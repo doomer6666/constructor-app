@@ -4,6 +4,7 @@ const BlockHeader = ({ data, onUpdate }) => {
   const [isSettingVisible, setIsSettingVisible] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
   const [isActualyBackImage, setIsActualyBackImage] = useState(true);
+  const [trueImg, setTrueImg] = useState(true);
   const oldData = useRef(data);
   const [contentTempData, setContentTempData] = useState({
     title0: data.title0 || "",
@@ -31,6 +32,7 @@ const BlockHeader = ({ data, onUpdate }) => {
   const handleSettingSave = () => {
     onUpdate(settingTempData);
     setIsSettingVisible(false);
+    setTrueImg(isActualyBackImage);
   };
 
   const handleFileUpload = (e) => {
@@ -54,15 +56,16 @@ const BlockHeader = ({ data, onUpdate }) => {
       className="header block"
       data-template="header"
       style={{
-        backgroundImage: isSettingVisible
-          ? `url(${oldData.current.backgroundImage})`
-          : isActualyBackImage
-          ? `url(${data.backgroundImage})`
-          : "none",
-        // пофиксить
+        backgroundImage:
+          isSettingVisible && trueImg
+            ? `url(${oldData.current.backgroundImage})`
+            : trueImg
+            ? `url(${data.backgroundImage})`
+            : "none",
+
         backgroundColor: isSettingVisible
           ? oldData.current.backgroundColor
-          : !isActualyBackImage
+          : !trueImg
           ? data.backgroundColor
           : "transparent",
       }}
