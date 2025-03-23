@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const RedactorPA = () => {
   return (
     <body>
@@ -15,7 +17,9 @@ const RedactorPA = () => {
         </section>
         <div className="container">
           <a>
-            <button className="create-internship">Создать стажировку</button>
+            <Link to="/sample" className="create-internship">
+              Создать стажировку
+            </Link>
           </a>
         </div>
       </main>

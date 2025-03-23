@@ -1,6 +1,13 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
-import decor from "../../assets/img/decor-index.png";
+import { Link } from "react-router-dom";
+import {
+  MainContainer,
+  SectInfo,
+  CompanyName,
+  InfoBlock,
+  FormContainer,
+  InputField,
+} from "../../components/Components";
 
 const LoginPage = () => {
   const [login, setLogin] = useState("");
@@ -12,42 +19,51 @@ const LoginPage = () => {
   };
 
   return (
-    <main>
-      <section className="sect-info">
-        <div className="company-name">
+    <MainContainer>
+      <SectInfo>
+        <CompanyName>
           <p>Uralintern</p>
-        </div>
-        <div className="info">
+        </CompanyName>
+        <InfoBlock>
           <p>Сайт с шаблонами для создания плана стажировок</p>
-          <img src={decor} alt="Декор" width="365" height="218" />
-        </div>
-      </section>
+          <img src="/decor-index.png" alt="Декор" width="365" height="218" />
+        </InfoBlock>
+      </SectInfo>
 
-      <section className="reg">
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Логин"
-            className="field"
-            value={login}
-            onChange={(e) => setLogin(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Пароль"
-            className="field"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <input type="submit" value="Вход" className="field submit" />
-          <Link to="/register" className="field submit button">
-            Зарегистрироваться
-          </Link>
-        </form>
-      </section>
-    </main>
+      <FormContainer onSubmit={handleSubmit}>
+        <InputField
+          type="text"
+          placeholder="Логин"
+          value={login}
+          onChange={(e) => setLogin(e.target.value)}
+          required
+        />
+        <InputField
+          type="password"
+          placeholder="Пароль"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <InputField type="submit" value="Вход" className="submit" />
+        <Link
+          to="/register"
+          style={{
+            color: "unset",
+            textDecoration: "unset",
+            backgroundColor: "#D8D8D8",
+            fontSize: "35px",
+            padding: "5px",
+            paddingRight: "10px",
+            paddingLeft: "10px",
+            borderRadius: "20px",
+            transition: "backgroundColor 0.3s, color 0.3s",
+          }}
+        >
+          Зарегистрироваться
+        </Link>
+      </FormContainer>
+    </MainContainer>
   );
 };
 
