@@ -1,23 +1,10 @@
 import { useState } from "react";
 import BlockHeader from "../components/SampleComponents/HeaderBlock";
-
+import { blockTemplates } from "../components/const";
 const SamplePage = () => {
   const [blocks, setBlocks] = useState([]);
   const [isVisibleBlockBar, setIsVisibleBlockBar] = useState(false);
   const handleAddBlock = (type) => {
-    const blockTemplates = {
-      header: {
-        title0: "Надзаголовок",
-        title1: "Заголовок",
-        title2: "Описание",
-        fontSize: [40, 90, 40],
-        colors: ["#ffffff", "#ffffff", "#ffffff"],
-        borderColor: "#FF7700",
-        backgroundColor: "#ffffff",
-        backgroundImage: "/title1.jpg",
-      },
-    };
-
     const newBlock = {
       id: Date.now(),
       type: type,
