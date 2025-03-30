@@ -1,0 +1,67 @@
+@use './sample/block-bar.scss';
+@use './sample/blocks.scss';
+@use './sample/header.scss';
+@use './sample/content-and-setting-bar.scss';
+body {
+    font-family: "Manrope";
+    color: black;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+  }
+
+  .page {
+    width: 100vw;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .new-block {
+    padding: 0.5em 2em;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: #fff1e3;
+    cursor: pointer;
+    border-radius: 1.25em;
+    border-color: black;
+    border-width: 0.125em;
+    border-style: solid;
+    font-size: 1.5rem;
+    margin-top: 3.125em;
+    margin-bottom: 2em;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .page-buttons {
+    display: flex;
+    padding: 0;
+  }
+
+  .save-page,
+.submit-page {
+  margin: 0;
+  color: white;
+  background-color: black;
+  margin-bottom: 1em;
+}
+
+  .save-page {
+  margin-left: 50%;
+}
+
+.hidden {
+  display: none !important;
+}
+
+section section {
+  border-bottom: 2px solid #c9c9c9;
+}
+

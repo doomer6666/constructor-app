@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import RedactorPA from "./pages/RedactorPA";
 import SamplePage from "./pages/SamplePage";
+import "./styles/sample.scss";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>

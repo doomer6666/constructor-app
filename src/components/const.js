@@ -11,4 +11,14 @@ export const blockTemplates = {
       backgroundColor: "#ffffff",
       backgroundImage: "/title1.jpg",
     },
+    info: {
+      title0: "Заголовок",
+      title1: "Описание",
+      fontSize: [40, 24],
+      colors: ["#000000", "#000000"],
+      borderColor: "#FF7700",
+      borderTitleColor: "#FF7700",
+      backgroundColor: "#ffffff",
+      backgroundImage: "none",
+    },
   };

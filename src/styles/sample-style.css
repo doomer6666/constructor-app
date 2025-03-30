@@ -27,32 +27,7 @@ body {
   transform: translateX(-50%);
 }
 
-.new-block:hover {
-  background-color: #ffb74d;
-}
-
-.new-block:active {
-  background-color: #cc6600;
-}
-
 /* Media Queries for Responsive Design */
-@media (max-width: 768px) {
-  .new-block {
-    padding: 0.4em 1.5em;
-    font-size: 1.2rem;
-    margin-top: 2em;
-    margin-bottom: 0.4em;
-  }
-}
-
-@media (max-width: 480px) {
-  .new-block {
-    padding: 0.3em 1em;
-    font-size: 1rem;
-    margin-top: 1.5em;
-    margin-bottom: 0.3em;
-  }
-}
 
 .block-bar {
   position: fixed;
@@ -398,7 +373,7 @@ p {
   box-sizing: border-box;
 }
 
-/* Адаптивная верстка для .content-bar */
+
 @media (max-width: 1024px) {
   .content-bar,
   .setting-bar {
@@ -433,7 +408,7 @@ p {
   box-sizing: border-box;
 }
 
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
   .content-bar,
   .setting-bar {
     width: 40%;
@@ -449,10 +424,10 @@ p {
 
 @media (max-width: 480px) {
   .content-bar,
-  .setting-barsetting-bar {
+  .setting-bar {
     width: 70%;
   }
-}
+} */
 
 .save,
 .save-header,

@@ -13,13 +13,13 @@ export default function HeaderBlockSetting({
 }) {
   return (
     <div className="setting-bar setting-header-bar">
-      <button className="save-header" onClick={handleSettingSave}>
+      <button className="save" onClick={handleSettingSave}>
         Сохранить
       </button>
       <p>Размер шрифта</p>
-      {HEADER_LABELS.map((field, index) => (
-        <div key={`position-x-div${index}`} className="position-x-div">
-          <div className="little-div">
+      <div className="position-x-div">
+        {HEADER_LABELS.map((field, index) => (
+          <div className="little-div" key={`little-div${index}`}>
             <p>{field}</p>
             <input
               type="number"
@@ -33,12 +33,12 @@ export default function HeaderBlockSetting({
               className={`input-setting-header-${index}`}
             />
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
       <p>Цвет шрифта</p>
-      {HEADER_LABELS.map((field, index) => (
-        <div key={`position-x-div1${index}`} className="position-x-div">
-          <div className="little-div">
+      <div className="position-x-div">
+        {HEADER_LABELS.map((field, index) => (
+          <div className="little-div" key={`little-div${index}`}>
             <p>{field}</p>
             <input
               type="color"
@@ -53,8 +53,8 @@ export default function HeaderBlockSetting({
               }}
             />
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
       <p>Цвет декора</p>
       <div>
         <input

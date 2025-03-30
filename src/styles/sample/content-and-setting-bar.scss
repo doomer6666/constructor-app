@@ -1,0 +1,125 @@
+@mixin bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: rgba(231, 231, 231, 1);
+    z-index: 10;
+    width: 33%;
+    padding-bottom: 6.25em;
+    box-sizing: border-box;
+
+    @media (max-width: 1024px) {
+        width: 40%;
+    }
+
+    @media (max-width: 768px) {
+        width: 50%;
+    }
+
+    @media (max-width: 480px) {
+        width: 70%;
+    }
+
+    input,
+    textarea {
+        margin: 0;
+        padding-bottom: 0.9rem;
+        margin-left: 1em;
+        margin-left: 1em;
+        margin-bottom: 2em;
+        font-size: 1.25rem;
+        color: rgba(0, 0, 0, 1);
+        background-color: rgba(217, 217, 217, 1);
+        width: 90%;
+        padding-top: 0.25em;
+        padding-bottom: 0.25em;
+        padding-left: 1em;
+        border-radius: 1.5em;
+        box-sizing: border-box;
+        border-width: 0.1em;
+        &:hover {
+            background-color: #ffb74d;
+        }
+        &:active {
+            background-color: #ff8c00;
+        }
+    }
+    p {
+        margin: 0;
+        padding-bottom: 0.9rem;
+        margin-left: 1em;
+        color: rgba(99, 99, 99, 1);
+        font-size: 1.5rem;
+    }
+}
+
+.content-bar {
+    @include bar;
+    input {
+        @media (max-width: 768px) {
+            font-size: 1rem;
+            padding-left: 0.875em;
+        }
+    }
+
+    p {
+        @media (max-width: 768px) {
+            font-size: 1.25rem;
+        }
+    }
+}
+
+.setting-bar {
+    overflow: auto;
+    overflow-x: hidden;
+
+    div {
+        display: flex;
+
+        div {
+            display: block;
+
+            p {
+                font-size: 20px;
+                margin-right: 0.5em;
+            }
+        }
+    }
+
+    input[type="number"] {
+        width: 45%;
+        font-size: 16px;
+        padding-left: 0.5em;
+    }
+
+    input[type="file"] {
+        border-style: solid;
+        border-color: #ff7700;
+        border-radius: 0 !important;
+        padding-left: 5px;
+    }
+
+    input[type="color"] {
+        border-radius: 0 !important;
+        padding: 0 !important;
+        width: 45% !important;
+        font-size: 16px;
+    }
+    @include bar;
+}
+
+.save {
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.5rem;
+    border-width: 0.125em;
+    border-style: solid;
+    background-color: black;
+    margin-bottom: 1em;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    width: 100%;
+    border-bottom-left-radius: 0.625em;
+    border-bottom-right-radius: 0.625em;
+    padding-left: 0;
+}
