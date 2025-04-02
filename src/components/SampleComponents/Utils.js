@@ -1,8 +1,8 @@
 export const handleFileUpload =
-  (setSettingTempData, setIsActualyBackImage) => (e) => {
+  (setSettingTempData, setIsActualyBackImage,setImgText) => (e) => {
     const file = e.target.files[0];
     if (!file) return;
-
+    setImgText(file.name.slice(0,7)+'...')
     const reader = new FileReader();
     reader.onload = (event) => {
       const newImageUrl = event.target.result;

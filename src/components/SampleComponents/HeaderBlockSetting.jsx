@@ -4,6 +4,7 @@ import {
   handleFileUpload,
 } from "./Utils";
 import { HEADER_LABELS } from "../const";
+import { useState } from "react";
 
 export default function HeaderBlockSetting({
   settingTempData,
@@ -11,6 +12,7 @@ export default function HeaderBlockSetting({
   handleSettingSave,
   setIsActualyBackImage,
 }) {
+  const [imgText, setImgText] = useState("Выберите файл");
   return (
     <div className="setting-bar setting-header-bar">
       <button className="save" onClick={handleSettingSave}>
@@ -23,6 +25,8 @@ export default function HeaderBlockSetting({
             <p>{field}</p>
             <input
               type="number"
+              //доработаь
+              // max={`--max-font-h${index === 1 ? 1 : 2}`.slice(0, -2)}
               value={settingTempData.fontSize[index] || ""}
               onChange={(e) => {
                 handleFontSizeChange(settingTempData, setSettingTempData)(
@@ -55,8 +59,8 @@ export default function HeaderBlockSetting({
           </div>
         ))}
       </div>
-      <p>Цвет декора</p>
-      <div>
+      <div className="little-div">
+        <p>Цвет декора</p>
         <input
           type="color"
           className="header-border-color"
@@ -71,11 +75,18 @@ export default function HeaderBlockSetting({
         />
       </div>
       <p>Фоновое изображение</p>
+      <label htmlFor="input-img" className="input-img">
+        {imgText}
+      </label>
       <input
-        className="input-img"
+        id="input-img"
         type="file"
         onChange={(e) =>
-          handleFileUpload(setSettingTempData, setIsActualyBackImage)(e)
+          handleFileUpload(
+            setSettingTempData,
+            setIsActualyBackImage,
+            setImgText
+          )(e)
         }
       />
       <p>Только цвет</p>

@@ -1,51 +1,57 @@
-@use './sample/block-bar.scss';
-@use './sample/blocks.scss';
-@use './sample/header.scss';
-@use './sample/content-and-setting-bar.scss';
+@use "./sample/block-bar.scss";
+@use "./sample/blocks.scss";
+@use "./sample/header.scss";
+@use "./sample/content-and-setting-bar.scss";
 body {
-    font-family: "Manrope";
-    color: black;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow-x: hidden;
-  }
+  font-family: "Manrope";
+  color: black;
+  margin: 0;
+  padding: 0;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+}
 
-  .page {
-    width: 100vw;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.page {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: 480px) {
+    font-size: 5px !important;
   }
+}
 
-  .new-block {
-    padding: 0.5em 2em;
-    border: none;
-    font: inherit;
-    color: inherit;
-    background-color: #fff1e3;
-    cursor: pointer;
-    border-radius: 1.25em;
-    border-color: black;
-    border-width: 0.125em;
-    border-style: solid;
-    font-size: 1.5rem;
-    margin-top: 3.125em;
-    margin-bottom: 2em;
-    margin-left: 50%;
-    transform: translateX(-50%);
+.new-block {
+  padding: 0.5em 2em;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: #fff1e3;
+  cursor: pointer;
+  border-radius: 1.25em;
+  border-color: black;
+  border-width: 0.125em;
+  border-style: solid;
+  font-size: 1.5rem;
+  margin-top: 3.125em;
+  margin-bottom: 2em;
+  @media (max-width: 585px) {
+    font-size: 1.25rem;
   }
-
-  .page-buttons {
-    display: flex;
-    padding: 0;
+  @media (max-width: 480px) {
+    font-size: 1rem;
   }
+}
 
-  .save-page,
+.page-buttons {
+  display: flex;
+  padding: 0;
+}
+
+.save-page,
 .submit-page {
   margin: 0;
   color: white;
@@ -53,7 +59,7 @@ body {
   margin-bottom: 1em;
 }
 
-  .save-page {
+.save-page {
   margin-left: 50%;
 }
 
@@ -65,3 +71,21 @@ section section {
   border-bottom: 2px solid #c9c9c9;
 }
 
+:root {
+  --max-font-h1: 8rem;
+  --max-font-h2: 5rem;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --max-font-h1: 7rem;
+    --max-font-h2: 4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --max-font-h1: 4rem;
+    --max-font-h2: 2rem;
+  }
+}

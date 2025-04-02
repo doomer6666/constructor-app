@@ -77,7 +77,7 @@ const BlockHeader = ({ data, onUpdate }) => {
               key={label + index}
               className={`title-${index}`}
               style={{
-                fontSize: data.fontSize[index] + "px",
+                "--dynamic-font": `${data.fontSize[index] / 16}rem`,
                 color: data.colors[index],
                 borderColor: data.borderColor,
               }}

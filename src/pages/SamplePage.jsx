@@ -26,18 +26,18 @@ const SamplePage = () => {
   };
 
   return (
-    <section>
-      <section className="page">
-        {blocks.map((block) => (
-          <div key={block.id}>
-            {block.type === "header" && (
+    <section className="redactor-page">
+      <section className="page" key={"page1"}>
+        {blocks.map(
+          (block) =>
+            block.type === "header" && (
               <BlockHeader
+                key={block.id}
                 data={block.data}
                 onUpdate={(newData) => updateBlockData(block.id, newData)}
               />
-            )}
-          </div>
-        ))}
+            )
+        )}
       </section>
       <button className="new-block" onClick={() => setIsVisibleBlockBar(true)}>
         Добавить блоки

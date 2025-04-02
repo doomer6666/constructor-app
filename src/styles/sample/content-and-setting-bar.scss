@@ -1,30 +1,27 @@
+@mixin text($em: 0.9em, $font: 1.5rem) {
+    margin: 0;
+    padding-bottom: $em;
+    margin-left: 0.5em;
+    color: rgba(99, 99, 99, 1);
+    font-size: $font;
+}
+
 @mixin bar {
+    text-align: left;
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
     background-color: rgba(231, 231, 231, 1);
     z-index: 10;
-    width: 33%;
+    width: 40%;
     padding-bottom: 6.25em;
     box-sizing: border-box;
-
-    @media (max-width: 1024px) {
-        width: 40%;
-    }
-
-    @media (max-width: 768px) {
-        width: 50%;
-    }
-
-    @media (max-width: 480px) {
-        width: 70%;
-    }
 
     input,
     textarea {
         margin: 0;
-        padding-bottom: 0.9rem;
+        padding-bottom: 0.9em;
         margin-left: 1em;
         margin-left: 1em;
         margin-bottom: 2em;
@@ -45,66 +42,84 @@
             background-color: #ff8c00;
         }
     }
-    p {
-        margin: 0;
-        padding-bottom: 0.9rem;
-        margin-left: 1em;
-        color: rgba(99, 99, 99, 1);
-        font-size: 1.5rem;
+    p,
+    label {
+        @include text();
+        @media (max-width: 768px) {
+            font-size: 1.25rem !important;
+        }
+    }
+
+    input {
+        @media (max-width: 768px) {
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        width: 50%;
+    }
+
+    @media (max-width: 480px) {
+        width: 70%;
     }
 }
 
 .content-bar {
     @include bar;
-    input {
-        @media (max-width: 768px) {
-            font-size: 1rem;
-            padding-left: 0.875em;
-        }
-    }
-
-    p {
-        @media (max-width: 768px) {
-            font-size: 1.25rem;
-        }
-    }
 }
 
 .setting-bar {
     overflow: auto;
     overflow-x: hidden;
-
-    div {
-        display: flex;
-
-        div {
-            display: block;
-
+    .position-x-div {
+        display: block;
+        .little-div {
+            display: flex;
+            flex-wrap: wrap;
             p {
-                font-size: 20px;
-                margin-right: 0.5em;
+                font-size: 1.25rem;
+                margin-left: 1em;
+                width: 7em;
             }
         }
     }
 
     input[type="number"] {
         width: 45%;
-        font-size: 16px;
-        padding-left: 0.5em;
+        font-size: 1rem;
+        // padding-left: 0.5em;
+        &:invalid {
+            background-color: red;
+        }
+    }
+
+    label.input-img {
+        @include text($em: 0, $font: 1.25em);
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border-style: solid;
+        border-color: black;
+        border-radius: 0;
+        padding-left: 5px;
+        padding-right: 5px;
+        margin-bottom: 2em;
+        width: 7em;
     }
 
     input[type="file"] {
-        border-style: solid;
-        border-color: #ff7700;
-        border-radius: 0 !important;
-        padding-left: 5px;
+        opacity: 0;
+        position: absolute;
+        z-index: -1;
     }
 
     input[type="color"] {
         border-radius: 0 !important;
         padding: 0 !important;
         width: 45% !important;
-        font-size: 16px;
+        font-size: 1rem;
     }
     @include bar;
 }
