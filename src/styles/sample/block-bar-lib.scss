@@ -1,0 +1,49 @@
+.lib {
+    z-index: 11;
+    position: fixed;
+    top: 0;
+    margin-left: 32%;
+    max-width: 312px;
+    max-height: 600px;
+    background-color: #ffe9d4;
+    border-bottom: none;
+    overflow: auto;
+    border-radius: 10px;
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 18px 28px;
+        li {
+            cursor: pointer;
+            border-bottom: 0.125em solid #dbdbdb;
+            margin-bottom: 0.5em;
+            img {
+                max-width: 240px;
+            }
+            p {
+                margin: 0;
+                padding: 0;
+                font-size: 1rem;
+                color: #535353;
+            }
+        }
+        :last-child {
+            border-bottom: none;
+        }
+    }
+}
+
+// ::-webkit-scrollbar {
+//     width: 14px;
+// }
+
+// ::-webkit-scrollbar-track {
+//     background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+// }
+
+// ::-webkit-scrollbar-thumb {
+//     background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+//     border-radius: 20px;
+//     border: 2px solid transparent;
+//     background-clip: content-box;
+// }

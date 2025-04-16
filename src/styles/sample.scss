@@ -1,7 +1,9 @@
 @use "./sample/block-bar.scss";
+@use "./sample/block-bar-lib.scss";
 @use "./sample/blocks.scss";
 @use "./sample/header.scss";
 @use "./sample/content-and-setting-bar.scss";
+@use "./sample/header-samples.scss";
 body {
   font-family: "Manrope";
   color: black;

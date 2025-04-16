@@ -1,14 +1,16 @@
 import { useState } from "react";
 import BlockHeader from "../components/SampleComponents/HeaderBlock";
 import { blockTemplates } from "../components/const";
+import BlockBar from "../components/SampleComponents/BlockBar";
 const SamplePage = () => {
   const [blocks, setBlocks] = useState([]);
   const [isVisibleBlockBar, setIsVisibleBlockBar] = useState(false);
-  const handleAddBlock = (type) => {
+  const handleAddBlock = (type, sample) => {
     const newBlock = {
       id: Date.now(),
       type: type,
-      data: blockTemplates[type] || {},
+      sample: sample,
+      data: blockTemplates[type][sample] || {},
     };
 
     setBlocks([...blocks, newBlock]);
@@ -35,13 +37,19 @@ const SamplePage = () => {
                 key={block.id}
                 data={block.data}
                 onUpdate={(newData) => updateBlockData(block.id, newData)}
+                sample={block.sample}
               />
             )
         )}
       </section>
-      <button className="new-block" onClick={() => setIsVisibleBlockBar(true)}>
-        Добавить блоки
-      </button>
+      {!isVisibleBlockBar && (
+        <button
+          className="new-block"
+          onClick={() => setIsVisibleBlockBar(true)}
+        >
+          Добавить блоки
+        </button>
+      )}
       <div className="page-buttons">
         <button className="new-block save-page hidden">
           Сохранить страницу
@@ -51,28 +59,10 @@ const SamplePage = () => {
         </button>
       </div>
       {isVisibleBlockBar && (
-        <section className="block-bar">
-          <div className="title-bar">
-            <h4>Библиотека шаблонов</h4>
-            <button
-              className="exit"
-              onClick={() => setIsVisibleBlockBar(false)}
-            >
-              <img src="/cross.svg" height="48px" width="51px" />
-            </button>
-          </div>
-          <ul className="block-list">
-            <li className="block-item">
-              <button
-                className="title-button template-button"
-                data-template-type="header"
-                onClick={() => handleAddBlock("header")}
-              >
-                Обложка
-              </button>
-            </li>
-          </ul>
-        </section>
+        <BlockBar
+          setIsVisibleBlockBar={setIsVisibleBlockBar}
+          handleAddBlock={handleAddBlock}
+        />
       )}
     </section>
   );

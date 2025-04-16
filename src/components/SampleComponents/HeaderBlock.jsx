@@ -1,64 +1,54 @@
-import { useRef, useState, useEffect } from "react";
+import { useState } from "react";
 import HeaderBlockContent from "./HeaderBlockContent";
 import HeaderBlockSetting from "./HeaderBlockSetting";
-import { HEADER_DIVS } from "../const";
 import Buttons from "./HeaderButtons";
 
-const BlockHeader = ({ data, onUpdate }) => {
+const BlockHeader = ({ data, sample }) => {
   const [isRender, setIsRender] = useState(true);
   const [isSettingVisible, setIsSettingVisible] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
-  const [isActualyBackImage, setIsActualyBackImage] = useState(true);
-  const [trueImg, setTrueImg] = useState(true);
-  const oldData = useRef(data);
-  const [contentTempData, setContentTempData] = useState({
-    title0: data.title0 || "",
-    title1: data.title1 || "",
-    title2: data.title2 || "",
-  });
-  const [settingTempData, setSettingTempData] = useState({
-    fontSize: data.fontSize || [],
-    colors: data.colors || "",
-    borderColor: data.borderColor || "",
-    backgroundColor: data.backgroundColor || "",
-    backgroundImage: data.backgroundImage || "",
-  });
+  const [contentData, setContentData] = useState({ ...data.content });
+  const [settingData, setSettingData] = useState({ ...data.setting });
+  const [lastContentData, setLastContentData] = useState(contentData);
+  const [lastSettingData, setLastSettingData] = useState(settingData);
+  const [isBackImage, setIsBackImage] = useState(
+    settingData.backgroundImage !== undefined
+  );
+  const handleContentClose = () => {
+    setContentData(lastContentData);
+    setIsContentVisible(false);
+  };
 
-  useEffect(() => {
-    oldData.current = data;
-  }, [data]);
+  const handleSettingClose = () => {
+    setSettingData(lastSettingData);
+    setIsSettingVisible(false);
+  };
 
   const handleContentSave = () => {
-    onUpdate(contentTempData);
+    setLastContentData(contentData);
     setIsContentVisible(false);
   };
 
   const handleSettingSave = () => {
-    onUpdate(settingTempData);
+    setLastSettingData(settingData);
     setIsSettingVisible(false);
-    setTrueImg(isActualyBackImage);
   };
 
   if (!isRender) {
     return null;
   }
-
-  const bgImage =
-    isSettingVisible && trueImg
-      ? `url(${oldData.current.backgroundImage})`
-      : trueImg
-      ? `url(${data.backgroundImage})`
-      : "none";
-
-  const bgColor = isSettingVisible
-    ? oldData.current.backgroundColor
-    : !trueImg
-    ? data.backgroundColor
-    : "transparent";
+  const bgImage = isBackImage ? `url(${settingData.backgroundImage})` : "none";
+  const bgColor = !isBackImage ? settingData.backgroundColor : "transparent";
+  const titles = Object.entries(contentData).filter(([label]) =>
+    label.includes("title")
+  );
+  const images = Object.entries(contentData).filter(([label]) =>
+    label.includes("img")
+  );
 
   return (
     <section
-      className="header block"
+      className={`header block ${sample}`}
       style={{
         backgroundImage: bgImage,
         backgroundColor: bgColor,
@@ -69,37 +59,49 @@ const BlockHeader = ({ data, onUpdate }) => {
         setIsContentVisible={setIsContentVisible}
         setIsRender={setIsRender}
       />
-      <div className="titles">
-        {HEADER_DIVS.map((label, index) => {
-          const HIndex = index === 1 ? "h1" : "h2";
-          return (
-            <HIndex
-              key={label + index}
-              className={`title-${index}`}
-              style={{
-                "--dynamic-font": `${data.fontSize[index] / 16}rem`,
-                color: data.colors[index],
-                borderColor: data.borderColor,
-              }}
-            >
-              {data[label]}
-            </HIndex>
-          );
-        })}
+      <div className="page__content">
+        <div className="titles">
+          {titles.map(([label, text]) => {
+            const index = parseInt(label.match(/\d+/), 10);
+            const HIndex = label.includes("1") ? "h1" : "h2";
+            return (
+              <HIndex
+                key={label + index}
+                className={`title-${index}`}
+                style={{
+                  "--dynamic-font": `${settingData.fontSize[index] / 16}rem`,
+                  color: settingData.colors[index],
+                  borderColor: settingData.borderColor,
+                }}
+              >
+                {text}
+              </HIndex>
+            );
+          })}
+        </div>
+        <div className="gallery">
+          {images.map(([label, url]) => (
+            <img className={label} key={label} src={url} />
+          ))}
+        </div>
       </div>
       {isContentVisible && (
         <HeaderBlockContent
-          contentTempData={contentTempData}
-          setContentTempData={setContentTempData}
+          contentTempData={contentData}
+          setContentTempData={setContentData}
           handleContentSave={handleContentSave}
+          handleContentClose={handleContentClose}
+          sample={sample}
         />
       )}
       {isSettingVisible && (
         <HeaderBlockSetting
-          settingTempData={settingTempData}
-          setSettingTempData={setSettingTempData}
+          settingTempData={settingData}
+          setSettingTempData={setSettingData}
           handleSettingSave={handleSettingSave}
-          setIsActualyBackImage={setIsActualyBackImage}
+          handleSettingClose={handleSettingClose}
+          setIsActualyBackImage={setIsBackImage}
+          sample={sample}
         />
       )}
     </section>

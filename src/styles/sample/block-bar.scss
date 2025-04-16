@@ -22,17 +22,19 @@
 .title-bar {
   padding: 0.25em 1.2em 0 0.4em;
   display: flex;
-  gap: 1.2em;
+  justify-content: space-between;
   font-size: 1.5rem;
   color: #535353;
   border-bottom: 0.125em solid #dbdbdb;
   margin-bottom: 1.25em;
   font-weight: normal;
-
+  //доработать положение в разных экранах
   h4 {
     margin: 0;
     padding: 0;
     margin-top: 9px;
+    display: block;
+    width: 70%;
   }
 }
 

@@ -14,6 +14,7 @@
   z-index: 3;
   color: black;
   margin: 3.125em 10.25em 3em 10.25em;
+  margin-bottom: -6.125rem;
   flex-direction: row;
   gap: 2.6875em;
 
@@ -45,4 +46,8 @@
 
 .trash {
   padding: 8px 11px 2px 11px;
+}
+
+.page__content {
+  margin-top: 98px;
 }

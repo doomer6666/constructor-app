@@ -124,17 +124,20 @@
     @include bar;
 }
 
-.save {
-    color: rgba(255, 255, 255, 1);
-    font-size: 1.5rem;
-    border-width: 0.125em;
-    border-style: solid;
-    background-color: black;
-    margin-bottom: 1em;
-    padding-top: 1.5em;
-    padding-bottom: 1.5em;
-    width: 100%;
-    border-bottom-left-radius: 0.625em;
-    border-bottom-right-radius: 0.625em;
-    padding-left: 0;
+.buttons-div {
+    display: flex;
+    button {
+        border: none;
+        color: rgba(255, 255, 255, 1);
+        font-size: 1.5rem;
+        background-color: black;
+        margin-bottom: 1em;
+        padding-top: 1.5em;
+        padding-bottom: 1.5em;
+        width: 50%;
+    }
+    .close {
+        background-color: rgba(255, 189, 131, 1);
+        color: black;
+    }
 }
