@@ -3,7 +3,6 @@ import {
   handleFontSizeChange,
   handleFileUpload,
 } from "./Utils";
-import { HEADER_DIVS, HEADER_LABELS } from "../const";
 import { useState } from "react";
 
 export default function HeaderBlockSetting({
@@ -12,10 +11,9 @@ export default function HeaderBlockSetting({
   handleSettingSave,
   handleSettingClose,
   setIsActualyBackImage,
-  sample,
+  divs,
+  labels,
 }) {
-  const SAMPLE_HEADER_DIVS = HEADER_DIVS[sample];
-  const SAMPLE_HEADER_LABELS = HEADER_LABELS[sample];
   const [imgText, setImgText] = useState("Выберите файл");
   return (
     <div className="setting-bar setting-header-bar">
@@ -30,11 +28,11 @@ export default function HeaderBlockSetting({
 
       <p>Размер шрифта</p>
       <div className="position-x-div">
-        {SAMPLE_HEADER_DIVS.map(
+        {divs.map(
           (field, index) =>
             field.includes("title") && (
               <div className="little-div" key={`little-div${index}`}>
-                <p>{SAMPLE_HEADER_LABELS[index]}</p>
+                <p>{labels[index]}</p>
                 <input
                   type="number"
                   value={settingTempData.fontSize[index]}
@@ -52,11 +50,11 @@ export default function HeaderBlockSetting({
       </div>
       <p>Цвет шрифта</p>
       <div className="position-x-div">
-        {SAMPLE_HEADER_DIVS.map(
+        {divs.map(
           (field, index) =>
             field.includes("title") && (
               <div className="little-div" key={`little-div${index}`}>
-                <p>{SAMPLE_HEADER_LABELS[index]}</p>
+                <p>{labels[index]}</p>
                 <input
                   type="color"
                   className={`header-color-${index}`}

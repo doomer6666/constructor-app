@@ -8,7 +8,7 @@ const BlockHeader = ({ data, sample }) => {
   const [isSettingVisible, setIsSettingVisible] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
   const [contentData, setContentData] = useState({ ...data.content });
-  const [settingData, setSettingData] = useState({ ...data.setting });
+  const [settingData, setSettingData] = useState({ ...data.settings });
   const [lastContentData, setLastContentData] = useState(contentData);
   const [lastSettingData, setLastSettingData] = useState(settingData);
   const [isBackImage, setIsBackImage] = useState(
@@ -91,7 +91,8 @@ const BlockHeader = ({ data, sample }) => {
           setContentTempData={setContentData}
           handleContentSave={handleContentSave}
           handleContentClose={handleContentClose}
-          sample={sample}
+          labels={data.labels}
+          divs={data.divs}
         />
       )}
       {isSettingVisible && (
@@ -101,7 +102,8 @@ const BlockHeader = ({ data, sample }) => {
           handleSettingSave={handleSettingSave}
           handleSettingClose={handleSettingClose}
           setIsActualyBackImage={setIsBackImage}
-          sample={sample}
+          labels={data.labels}
+          divs={data.divs}
         />
       )}
     </section>

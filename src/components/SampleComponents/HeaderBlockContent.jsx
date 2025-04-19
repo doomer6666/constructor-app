@@ -1,11 +1,10 @@
-import { HEADER_DIVS, HEADER_LABELS } from "../const";
-
 export default function HeaderBlockContent({
   contentTempData,
   setContentTempData,
   handleContentSave,
   handleContentClose,
-  sample,
+  divs,
+  labels,
 }) {
   return (
     <div className="content-bar header-bar">
@@ -17,12 +16,12 @@ export default function HeaderBlockContent({
           Сохранить и закрыть
         </button>
       </div>
-      {HEADER_DIVS[sample].map((field, index) => {
+      {divs.map((field, index) => {
         return (
           <div key={`${field}-${index}`}>
             {field.includes("title") && (
               <div>
-                <p>{HEADER_LABELS[sample][index]}</p>
+                <p>{labels[index]}</p>
                 <input
                   type="text"
                   value={contentTempData[field] || ""}
