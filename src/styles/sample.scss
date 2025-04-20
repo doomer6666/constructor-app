@@ -4,6 +4,7 @@
 @use "./sample/header.scss";
 @use "./sample/content-and-setting-bar.scss";
 @use "./sample/header-samples.scss";
+@use "./sample/text.scss";
 body {
   font-family: "Manrope";
   color: black;
@@ -76,12 +77,18 @@ section section {
 :root {
   --max-font-h1: 8rem;
   --max-font-h2: 5rem;
+  --max-font-p: 4.5rem;
+
+  --w: 20px;
+  --h: 5px;
+  --c: #fff1e3;
 }
 
 @media (max-width: 768px) {
   :root {
     --max-font-h1: 7rem;
     --max-font-h2: 4rem;
+    --max-font-p: 3.5rem;
   }
 }
 
@@ -89,5 +96,6 @@ section section {
   :root {
     --max-font-h1: 4rem;
     --max-font-h2: 2rem;
+    --max-font-p: 1.5rem;
   }
 }

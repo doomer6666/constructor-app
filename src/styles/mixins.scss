@@ -1,0 +1,21 @@
+@mixin border-style($radius: 0, $color: transparent, $width: 2px, $style: solid) {
+    border-radius: $radius;
+    border-color: $color;
+    border-width: $width;
+    border-style: $style;
+}
+
+@mixin responsive-font($max-font, $dynamic-font) {
+    font-size: min($max-font, $dynamic-font);
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+@mixin flex-center($direction: row, $gap: 0) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $direction;
+    gap: $gap;
+}

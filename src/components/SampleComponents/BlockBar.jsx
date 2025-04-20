@@ -3,7 +3,11 @@ import BlockLib from "./BlockLib";
 
 export default function BlockBar({ setIsVisibleBlockBar, handleAddBlock }) {
   const [activeType, setActiveType] = useState("");
-  const [libIsVisible, setLibIsVisible] = useState(false);
+  const [libIsVisible, setLibIsVisible] = useState(true);
+  const blocks = [
+    ["header", "Обложка"],
+    ["text", "Текстовый блок"],
+  ];
   return (
     <>
       <section className="block-bar">
@@ -14,18 +18,19 @@ export default function BlockBar({ setIsVisibleBlockBar, handleAddBlock }) {
           </button>
         </div>
         <ul className="block-list">
-          <li className="block-item">
-            <button
-              className="title-button template-button"
-              data-template-type="header"
-              onClick={() => {
-                setActiveType("header");
-                setLibIsVisible(!libIsVisible);
-              }}
-            >
-              Обложка
-            </button>
-          </li>
+          {blocks.map((block, index) => (
+            <li className="block-item" key={index}>
+              <button
+                className="title-button template-button"
+                onClick={() => {
+                  setActiveType(block[0]);
+                  setLibIsVisible(!!libIsVisible);
+                }}
+              >
+                {block[1]}
+              </button>
+            </li>
+          ))}
         </ul>
       </section>
       {libIsVisible && (

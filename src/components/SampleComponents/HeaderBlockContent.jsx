@@ -19,20 +19,33 @@ export default function HeaderBlockContent({
       {divs.map((field, index) => {
         return (
           <div key={`${field}-${index}`}>
-            {field.includes("title") && (
+            {(field.includes("title") || field.includes("text")) && (
               <div>
                 <p>{labels[index]}</p>
-                <input
-                  type="text"
-                  value={contentTempData[field] || ""}
-                  onChange={(e) =>
-                    setContentTempData({
-                      ...contentTempData,
-                      [field]: e.target.value,
-                    })
-                  }
-                  className={`input-title-${index}`}
-                />
+                {field.includes("text") ? (
+                  <textarea
+                    value={contentTempData[field] || ""}
+                    onChange={(e) =>
+                      setContentTempData({
+                        ...contentTempData,
+                        [field]: e.target.value,
+                      })
+                    }
+                    className={`textarea-text-${index}`}
+                  />
+                ) : (
+                  <input
+                    type="text"
+                    value={contentTempData[field] || ""}
+                    onChange={(e) =>
+                      setContentTempData({
+                        ...contentTempData,
+                        [field]: e.target.value,
+                      })
+                    }
+                    className={`input-title-${index}`}
+                  />
+                )}
               </div>
             )}
             {field.includes("img") && (

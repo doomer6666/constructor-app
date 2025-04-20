@@ -73,9 +73,8 @@ export const blockTemplates = {
         fontSize: [40, 24],
         colors: ["#000000", "#000000"],
         borderColor: "#FF7700",
-        borderTitleColor: "#FF7700",
+        borderTitleColor: "#fff1e3",
         backgroundColor: "#ffffff",
-        backgroundImage: "none"
       }
     }
   }
@@ -108,7 +107,7 @@ export const SampleLib = {
       description:"заголовок, описание, картинки"
     },
   ],
-  info:[
+  text:[
     {
       name:'sample1',
       previewImg: "/header_lib/sample1.png",

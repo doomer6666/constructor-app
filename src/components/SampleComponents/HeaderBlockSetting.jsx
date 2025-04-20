@@ -3,7 +3,7 @@ import {
   handleFontSizeChange,
   handleFileUpload,
 } from "./Utils";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 export default function HeaderBlockSetting({
   settingTempData,
@@ -15,6 +15,13 @@ export default function HeaderBlockSetting({
   labels,
 }) {
   const [imgText, setImgText] = useState("Выберите файл");
+  const memoizedHandleFontSizeChange = useCallback(
+    (e, index) => {
+      handleFontSizeChange(settingTempData, setSettingTempData)(e, index);
+    },
+    [settingTempData, setSettingTempData]
+  );
+
   return (
     <div className="setting-bar setting-header-bar">
       <div className="buttons-div">
@@ -30,19 +37,16 @@ export default function HeaderBlockSetting({
       <div className="position-x-div">
         {divs.map(
           (field, index) =>
-            field.includes("title") && (
+            (field.includes("title") || field.includes("text")) && (
               <div className="little-div" key={`little-div${index}`}>
                 <p>{labels[index]}</p>
                 <input
                   type="number"
                   value={settingTempData.fontSize[index]}
                   onChange={(e) => {
-                    handleFontSizeChange(settingTempData, setSettingTempData)(
-                      e,
-                      index
-                    );
+                    memoizedHandleFontSizeChange(e, index);
                   }}
-                  className={`input-setting-header-${index}`}
+                  className={`input-setting-${index}`}
                 />
               </div>
             )
@@ -52,7 +56,7 @@ export default function HeaderBlockSetting({
       <div className="position-x-div">
         {divs.map(
           (field, index) =>
-            field.includes("title") && (
+            (field.includes("title") || field.includes("text")) && (
               <div className="little-div" key={`little-div${index}`}>
                 <p>{labels[index]}</p>
                 <input
@@ -86,6 +90,24 @@ export default function HeaderBlockSetting({
               });
             }}
           />
+          {settingTempData.borderTitleColor && (
+            <input
+              type="color"
+              className="header-border-title-color"
+              name="header-border"
+              value={settingTempData.borderTitleColor || ""}
+              onChange={(e) => {
+                setSettingTempData({
+                  ...settingTempData,
+                  borderTitleColor: e.target.value,
+                });
+                document.documentElement.style.setProperty(
+                  "--c",
+                  settingTempData.borderTitleColor
+                );
+              }}
+            />
+          )}
         </div>
       )}
       {settingTempData.backgroundImage && (

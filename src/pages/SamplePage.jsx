@@ -1,7 +1,9 @@
 import { useState } from "react";
-import BlockHeader from "../components/SampleComponents/HeaderBlock";
+import BaseBlock from "../components/SampleComponents/BaseBlock";
 import { blockTemplates } from "../components/const";
 import BlockBar from "../components/SampleComponents/BlockBar";
+import HeaderBlock from "../components/SampleComponents/HeaderBlock";
+import TextBlock from "../components/SampleComponents/TextBlock";
 const SamplePage = () => {
   const [blocks, setBlocks] = useState([]);
   const [isVisibleBlockBar, setIsVisibleBlockBar] = useState(false);
@@ -30,17 +32,27 @@ const SamplePage = () => {
   return (
     <section className="redactor-page">
       <section className="page" key={"page1"}>
-        {blocks.map(
-          (block) =>
-            block.type === "header" && (
-              <BlockHeader
-                key={block.id}
-                data={block.data}
-                onUpdate={(newData) => updateBlockData(block.id, newData)}
-                sample={block.sample}
-              />
-            )
-        )}
+        {blocks.map((block) => {
+          return block.type === "header" ? (
+            <BaseBlock
+              key={block.id}
+              type={block.type}
+              data={block.data}
+              onUpdate={(newData) => updateBlockData(block.id, newData)}
+              sample={block.sample}
+              pageContent={HeaderBlock}
+            />
+          ) : block.type === "text" ? (
+            <BaseBlock
+              key={block.id}
+              type={block.type}
+              data={block.data}
+              onUpdate={(newData) => updateBlockData(block.id, newData)}
+              sample={block.sample}
+              pageContent={TextBlock}
+            />
+          ) : null;
+        })}
       </section>
       {!isVisibleBlockBar && (
         <button

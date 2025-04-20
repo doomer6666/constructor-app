@@ -1,64 +1,12 @@
-import { useState } from "react";
-import HeaderBlockContent from "./HeaderBlockContent";
-import HeaderBlockSetting from "./HeaderBlockSetting";
-import Buttons from "./HeaderButtons";
-
-const BlockHeader = ({ data, sample }) => {
-  const [isRender, setIsRender] = useState(true);
-  const [isSettingVisible, setIsSettingVisible] = useState(false);
-  const [isContentVisible, setIsContentVisible] = useState(false);
-  const [contentData, setContentData] = useState({ ...data.content });
-  const [settingData, setSettingData] = useState({ ...data.settings });
-  const [lastContentData, setLastContentData] = useState(contentData);
-  const [lastSettingData, setLastSettingData] = useState(settingData);
-  const [isBackImage, setIsBackImage] = useState(
-    settingData.backgroundImage !== undefined
-  );
-  const handleContentClose = () => {
-    setContentData(lastContentData);
-    setIsContentVisible(false);
-  };
-
-  const handleSettingClose = () => {
-    setSettingData(lastSettingData);
-    setIsSettingVisible(false);
-  };
-
-  const handleContentSave = () => {
-    setLastContentData(contentData);
-    setIsContentVisible(false);
-  };
-
-  const handleSettingSave = () => {
-    setLastSettingData(settingData);
-    setIsSettingVisible(false);
-  };
-
-  if (!isRender) {
-    return null;
-  }
-  const bgImage = isBackImage ? `url(${settingData.backgroundImage})` : "none";
-  const bgColor = !isBackImage ? settingData.backgroundColor : "transparent";
+export default function HeaderBlock({ contentData, settingData }) {
   const titles = Object.entries(contentData).filter(([label]) =>
     label.includes("title")
   );
   const images = Object.entries(contentData).filter(([label]) =>
     label.includes("img")
   );
-
   return (
-    <section
-      className={`header block ${sample}`}
-      style={{
-        backgroundImage: bgImage,
-        backgroundColor: bgColor,
-      }}
-    >
-      <Buttons
-        setIsSettingVisible={setIsSettingVisible}
-        setIsContentVisible={setIsContentVisible}
-        setIsRender={setIsRender}
-      />
+    titles && (
       <div className="page__content">
         <div className="titles">
           {titles.map(([label, text]) => {
@@ -85,29 +33,6 @@ const BlockHeader = ({ data, sample }) => {
           ))}
         </div>
       </div>
-      {isContentVisible && (
-        <HeaderBlockContent
-          contentTempData={contentData}
-          setContentTempData={setContentData}
-          handleContentSave={handleContentSave}
-          handleContentClose={handleContentClose}
-          labels={data.labels}
-          divs={data.divs}
-        />
-      )}
-      {isSettingVisible && (
-        <HeaderBlockSetting
-          settingTempData={settingData}
-          setSettingTempData={setSettingData}
-          handleSettingSave={handleSettingSave}
-          handleSettingClose={handleSettingClose}
-          setIsActualyBackImage={setIsBackImage}
-          labels={data.labels}
-          divs={data.divs}
-        />
-      )}
-    </section>
+    )
   );
-};
-
-export default BlockHeader;
+}

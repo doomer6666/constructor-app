@@ -1,4 +1,5 @@
 @use "./blocks.scss" as blocks;
+@use "../mixins.scss" as mixins;
 
 .header {
   width: 100vw;
@@ -16,27 +17,23 @@
   height: fit-content;
   @include blocks.block();
 }
+
 h1 {
   width: 100%;
-  font-size: min(var(--max-font-h1), var(--dynamic-font, 5.625rem)); // 90px
+  @include mixins.responsive-font(var(--max-font-h1), var(--dynamic-font, 5.625rem));
   margin: 0;
   color: #ffffff;
   padding: 0.12em 0.333em 0.144em 0.389em;
   margin-bottom: 0.8em;
-  white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
 }
 
 h2 {
   width: 100%;
-  font-size: min(var(--max-font-h2), var(--dynamic-font, 2.5rem));
+  @include mixins.responsive-font(var(--max-font-h2), var(--dynamic-font, 2.5rem));
   margin: 0;
   color: #ffffff;
   margin-bottom: 4.35em;
-  white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+
   @media (max-width: 480px) {
     margin-bottom: 3.35em;
   }
