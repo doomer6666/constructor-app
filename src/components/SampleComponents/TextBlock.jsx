@@ -8,13 +8,14 @@ export default function TextBlock({ contentData, settingData }) {
   return (
     <div
       className="page__content"
-      style={{ borderColor: settingData.borderColor }}
+      style={{ borderColor: settingData?.borderColor }}
     >
       {titles.map(([label, text]) => (
         <h2
           key={label + text}
           className={label}
           style={{
+            "--c": settingData.borderTitleColor,
             "--dynamic-font": `${settingData.fontSize[0] / 16}rem`,
             color: settingData.colors[0],
           }}
@@ -22,21 +23,28 @@ export default function TextBlock({ contentData, settingData }) {
           {text}
         </h2>
       ))}
-      {texts.map(([label, text]) => {
-        const index = parseInt(label.match(/\d+/), 10) + 1;
-        return (
-          <p
-            key={label + text}
-            className={label}
-            style={{
-              "--dynamic-font-p": `${settingData.fontSize[index] / 16}rem`,
-              color: settingData.colors[index],
-            }}
-          >
-            {text}
-          </p>
-        );
-      })}
+      <div className="text-container">
+        {texts.map(([label, text]) => {
+          const index = parseInt(label.match(/\d+/), 10) + 1;
+          return (
+            <div
+              key={label + text}
+              className="text-div"
+              style={{ borderColor: settingData.borderTextColor }}
+            >
+              <p
+                className={label}
+                style={{
+                  "--dynamic-font-p": `${settingData.fontSize[index] / 16}rem`,
+                  color: settingData.colors[index],
+                }}
+              >
+                {text}
+              </p>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

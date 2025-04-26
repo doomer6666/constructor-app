@@ -76,7 +76,63 @@ export const blockTemplates = {
         borderTitleColor: "#fff1e3",
         backgroundColor: "#ffffff",
       }
-    }
+    },
+    sample2: {
+      labels: ["Заголовок", "Текст"],
+      divs: ["title0", "text0"],
+      content: {
+        title0: "Заголовок",
+        text0: "Текст"
+      },
+      settings: {
+        fontSize: [40, 24],
+        colors: ["#000000", "#000000"],
+        borderTextColor: "#000000",
+        borderTitleColor: "#f3f3f3",
+        backgroundColor: "#ffffff",
+      }
+    },
+    sample3: {
+      labels: ["Заголовок", "Текст", "Текст"],
+      divs: ["title0", "text0", "text1"],
+      content: {
+        title0: "Заголовок",
+        text0: "Текст",
+        text1: "Текст"
+      },
+      settings: {
+        fontSize: [40, 24, 24],
+        colors: ["#000000", "#000000", "#000000"],
+        borderTextColor: "#000000",
+        borderTitleColor: "#f3f3f3",
+        backgroundColor: "#ffffff",
+      }
+    },
+    sample4: {
+      labels: ["Заголовок", "Текст"],
+      divs: ["title0", "text0"],
+      content: {
+        title0: "Заголовок",
+        text0: "Всегда, когда провожу секции, смотрю не на конечный результат, а на ход размышлений. Можно выучить все типы задач, прийти, решить все заготовленные интервьюером задачи за 10 минут и молчать, но это не совсем то, что хочется видеть! Живой ум, поток мыслей, желание рассказать и обсудить своё решение — это то, что хочется видеть в первую очередь. Конечно, есть фактор волнения, который заставляет вас быстрее «закончить» всё это. Но и с ним можно бороться — просто решайте больше, не сдавайтесь даже после неудачных попыток, и тогда удача будет на вашей стороне."
+      },
+      settings: {
+        fontSize: [40, 24],
+        colors: ["#000000", "#000000"],
+        backgroundColor: "#ffffff",
+      }
+    },
+    sample5: {
+      labels: ["Текст"],
+      divs: ["text0"],
+      content: {
+        text0: "Всегда, когда провожу секции, смотрю не на конечный результат, а на ход размышлений. Можно выучить все типы задач, прийти, решить все заготовленные интервьюером задачи за 10 минут и молчать, но это не совсем то, что хочется видеть! Живой ум, поток мыслей, желание рассказать и обсудить своё решение — это то, что хочется видеть в первую очередь. Конечно, есть фактор волнения, который заставляет вас быстрее «закончить» всё это. Но и с ним можно бороться — просто решайте больше, не сдавайтесь даже после неудачных попыток, и тогда удача будет на вашей стороне."
+      },
+      settings: {
+        fontSize: [0,24],
+        colors: ["#000000"],
+        backgroundColor: "#ffffff",
+      }
+    },
   }
 };
 
@@ -110,9 +166,33 @@ export const SampleLib = {
   text:[
     {
       name:'sample1',
-      previewImg: "/header_lib/sample1.png",
+      previewImg: "/text_lib/sample1.jpg",
       title:"ТБ1",
       description:"загловок,текст, обводка"
+    },
+    {
+      name:'sample2',
+      previewImg: "/text_lib/sample2.jpg",
+      title:"ТБ2",
+      description:"загловок, текст, обводка"
+    },
+    {
+      name:'sample3',
+      previewImg: "/text_lib/sample3.jpg",
+      title:"ТБ3",
+      description:"загловок, текст, текст, обводка"
+    },
+    {
+      name:'sample4',
+      previewImg: "/text_lib/sample4.jpg",
+      title:"ТБ4",
+      description:"загловок, текст"
+    },
+    {
+      name:'sample5',
+      previewImg: "/text_lib/sample5.jpg",
+      title:"ТБ5",
+      description:"текст"
     }
   ]
 }

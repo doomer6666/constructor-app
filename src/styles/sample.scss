@@ -5,6 +5,8 @@
 @use "./sample/content-and-setting-bar.scss";
 @use "./sample/header-samples.scss";
 @use "./sample/text.scss";
+@use "./mixins.scss" as mixins;
+@use "./sample/text-samples.scss";
 body {
   font-family: "Manrope";
   color: black;
@@ -28,19 +30,7 @@ body {
 }
 
 .new-block {
-  padding: 0.5em 2em;
-  border: none;
-  font: inherit;
-  color: inherit;
-  background-color: #fff1e3;
-  cursor: pointer;
-  border-radius: 1.25em;
-  border-color: black;
-  border-width: 0.125em;
-  border-style: solid;
-  font-size: 1.5rem;
-  margin-top: 3.125em;
-  margin-bottom: 2em;
+  @include mixins.customButton;
   @media (max-width: 585px) {
     font-size: 1.25rem;
   }
@@ -81,7 +71,7 @@ section section {
 
   --w: 20px;
   --h: 5px;
-  --c: #fff1e3;
+  --c: transperent;
 }
 
 @media (max-width: 768px) {

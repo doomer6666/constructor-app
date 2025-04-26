@@ -1,3 +1,4 @@
+import { ColorPicker } from "antd";
 import {
   handleFontColorChange,
   handleFontSizeChange,
@@ -14,7 +15,7 @@ export default function HeaderBlockSetting({
   divs,
   labels,
 }) {
-  const [imgText, setImgText] = useState("Выберите файл");
+  const [imgText, setImgText] = useState("Загрузить");
   const memoizedHandleFontSizeChange = useCallback(
     (e, index) => {
       handleFontSizeChange(settingTempData, setSettingTempData)(e, index);
@@ -59,14 +60,12 @@ export default function HeaderBlockSetting({
             (field.includes("title") || field.includes("text")) && (
               <div className="little-div" key={`little-div${index}`}>
                 <p>{labels[index]}</p>
-                <input
-                  type="color"
-                  className={`header-color-${index}`}
-                  name="header"
-                  value={settingTempData.colors[index] || ""}
-                  onChange={(e) => {
+                <ColorPicker
+                  className="colorPicker"
+                  value={settingTempData.colors[index]}
+                  onChange={(color) => {
                     handleFontColorChange(settingTempData, setSettingTempData)(
-                      e,
+                      color,
                       index
                     );
                   }}
@@ -75,72 +74,103 @@ export default function HeaderBlockSetting({
             )
         )}
       </div>
-      {settingTempData.borderColor && (
-        <div className="little-div">
+      {(settingTempData.borderColor ||
+        settingTempData.borderTitleColor ||
+        settingTempData.borderTextColor) && (
+        <>
           <p>Цвет декора</p>
-          <input
-            type="color"
-            className="header-border-color"
-            name="header-border"
-            value={settingTempData.borderColor || ""}
-            onChange={(e) => {
-              setSettingTempData({
-                ...settingTempData,
-                borderColor: e.target.value,
-              });
-            }}
-          />
-          {settingTempData.borderTitleColor && (
-            <input
-              type="color"
-              className="header-border-title-color"
-              name="header-border"
-              value={settingTempData.borderTitleColor || ""}
-              onChange={(e) => {
-                setSettingTempData({
-                  ...settingTempData,
-                  borderTitleColor: e.target.value,
-                });
-                document.documentElement.style.setProperty(
-                  "--c",
-                  settingTempData.borderTitleColor
-                );
-              }}
-            />
-          )}
-        </div>
+          <div className="position-x-div">
+            {settingTempData.borderColor && (
+              <div className="little-div">
+                <p>Обводка блока</p>
+                <ColorPicker
+                  className="colorPicker"
+                  value={settingTempData.borderColor}
+                  onChange={(color) => {
+                    setSettingTempData({
+                      ...settingTempData,
+                      borderColor: color.toHexString(),
+                    });
+                  }}
+                />
+              </div>
+            )}
+            {settingTempData.borderTitleColor && (
+              <div className="little-div">
+                <p>Рисунок под заголовком</p>
+                <ColorPicker
+                  className="colorPicker"
+                  value={settingTempData.borderTitleColor}
+                  onChange={(color) => {
+                    setSettingTempData({
+                      ...settingTempData,
+                      borderTitleColor: color.toHexString(),
+                    });
+                  }}
+                />
+              </div>
+            )}
+            {settingTempData.borderTextColor && (
+              <div className="little-div">
+                <p>Обводка блоков</p>
+                <ColorPicker
+                  className="colorPicker"
+                  value={settingTempData.borderTextColor}
+                  onChange={(color) => {
+                    setSettingTempData({
+                      ...settingTempData,
+                      borderTextColor: color.toHexString(),
+                    });
+                  }}
+                />
+              </div>
+            )}
+          </div>
+        </>
       )}
       {settingTempData.backgroundImage && (
         <>
           <p>Фоновое изображение</p>
-          <label htmlFor="input-img" className="input-img">
-            {imgText}
-          </label>
-          <input
-            id="input-img"
-            type="file"
-            onChange={(e) =>
-              handleFileUpload(
-                setSettingTempData,
-                setIsActualyBackImage,
-                setImgText
-              )(e)
-            }
-          />
+          <div className="div-img">
+            <label htmlFor="input-img" className="input-img">
+              {imgText}
+            </label>
+            <input
+              id="input-img"
+              type="file"
+              onChange={(e) =>
+                handleFileUpload(
+                  setSettingTempData,
+                  setIsActualyBackImage,
+                  setImgText
+                )(e)
+              }
+            />
+            <button
+              className="remove-img"
+              onClick={() => {
+                setImgText("Загрузить");
+                setSettingTempData({
+                  ...settingTempData,
+                  backgroundImage: "none",
+                });
+                setIsActualyBackImage(false);
+              }}
+            >
+              Удалить
+            </button>
+          </div>
         </>
       )}
       <p>Фоновый цвет</p>
-      <input
-        type="color"
-        className="head-color"
-        name="head"
+      <ColorPicker
+        className="colorPicker"
         value={settingTempData.backgroundColor}
-        onChange={(e) => {
+        onChange={(color) => {
           setSettingTempData({
             ...settingTempData,
-            backgroundColor: e.target.value,
+            backgroundColor: color.toHexString(),
           });
-          setIsActualyBackImage(false);
         }}
       />
     </div>

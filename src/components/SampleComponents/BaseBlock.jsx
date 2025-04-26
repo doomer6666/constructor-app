@@ -22,6 +22,7 @@ const BaseBlock = ({ type, data, sample, pageContent }) => {
   const handleSettingClose = () => {
     setSettingData(lastSettingData);
     setIsSettingVisible(false);
+    setIsBackImage(settingData.backgroundImage !== undefined);
   };
 
   const handleContentSave = () => {

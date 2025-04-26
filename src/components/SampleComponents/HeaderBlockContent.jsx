@@ -25,12 +25,12 @@ export default function HeaderBlockContent({
                 {field.includes("text") ? (
                   <textarea
                     value={contentTempData[field] || ""}
-                    onChange={(e) =>
+                    onChange={(e) => {
                       setContentTempData({
                         ...contentTempData,
-                        [field]: e.target.value,
-                      })
-                    }
+                        [field]: e.target.value.replace(/(\r\n|\r|\n)/g, "\n"),
+                      });
+                    }}
                     className={`textarea-text-${index}`}
                   />
                 ) : (

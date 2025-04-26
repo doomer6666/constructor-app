@@ -1,3 +1,5 @@
+@use "../mixins.scss" as mixins;
+
 @mixin text($em: 0.9em, $font: 1.5rem) {
     margin: 0;
     padding-bottom: $em;
@@ -19,7 +21,9 @@
     box-sizing: border-box;
 
     input,
-    textarea {
+    textarea,
+    .colorPicker {
+        font-family: "Manrope";
         margin: 0;
         padding-bottom: 0.9em;
         margin-left: 1em;
@@ -28,18 +32,17 @@
         font-size: 1.25rem;
         color: rgba(0, 0, 0, 1);
         background-color: rgba(217, 217, 217, 1);
-        width: 90%;
+        width: 10%;
         padding-top: 0.25em;
         padding-bottom: 0.25em;
-        padding-left: 1em;
-        border-radius: 1.5em;
+        border-radius: 0.5em;
         box-sizing: border-box;
-        border-width: 0.1em;
+        border-width: 0;
         &:hover {
-            background-color: #ffb74d;
+            background-color: rgb(202, 200, 200);
         }
         &:active {
-            background-color: #ff8c00;
+            background-color: rgb(199, 196, 196);
         }
     }
     p,
@@ -67,6 +70,19 @@
 
 .content-bar {
     @include bar;
+    p {
+        white-space: pre-line;
+    }
+    input,
+    textarea {
+        width: 90% !important;
+        padding-left: 0.5em;
+    }
+    textarea {
+        height: 9em !important;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
 }
 
 .setting-bar {
@@ -86,41 +102,43 @@
     }
 
     input[type="number"] {
-        width: 45%;
         font-size: 1rem;
-        // padding-left: 0.5em;
+        text-align: center;
         &:invalid {
             background-color: red;
         }
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
     }
 
-    label.input-img {
-        @include text($em: 0, $font: 1.25em);
-        display: inline-block;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        border-style: solid;
-        border-color: black;
-        border-radius: 0;
-        padding-left: 5px;
-        padding-right: 5px;
-        margin-bottom: 2em;
-        width: 7em;
+    .div-img {
+        display: flex;
+        align-items: start;
+        gap: 1em;
+        .input-img {
+            @include mixins.customButton($fontSize: 1rem, $backgroundColor: rgb(255, 255, 255), $borderColor: #ff7700);
+            margin-top: 0;
+        }
+        .remove-img {
+            @include mixins.customButton($fontSize: 1rem, $backgroundColor: rgb(229, 229, 229));
+            margin-top: 0;
+        }
     }
 
     input[type="file"] {
-        opacity: 0;
-        position: absolute;
-        z-index: -1;
+        display: none;
     }
 
-    input[type="color"] {
-        border-radius: 0 !important;
-        padding: 0 !important;
-        width: 45% !important;
-        font-size: 1rem;
+    .colorPicker {
+        .ant-color-picker-color-block {
+            width: 95%;
+            border-radius: 0.5rem;
+        }
     }
+
     @include bar;
 }
 

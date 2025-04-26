@@ -1,0 +1,16 @@
+.text {
+    &.sample2,
+    &.sample3 {
+        h2 {
+            margin-bottom: 1em !important;
+        }
+        .text-container {
+            display: flex !important;
+            gap: 2em !important;
+            .text-div {
+                padding: 0.8em !important;
+                min-height: 300px !important;
+            }
+        }
+    }
+}

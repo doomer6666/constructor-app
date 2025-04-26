@@ -13,8 +13,10 @@
     .page__content {
         @include blocks.block();
         width: 75%;
-        @include mixins.border-style(1.25em, #ff7700, 2px, solid);
-        padding: 15px 30px 300px 30px;
+        @include mixins.border-style(1.25em, transparent, 2px, solid);
+        padding: 15px 30px 0px 30px;
+        min-height: 400px;
+        box-sizing: border-box;
         margin-bottom: 30px;
         position: relative;
 
@@ -26,14 +28,24 @@
             color: #ffffff;
             line-height: calc(1.2em + 2 * var(--h));
             padding-bottom: calc(2 * var(--h));
+            background: bottom/calc(2 * var(--w)) calc(2 * var(--h)) space no-repeat;
+            --_g: calc(var(--w) / 2) top 50%, var(--c) 90%, #0000 105%;
+            background-image: radial-gradient(var(--h) at left var(--_g)), radial-gradient(var(--h) at right var(--_g)),
+                linear-gradient(90deg, #0000 calc(var(--w) / 2), var(--c) 0 calc(3 * var(--w) / 2), #0000 0);
+            -webkit-box-decoration-break: clone;
+            box-decoration-break: clone;
         }
-
-        p {
+        div {
             width: 100%;
-            @include mixins.responsive-font(var(--max-font-p), var(--dynamic-font-p, 2rem));
-            text-align: left;
-            margin: 0;
-            color: #ffffff;
+            @include mixins.border-style(1.25em, transparent, 2px, solid);
+            p {
+                width: 100%;
+                @include mixins.responsive-font(var(--max-font-p), var(--dynamic-font-p, 2rem));
+                text-align: left;
+                margin: 0;
+                white-space: pre-line;
+                margin-bottom: 30px;
+            }
         }
     }
 }

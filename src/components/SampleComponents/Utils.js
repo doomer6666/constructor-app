@@ -2,7 +2,11 @@ export const handleFileUpload =
   (setSettingTempData, setIsActualyBackImage,setImgText) => (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    setImgText(file.name.slice(0,7)+'...')
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    if (!allowedTypes.includes(file.type)) {
+      setImgText("Ошибка");
+      return;
+    }
     const reader = new FileReader();
     reader.onload = (event) => {
       const newImageUrl = event.target.result;
@@ -13,6 +17,7 @@ export const handleFileUpload =
       setIsActualyBackImage(true);
     };
     reader.readAsDataURL(file);
+    setImgText("Загружено")
   };
 
 export const handleFontSizeChange =
@@ -26,11 +31,12 @@ export const handleFontSizeChange =
   };
 
 export const handleFontColorChange =
-  (settingTempData, setSettingTempData) => (e, index) => {
+  (settingTempData, setSettingTempData) => (color, index) => {
     const newFontColors = [...settingTempData.colors];
-    newFontColors[index] = e.target.value;
+    newFontColors[index] = color.toHexString();
     setSettingTempData({
       ...settingTempData,
       colors: newFontColors,
     });
   };
+

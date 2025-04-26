@@ -19,3 +19,25 @@
     flex-direction: $direction;
     gap: $gap;
 }
+
+@mixin customButton(
+    $color: black,
+    $backgroundColor: #fff1e3,
+    $borderColor: black,
+    $fontSize: 1.5rem,
+    $margin-bottom: 2em
+) {
+    padding: 0.5em 2em;
+    border: none;
+    font: inherit;
+    color: $color;
+    background-color: $backgroundColor;
+    cursor: pointer;
+    border-radius: 0.5em;
+    border-color: $borderColor;
+    border-width: 0.025em;
+    border-style: solid;
+    font-size: $fontSize;
+    margin-top: 3.125em;
+    margin-bottom: $margin-bottom;
+}
