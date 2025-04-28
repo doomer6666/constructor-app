@@ -37,7 +37,7 @@ export default function TextBlock({ contentData, settingData }) {
                     >
                       {index}
                     </div>
-                    <div
+                    <p
                       class="text"
                       style={{
                         "--dynamic-font-p": `${
@@ -47,7 +47,7 @@ export default function TextBlock({ contentData, settingData }) {
                       }}
                     >
                       {text}
-                    </div>
+                    </p>
                   </div>
                   <div
                     class="line"

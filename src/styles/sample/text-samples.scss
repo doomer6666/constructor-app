@@ -52,13 +52,15 @@
             align-items: center;
             position: relative;
             margin: 50px;
+            margin-left: 15vw;
+            margin-right: 0;
         }
 
         /* Соединительная линия (отступы настроены для корректного позиционирования) */
         .text-container::before {
             content: "";
             position: absolute;
-            top: 33%;
+            top: 20%;
             left: 2%;
             right: 23%;
             border-top: 2px solid #f39c12; /* Оттенок оранжевого */
@@ -72,26 +74,24 @@
             justify-content: start;
             text-align: center;
             z-index: 2; /* чтобы круги были поверх линии */
-        }
+            /* Стили для круга с числом */
+            .circle {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: #f39c12;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: black;
+                font-weight: bold;
+                font-size: 18px;
+            }
 
-        /* Стили для круга с числом */
-        .circle {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #f39c12;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: bold;
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        /* Стили для подписи под кругом */
-        .text {
-            justify-content: start;
+            /* Стили для подписи под кругом */
+            p {
+                margin-left: -0.5em;
+            }
         }
     }
 }

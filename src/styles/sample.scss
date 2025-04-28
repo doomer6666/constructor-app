@@ -7,6 +7,8 @@
 @use "./sample/text.scss";
 @use "./mixins.scss" as mixins;
 @use "./sample/text-samples.scss";
+@use "./scroll-bar.scss";
+
 body {
   font-family: "Manrope";
   color: black;
