@@ -1,6 +1,7 @@
 .text {
     &.sample2,
-    &.sample3 {
+    &.sample3,
+    &.sample6 {
         h2 {
             margin-bottom: 1em !important;
         }
@@ -11,6 +12,86 @@
                 padding: 0.8em !important;
                 min-height: 300px !important;
             }
+        }
+    }
+    &.sample7,
+    &.sample8 {
+        .text-container {
+            display: flex !important;
+            flex-direction: column;
+            gap: 1em !important;
+            .text-div {
+                padding: 0.8em !important;
+            }
+        }
+    }
+    &.sample8 {
+        .text-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2em;
+            padding: 0.8em !important;
+            img {
+                display: flex;
+                justify-content: start;
+                height: min(max(var(--font-data, 2rem), 2rem), 5rem);
+            }
+            p {
+                display: block;
+                margin: 0;
+                padding: 0;
+            }
+        }
+    }
+
+    &.sample9 {
+        .text-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            margin: 50px;
+        }
+
+        /* Соединительная линия (отступы настроены для корректного позиционирования) */
+        .text-container::before {
+            content: "";
+            position: absolute;
+            top: 33%;
+            left: 2%;
+            right: 23%;
+            border-top: 2px solid #f39c12; /* Оттенок оранжевого */
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        /* Элемент таймлайна */
+        .block {
+            position: relative;
+            justify-content: start;
+            text-align: center;
+            z-index: 2; /* чтобы круги были поверх линии */
+        }
+
+        /* Стили для круга с числом */
+        .circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f39c12;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        /* Стили для подписи под кругом */
+        .text {
+            justify-content: start;
         }
     }
 }

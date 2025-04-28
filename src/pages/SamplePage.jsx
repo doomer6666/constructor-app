@@ -66,7 +66,10 @@ const SamplePage = () => {
         <button className="new-block save-page hidden">
           Сохранить страницу
         </button>
-        <button className="new-block submit-page hidden">
+        <button
+          className="new-block submit-page hidden"
+          // onClick={ }
+        >
           Выгрузить страницу
         </button>
       </div>

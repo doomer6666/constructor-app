@@ -83,6 +83,9 @@
         white-space: pre-wrap;
         word-wrap: break-word;
     }
+    & {
+        overflow-x: scroll;
+    }
 }
 
 .setting-bar {

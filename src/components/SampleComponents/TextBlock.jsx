@@ -27,21 +27,63 @@ export default function TextBlock({ contentData, settingData }) {
         {texts.map(([label, text]) => {
           const index = parseInt(label.match(/\d+/), 10) + 1;
           return (
-            <div
-              key={label + text}
-              className="text-div"
-              style={{ borderColor: settingData.borderTextColor }}
-            >
-              <p
-                className={label}
-                style={{
-                  "--dynamic-font-p": `${settingData.fontSize[index] / 16}rem`,
-                  color: settingData.colors[index],
-                }}
+            <>
+              {settingData.textTimeLine && (
+                <>
+                  <div className="block">
+                    <div
+                      class="circle"
+                      styte={{ backgroundColor: settingData.textTimeLine }}
+                    >
+                      {index}
+                    </div>
+                    <div
+                      class="text"
+                      style={{
+                        "--dynamic-font-p": `${
+                          settingData.fontSize[index] / 16
+                        }rem`,
+                        color: settingData.colors[index],
+                      }}
+                    >
+                      {text}
+                    </div>
+                  </div>
+                  <div
+                    class="line"
+                    styte={{ backgroundColor: settingData.textTimeLine }}
+                  ></div>
+                </>
+              )}
+              <div
+                key={label + text}
+                className="text-div"
+                style={{ borderColor: settingData.borderTextColor }}
               >
-                {text}
-              </p>
-            </div>
+                {settingData.textIconColor && (
+                  <img
+                    src="/text_lib/text-icon.svg"
+                    style={{
+                      "--font-data": `${settingData.fontSize[index] / 16}rem`,
+                      color: settingData.colors[index],
+                    }}
+                  />
+                )}
+                {!settingData.textTimeLine && (
+                  <p
+                    className={label}
+                    style={{
+                      "--dynamic-font-p": `${
+                        settingData.fontSize[index] / 16
+                      }rem`,
+                      color: settingData.colors[index],
+                    }}
+                  >
+                    {text}
+                  </p>
+                )}
+              </div>
+            </>
           );
         })}
       </div>
