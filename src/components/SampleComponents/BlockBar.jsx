@@ -21,7 +21,9 @@ export default function BlockBar({ setIsVisibleBlockBar, handleAddBlock }) {
           {blocks.map((block, index) => (
             <li className="block-item" key={index}>
               <button
-                className="title-button template-button"
+                className={`title-button template-button ${
+                  activeType === block[0] ? "active" : ""
+                }`}
                 onClick={() => {
                   setActiveType(block[0]);
                   setLibIsVisible(!!libIsVisible);

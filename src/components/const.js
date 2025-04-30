@@ -199,6 +199,23 @@ export const blockTemplates = {
         backgroundColor: "#ffffff",
       }
     },
+    sample10: {
+      labels: ["Заголовок", "Текст1", "Текст2", "Текст3", "Текст4"],
+      divs: ["title0", "text0", "text1", "text2", "text3"],
+      content: {
+        title0: "Заголовок",
+        text0: "Текст1",
+        text1: "Текст2",
+        text2: "Текст3",
+        text3: "Текст4",
+      },
+      settings: {
+        fontSize: [40, 24, 24, 24, 24],
+        colors: ["#000000", "#000000","#000000", "#000000","#000000"],
+        textTimeLine:"#FFAA5F",
+        backgroundColor: "#ffffff",
+      }
+    },
   }
 };
 

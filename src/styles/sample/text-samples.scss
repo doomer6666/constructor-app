@@ -63,7 +63,8 @@
             top: 20%;
             left: 2%;
             right: 23%;
-            border-top: 2px solid #f39c12; /* Оттенок оранжевого */
+            border-top: 2px solid; /* Оттенок оранжевого */
+            border-top-color: var(--custom-color);
             transform: translateY(-50%);
             z-index: 1;
         }
@@ -91,6 +92,83 @@
             /* Стили для подписи под кругом */
             p {
                 margin-left: -0.5em;
+            }
+        }
+    }
+    &.sample10 {
+        position: relative;
+
+        .text-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+
+            &::before {
+                margin-top: 8em;
+                margin-bottom: 3em;
+                content: "";
+                position: absolute;
+                left: 50%; // линия по центру контейнера
+                top: 0;
+                bottom: 0;
+                width: 2px; // толщина линии
+                background-color: var(--custom-color);
+                transform: translateX(-50%);
+                z-index: 1;
+            }
+        }
+
+        .block {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            gap: 2em;
+            width: 50%;
+            margin: 50px auto;
+            box-sizing: border-box;
+            z-index: 2;
+
+            .circle {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: #f39c12;
+                color: #000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                font-size: 18px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            p {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                width: fit-content;
+                margin: 0;
+            }
+
+            &.odd {
+                p {
+                    left: 0;
+                    text-align: right;
+                }
+            }
+
+            &.even {
+                p {
+                    right: 0;
+                    text-align: left;
+                }
             }
         }
     }

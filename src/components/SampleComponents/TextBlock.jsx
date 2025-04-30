@@ -23,22 +23,25 @@ export default function TextBlock({ contentData, settingData }) {
           {text}
         </h2>
       ))}
-      <div className="text-container">
+      <div
+        className="text-container"
+        style={{ "--custom-color": settingData.textTimeLine }}
+      >
         {texts.map(([label, text]) => {
           const index = parseInt(label.match(/\d+/), 10) + 1;
           return (
             <>
               {settingData.textTimeLine && (
                 <>
-                  <div className="block">
+                  <div className={`block ${index % 2 === 0 ? "even" : "odd"}`}>
                     <div
-                      class="circle"
-                      styte={{ backgroundColor: settingData.textTimeLine }}
+                      className="circle"
+                      style={{ backgroundColor: settingData.textTimeLine }}
                     >
                       {index}
                     </div>
                     <p
-                      class="text"
+                      className="text"
                       style={{
                         "--dynamic-font-p": `${
                           settingData.fontSize[index] / 16
@@ -49,10 +52,7 @@ export default function TextBlock({ contentData, settingData }) {
                       {text}
                     </p>
                   </div>
-                  <div
-                    class="line"
-                    styte={{ backgroundColor: settingData.textTimeLine }}
-                  ></div>
+                  <div className="line"></div>
                 </>
               )}
               <div

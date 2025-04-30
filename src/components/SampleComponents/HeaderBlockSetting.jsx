@@ -76,7 +76,8 @@ export default function HeaderBlockSetting({
       </div>
       {(settingTempData.borderColor ||
         settingTempData.borderTitleColor ||
-        settingTempData.borderTextColor) && (
+        settingTempData.borderTextColor ||
+        settingTempData.textTimeLine) && (
         <>
           <p>Цвет декора</p>
           <div className="position-x-div">
@@ -120,6 +121,21 @@ export default function HeaderBlockSetting({
                     setSettingTempData({
                       ...settingTempData,
                       borderTextColor: color.toHexString(),
+                    });
+                  }}
+                />
+              </div>
+            )}
+            {settingTempData.textTimeLine && (
+              <div className="little-div">
+                <p>Обводка таймлайна</p>
+                <ColorPicker
+                  className="colorPicker"
+                  value={settingTempData.textTimeLine}
+                  onChange={(color) => {
+                    setSettingTempData({
+                      ...settingTempData,
+                      textTimeLine: color.toHexString(),
                     });
                   }}
                 />
