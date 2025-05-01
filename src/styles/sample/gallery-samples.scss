@@ -1,0 +1,24 @@
+.gallery {
+    &.sample2 {
+        .gallery-div {
+            gap: 5em;
+            div {
+                width: 35em;
+                &:nth-child(2) {
+                    margin-top: 4em;
+                }
+            }
+        }
+    }
+    &.sample3 {
+        .gallery-div {
+            gap: 5em;
+            div {
+                width: 35em;
+                &:nth-child(2) {
+                    margin-top: 4em;
+                }
+            }
+        }
+    }
+}

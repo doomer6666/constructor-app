@@ -53,6 +53,24 @@
         }
     }
 
+    .div-img {
+        display: flex;
+        align-items: start;
+        gap: 1em;
+        .input-img {
+            @include mixins.customButton($fontSize: 1rem, $backgroundColor: rgb(255, 255, 255), $borderColor: #ff7700);
+            margin-top: 0;
+        }
+        .remove-img {
+            @include mixins.customButton($fontSize: 1rem, $backgroundColor: rgb(229, 229, 229));
+            margin-top: 0;
+        }
+    }
+
+    input[type="file"] {
+        display: none;
+    }
+
     input {
         @media (max-width: 768px) {
             font-size: 1rem;
@@ -115,24 +133,6 @@
             -webkit-appearance: none;
             margin: 0;
         }
-    }
-
-    .div-img {
-        display: flex;
-        align-items: start;
-        gap: 1em;
-        .input-img {
-            @include mixins.customButton($fontSize: 1rem, $backgroundColor: rgb(255, 255, 255), $borderColor: #ff7700);
-            margin-top: 0;
-        }
-        .remove-img {
-            @include mixins.customButton($fontSize: 1rem, $backgroundColor: rgb(229, 229, 229));
-            margin-top: 0;
-        }
-    }
-
-    input[type="file"] {
-        display: none;
     }
 
     .colorPicker {

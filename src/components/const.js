@@ -134,7 +134,7 @@ export const blockTemplates = {
       }
     },
     sample6: {
-      labels: ["Текст1","Текст2","Текст3"],
+      labels: ["Текст","Текст1","Текст2","Текст3"],
       divs: ["text0","text1","text2"],
       content: {
         text0: "Всегда, когда провожу секции, смотрю не на конечный результат, а на ход размышлений. Можно выучить все типы задач, прийти, решить все заготовленные интервьюером задачи за 10 минут и молчать, но это не совсем то, что хочется видеть! Живой ум, поток мыслей, желание рассказать и обсудить своё решение — это то, что хочется видеть в первую очередь. Конечно, есть фактор волнения, который заставляет вас быстрее «закончить» всё это. Но и с ним можно бороться — просто решайте больше, не сдавайтесь даже после неудачных попыток, и тогда удача будет на вашей стороне.",
@@ -216,7 +216,68 @@ export const blockTemplates = {
         backgroundColor: "#ffffff",
       }
     },
-  }
+  },
+  gallery: {
+    sample1: {
+      labels: ["Изображение1","Изображение2","Изображение3",],
+      divs: ["img1", "img2", "img3"],
+      content: {
+        img1: "none",
+        img2: "none",
+        img3: "none",
+      },
+      settings: {
+        backgroundColor: "#ffffff",
+      }
+    },
+    sample2: {
+      labels: ["Изображение1","Изображение2"],
+      divs: ["img1", "img2"],
+      content: {
+        img1: "none",
+        img2: "none",
+      },
+      settings: {
+        backgroundColor: "#ffffff",
+      }
+    },
+  },
+  button: {
+    sample1: {
+      labels: ["Надзаголовок", "Заголовок", "Изображение"],
+      divs: ["title0", "title1", "img1"],
+      content: {
+        title0: "Надзаголовок",
+        title1: "Заголовок",
+        title2: "Описание",
+        img1: "/content-img-sample1.png"
+      },
+    },
+  },
+  contacts: {
+    sample1: {
+      labels: ["Надзаголовок", "Заголовок", "Изображение"],
+      divs: ["title0", "title1", "img1"],
+      content: {
+        title0: "Надзаголовок",
+        title1: "Заголовок",
+        title2: "Описание",
+        img1: "/content-img-sample1.png"
+      },
+    },
+  },
+  video: {
+    sample1: {
+      labels: ["Надзаголовок", "Заголовок", "Изображение"],
+      divs: ["title0", "title1", "img1"],
+      content: {
+        title0: "Надзаголовок",
+        title1: "Заголовок",
+        title2: "Описание",
+        img1: "/content-img-sample1.png"
+      },
+    },
+  },
 };
 
 export const SampleLib = {
@@ -307,5 +368,61 @@ export const SampleLib = {
       title:"ТБ10",
       description:"загловок, 4 текста, этапы"
     }
-  ]
+  ],
+  gallery: [
+    {
+      name:'sample1',
+      previewImg: "/gallery_lib/sample1.jpg",
+      title:"Г1",
+      description:"3 изображения"
+    },
+    {
+      name:'sample2',
+      previewImg: "/gallery_lib/sample2.jpg",
+      title:"Г2",
+      description:"2 изображения"
+    },
+    {
+      name:'sample3',
+      previewImg: "/gallery_lib/sample3.jpg",
+      title:"Г3",
+      description:"6 изображений"
+    },
+    {
+      name:'sample4',
+      previewImg: "/gallery_lib/sample4.jpg",
+      title:"Г4",
+      description:"лента изображений"
+    },
+    {
+      name:'sample5',
+      previewImg: "/gallery_lib/sample5.jpg",
+      title:"Г5",
+      description:"1 изображение"
+    },
+  ],
+  button: [
+    {
+      name:'sample1',
+      previewImg: "/header_lib/sample1.png",
+      title:"О1",
+      description:"надзаголовок, заголовок, описание, картинка"
+    },
+  ],
+  contacts: [
+    {
+      name:'sample1',
+      previewImg: "/header_lib/sample1.png",
+      title:"О1",
+      description:"надзаголовок, заголовок, описание, картинка"
+    },
+  ],
+  video: [
+    {
+      name:'sample1',
+      previewImg: "/header_lib/sample1.png",
+      title:"О1",
+      description:"надзаголовок, заголовок, описание, картинка"
+    },
+  ],
 }

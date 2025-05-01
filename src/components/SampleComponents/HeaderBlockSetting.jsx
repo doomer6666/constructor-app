@@ -15,14 +15,15 @@ export default function HeaderBlockSetting({
   divs,
   labels,
 }) {
-  const [imgText, setImgText] = useState("Загрузить");
+  const [imgText, setImgText] = useState(
+    setIsActualyBackImage ? "Загружено" : "Загрузить"
+  );
   const memoizedHandleFontSizeChange = useCallback(
     (e, index) => {
       handleFontSizeChange(settingTempData, setSettingTempData)(e, index);
     },
     [settingTempData, setSettingTempData]
   );
-
   return (
     <div className="setting-bar setting-header-bar">
       <div className="buttons-div">
@@ -34,46 +35,80 @@ export default function HeaderBlockSetting({
         </button>
       </div>
 
-      <p>Размер шрифта</p>
-      <div className="position-x-div">
-        {divs.map(
-          (field, index) =>
-            (field.includes("title") || field.includes("text")) && (
-              <div className="little-div" key={`little-div${index}`}>
-                <p>{labels[index]}</p>
-                <input
-                  type="number"
-                  value={settingTempData.fontSize[index]}
-                  onChange={(e) => {
-                    memoizedHandleFontSizeChange(e, index);
-                  }}
-                  className={`input-setting-${index}`}
-                />
-              </div>
-            )
-        )}
-      </div>
-      <p>Цвет шрифта</p>
-      <div className="position-x-div">
-        {divs.map(
-          (field, index) =>
-            (field.includes("title") || field.includes("text")) && (
-              <div className="little-div" key={`little-div${index}`}>
-                <p>{labels[index]}</p>
-                <ColorPicker
-                  className="colorPicker"
-                  value={settingTempData.colors[index]}
-                  onChange={(color) => {
-                    handleFontColorChange(settingTempData, setSettingTempData)(
-                      color,
-                      index
-                    );
-                  }}
-                />
-              </div>
-            )
-        )}
-      </div>
+      {!divs.includes("title0") && divs.includes("text0") && (
+        <>
+          <p>Размер шрифта</p>
+          <div className="position-x-div">
+            {divs.map((field, index) => {
+              index = field.includes("text") ? index + 1 : index;
+              return (
+                (field.includes("title") || field.includes("text")) && (
+                  <div className="little-div" key={`little-div${index}`}>
+                    <p>{labels[index]}</p>
+                    <input
+                      type="number"
+                      value={settingTempData.fontSize[index]}
+                      onChange={(e) => {
+                        memoizedHandleFontSizeChange(e, index);
+                      }}
+                      className={`input-setting-${index}`}
+                    />
+                  </div>
+                )
+              );
+            })}
+          </div>
+        </>
+      )}
+      {divs.includes("title0") && (
+        <>
+          <p>Размер шрифта</p>
+          <div className="position-x-div">
+            {divs.map((field, index) => {
+              return (
+                (field.includes("title") || field.includes("text")) && (
+                  <div className="little-div" key={`little-div${index}`}>
+                    <p>{labels[index]}</p>
+                    <input
+                      type="number"
+                      value={settingTempData.fontSize[index]}
+                      onChange={(e) => {
+                        memoizedHandleFontSizeChange(e, index);
+                      }}
+                      className={`input-setting-${index}`}
+                    />
+                  </div>
+                )
+              );
+            })}
+          </div>
+        </>
+      )}
+      {(divs.includes("title0") || divs.includes("text0")) && (
+        <>
+          <p>Цвет шрифта</p>
+          <div className="position-x-div">
+            {divs.map(
+              (field, index) =>
+                (field.includes("title") || field.includes("text")) && (
+                  <div className="little-div" key={`little-div${index}`}>
+                    <p>{labels[index]}</p>
+                    <ColorPicker
+                      className="colorPicker"
+                      value={settingTempData.colors[index]}
+                      onChange={(color) => {
+                        handleFontColorChange(
+                          settingTempData,
+                          setSettingTempData
+                        )(color, index);
+                      }}
+                    />
+                  </div>
+                )
+            )}
+          </div>
+        </>
+      )}
       {(settingTempData.borderColor ||
         settingTempData.borderTitleColor ||
         settingTempData.borderTextColor ||
@@ -156,9 +191,10 @@ export default function HeaderBlockSetting({
               type="file"
               onChange={(e) =>
                 handleFileUpload(
+                  "backgroundImage",
                   setSettingTempData,
-                  setIsActualyBackImage,
-                  setImgText
+                  setImgText,
+                  setIsActualyBackImage
                 )(e)
               }
             />

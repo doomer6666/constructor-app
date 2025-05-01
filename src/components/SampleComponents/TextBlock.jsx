@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function TextBlock({ contentData, settingData }) {
   const titles = Object.entries(contentData).filter(([label]) =>
     label.includes("title")
@@ -10,9 +12,9 @@ export default function TextBlock({ contentData, settingData }) {
       className="page__content"
       style={{ borderColor: settingData?.borderColor }}
     >
-      {titles.map(([label, text]) => (
+      {titles.map(([label, text], index) => (
         <h2
-          key={label + text}
+          key={`${label}-${index}`}
           className={label}
           style={{
             "--c": settingData.borderTitleColor,
@@ -30,7 +32,7 @@ export default function TextBlock({ contentData, settingData }) {
         {texts.map(([label, text]) => {
           const index = parseInt(label.match(/\d+/), 10) + 1;
           return (
-            <>
+            <React.Fragment key={`text-block-${label}-${index}`}>
               {settingData.textTimeLine && (
                 <>
                   <div className={`block ${index % 2 === 0 ? "even" : "odd"}`}>
@@ -83,7 +85,7 @@ export default function TextBlock({ contentData, settingData }) {
                   </p>
                 )}
               </div>
-            </>
+            </React.Fragment>
           );
         })}
       </div>

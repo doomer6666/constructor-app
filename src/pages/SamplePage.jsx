@@ -4,9 +4,21 @@ import { blockTemplates } from "../components/const";
 import BlockBar from "../components/SampleComponents/BlockBar";
 import HeaderBlock from "../components/SampleComponents/HeaderBlock";
 import TextBlock from "../components/SampleComponents/TextBlock";
+import GalleryBlock from "../components/SampleComponents/GalleryBlock";
+import ButtonBlock from "../components/SampleComponents/ButtonBlock";
+import ContactsBlock from "../components/SampleComponents/ContactsBlock";
+import VideoBlock from "../components/SampleComponents/VideoBlock";
 const SamplePage = () => {
   const [blocks, setBlocks] = useState([]);
   const [isVisibleBlockBar, setIsVisibleBlockBar] = useState(false);
+  const componentMap = {
+    header: HeaderBlock,
+    text: TextBlock,
+    gallery: GalleryBlock,
+    button: ButtonBlock,
+    contacts: ContactsBlock,
+    video: VideoBlock,
+  };
   const handleAddBlock = (type, sample) => {
     const newBlock = {
       id: Date.now(),
@@ -32,27 +44,16 @@ const SamplePage = () => {
   return (
     <section className="redactor-page">
       <section className="page" key={"page1"}>
-        {blocks.map((block) => {
-          return block.type === "header" ? (
-            <BaseBlock
-              key={block.id}
-              type={block.type}
-              data={block.data}
-              onUpdate={(newData) => updateBlockData(block.id, newData)}
-              sample={block.sample}
-              pageContent={HeaderBlock}
-            />
-          ) : block.type === "text" ? (
-            <BaseBlock
-              key={block.id}
-              type={block.type}
-              data={block.data}
-              onUpdate={(newData) => updateBlockData(block.id, newData)}
-              sample={block.sample}
-              pageContent={TextBlock}
-            />
-          ) : null;
-        })}
+        {blocks.map((block) => (
+          <BaseBlock
+            key={block.id}
+            type={block.type}
+            data={block.data}
+            onUpdate={(newData) => updateBlockData(block.id, newData)}
+            sample={block.sample}
+            pageContent={componentMap[block.type]}
+          />
+        ))}
       </section>
       {!isVisibleBlockBar && (
         <button

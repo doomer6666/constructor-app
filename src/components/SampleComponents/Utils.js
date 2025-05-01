@@ -1,5 +1,6 @@
 export const handleFileUpload =
-  (setSettingTempData, setIsActualyBackImage,setImgText) => (e) => {
+  (field,setSettingTempData,setImgText, setIsActualyBackImage = () => {}) => (e) => {
+    console.log(field)
     const file = e.target.files[0];
     if (!file) return;
     const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
@@ -12,7 +13,7 @@ export const handleFileUpload =
       const newImageUrl = event.target.result;
       setSettingTempData((prev) => ({
         ...prev,
-        backgroundImage: newImageUrl,
+        [field]: newImageUrl,
       }));
       setIsActualyBackImage(true);
     };

@@ -7,6 +7,10 @@ export default function BlockBar({ setIsVisibleBlockBar, handleAddBlock }) {
   const blocks = [
     ["header", "Обложка"],
     ["text", "Текстовый блок"],
+    ["gallery", "Галерея"],
+    ["button", "Кнопка"],
+    ["contacts", "Контакты"],
+    ["video", "Видео"],
   ];
   return (
     <>

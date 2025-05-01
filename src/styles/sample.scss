@@ -8,6 +8,8 @@
 @use "./mixins.scss" as mixins;
 @use "./sample/text-samples.scss";
 @use "./scroll-bar.scss";
+@use "./sample/gallery.scss";
+@use "./sample/gallery-samples.scss";
 
 body {
   font-family: "Manrope";
