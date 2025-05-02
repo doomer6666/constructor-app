@@ -241,6 +241,47 @@ export const blockTemplates = {
         backgroundColor: "#ffffff",
       }
     },
+    sample3: {
+      labels: ["Изображение1","Изображение2","Изображение3","Изображение4","Изображение5","Изображение6"],
+      divs: ["img1", "img2", "img3", "img4", "img5", "img6"],
+      content: {
+        img1: "none",
+        img2: "none",
+        img3: "none",
+        img4: "none",
+        img5: "none",
+        img6: "none",
+        isGrid:true
+      },
+      settings: {
+        backgroundColor: "#ffffff",
+      }
+    },
+    sample4: {
+      labels: ["Изображение1","Изображение2","Изображение3","Изображение4","Изображение5","Изображение6"],
+      divs: ["img1", "img2", "img3", "img4", "img5"],
+      content: {
+        img1: "none",
+        img2: "none",
+        img3: "none",
+        img4: "none",
+        img5: "none",
+        isInfinite:true
+      },
+      settings: {
+        backgroundColor: "#ffffff",
+      }
+    },
+    sample5: {
+      labels: ["Изображение"],
+      divs: ["img1"],
+      content: {
+        img1: "none",
+      },
+      settings: {
+        backgroundColor: "#ffffff",
+      }
+    },
   },
   button: {
     sample1: {

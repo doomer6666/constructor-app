@@ -12,12 +12,98 @@
     }
     &.sample3 {
         .gallery-div {
-            gap: 5em;
-            div {
-                width: 35em;
-                &:nth-child(2) {
-                    margin-top: 4em;
+            display: flex;
+            gap: 30px;
+            .path-1 {
+                background-color: transparent;
+                width: auto;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                .big-img {
+                    width: 863px;
+                    height: 518px;
                 }
+                .x-gallery {
+                    background-color: transparent;
+                    width: auto;
+                    height: auto;
+                    display: flex;
+                    gap: 22px;
+                    div {
+                        width: 420px;
+                        height: 240px;
+                    }
+                }
+            }
+            .path-2 {
+                background-color: transparent;
+                width: auto;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 29px;
+                div {
+                    width: 420px;
+                    height: 240px;
+                }
+            }
+        }
+    }
+    &.sample4 {
+        // .carousel {
+        //     // .slick-arrow.slick-prev {
+        //     //     margin-left: 2em;
+        //     // }
+        //     // .slick-arrow.slick-next {
+        //     //     margin-left: -2em;
+        //     // }
+        // }
+        .slick-arrow.slick-prev,
+        .slick-arrow.slick-next {
+            position: absolute;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            transform: translateY(-50%);
+            transform-origin: center;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 1em;
+            cursor: pointer;
+            &::after {
+                top: auto;
+                inset-inline-start: auto;
+            }
+        }
+
+        .slick-arrow.slick-prev {
+            left: -6%;
+        } /* Смещаем влево от края слайда */
+        .slick-arrow.slick-next {
+            right: -6%;
+        } /* Смещаем вправо от края слайда */
+
+        .gallery-div {
+            width: 70%;
+            div {
+                width: 50em;
+                height: 30em;
+                // div {
+                //     width: 100%;
+                //     max-width: 100vw;
+                // }
+            }
+        }
+    }
+
+    &.sample5 {
+        .gallery-div {
+            div {
+                width: 60%;
             }
         }
     }
