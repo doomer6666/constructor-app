@@ -285,13 +285,11 @@ export const blockTemplates = {
   },
   button: {
     sample1: {
-      labels: ["Надзаголовок", "Заголовок", "Изображение"],
-      divs: ["title0", "title1", "img1"],
+      labels: ["Текст", "Ссылка"],
+      divs: ["text", "link"],
       content: {
-        title0: "Надзаголовок",
-        title1: "Заголовок",
-        title2: "Описание",
-        img1: "/content-img-sample1.png"
+        text: "Кнопка",
+        link: "#",
       },
     },
   },
@@ -431,7 +429,7 @@ export const SampleLib = {
     },
     {
       name:'sample4',
-      previewImg: "/gallery_lib/sample4.jpg",
+      previewImg: "/gallery_lib/sample4.png",
       title:"Г4",
       description:"лента изображений"
     },
@@ -445,9 +443,51 @@ export const SampleLib = {
   button: [
     {
       name:'sample1',
-      previewImg: "/header_lib/sample1.png",
-      title:"О1",
-      description:"надзаголовок, заголовок, описание, картинка"
+      previewImg: "/button_lib/sample1.jpg",
+      title:"Кн1",
+      description:"округлая кнопка"
+    },
+    {
+      name:'sample2',
+      previewImg: "/button_lib/sample2.jpg",
+      title:"Кн2",
+      description:"остроугольная кнопка"
+    },
+    {
+      name:'sample3',
+      previewImg: "/button_lib/sample3.jpg",
+      title:"Кн3",
+      description:"длинная кнопка"
+    },
+    {
+      name:'sample4',
+      previewImg: "/button_lib/sample4.jpg",
+      title:"Кн4",
+      description:"кнопка с тенью"
+    },
+    {
+      name:'sample5',
+      previewImg: "/button_lib/sample5.jpg",
+      title:"Кн5",
+      description:"кнопка с границами"
+    },
+    {
+      name:'sample6',
+      previewImg: "/button_lib/sample6.jpg",
+      title:"Кн6",
+      description:"кнопка с градиенотом"
+    },
+    {
+      name:'sample7',
+      previewImg: "/button_lib/sample7.jpg",
+      title:"Кн7",
+      description:"кнопка с градиенотом"
+    },
+    {
+      name:'sample8',
+      previewImg: "/button_lib/sample8.jpg",
+      title:"Кн8",
+      description:"кнопка с градиенотом"
     },
   ],
   contacts: [

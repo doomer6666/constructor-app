@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Добавлен useNavigate
 import {
   MainContainer,
   SectInfo,
@@ -8,18 +8,32 @@ import {
   FormContainer,
   InputField,
 } from "../../components/Components";
+import { useLoginMutation } from "../../api/authApi";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../slices/AuthSlice";
 
 const LoginPage = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [loginMutation, { isLoading, error }] = useLoginMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Отправка данных:", { login, password });
+    try {
+      const result = await loginMutation({ login, password }).unwrap();
+      console.log("Успешный вход:", result);
+      dispatch(setCredentials(result));
+      navigate("/dashboard");
+    } catch (err) {
+      console.error("Ошибка входа:", err);
+    }
   };
 
   return (
     <MainContainer>
+      {error && <p style={{ color: "red" }}>Ошибка: {error.message}</p>}{" "}
       <SectInfo>
         <CompanyName>
           <p>Uralintern</p>
@@ -29,7 +43,6 @@ const LoginPage = () => {
           <img src="/decor-index.png" alt="Декор" width="365" height="218" />
         </InfoBlock>
       </SectInfo>
-
       <FormContainer onSubmit={handleSubmit}>
         <InputField
           type="text"
@@ -45,7 +58,12 @@ const LoginPage = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <InputField type="submit" value="Вход" className="submit" />
+        <InputField
+          type="submit"
+          value={"Вход"}
+          className="submit"
+          disabled={isLoading}
+        />
         <Link
           to="/register"
           style={{
