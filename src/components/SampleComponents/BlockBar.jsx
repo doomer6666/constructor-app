@@ -16,7 +16,7 @@ export default function BlockBar({ setIsVisibleBlockBar, handleAddBlock }) {
     <>
       <section className="block-bar">
         <div className="title-bar">
-          <h4>Библиотека шаблонов</h4>
+          <h4>Библиотека блоков</h4>
           <button className="exit" onClick={() => setIsVisibleBlockBar(false)}>
             <img src="/cross.svg" height="48px" width="51px" />
           </button>

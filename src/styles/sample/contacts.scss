@@ -1,0 +1,20 @@
+.contacts {
+    .page__content {
+        margin-bottom: 5em;
+        h2 {
+            margin-bottom: 1.5em;
+            font-size: var(--dynamic-font-p);
+        }
+        .icon-div {
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 5em;
+            img {
+                width: 100px;
+                height: 100px;
+                cursor: pointer;
+            }
+        }
+    }
+}

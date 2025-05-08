@@ -271,6 +271,7 @@ export default function BlockSetting({
 
   const renderGallerySettings = () => <>{renderBackgroundColor()}</>;
   const renderVideoSettings = () => <>{renderBackgroundColor()}</>;
+  const renderContactsSetting = () => <>{renderTextSettings()}</>;
   const renderButtonSettings = () => {
     return (
       <>
@@ -387,6 +388,7 @@ export default function BlockSetting({
         {blockType === "text" && renderTextSettings()}
         {blockType === "gallery" && renderGallerySettings()}
         {blockType === "button" && renderButtonSettings()}
+        {blockType === "contacts" && renderContactsSetting()}
         {blockType === "video" && renderVideoSettings()}
       </div>
     </div>

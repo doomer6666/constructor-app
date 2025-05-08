@@ -12,6 +12,9 @@ export default function BlockContent({
   const images = Object.entries(contentTempData).filter(([label]) =>
     label.includes("img")
   );
+  const links = Object.entries(contentTempData).filter(([label]) =>
+    label.includes("link")
+  );
   const [imgTexts, setImgTexts] = useState(
     images.map(([, value]) => (value === "none" ? "Загрузить" : "Загружено"))
   );
@@ -144,7 +147,7 @@ export default function BlockContent({
           </div>
         </div>
       )}
-      {contentTempData.link !== undefined && (
+      {links.length === 1 && (
         <div>
           <p>Ссылка</p>
           <input
@@ -158,6 +161,21 @@ export default function BlockContent({
           />
         </div>
       )}
+      {links.length > 1 &&
+        links.map((link, index) => (
+          <div key={link + index}>
+            <p>Ссылка на {labels[index + 1]}</p>
+            <input
+              value={link[1] === "#" ? "" : link[1]}
+              onChange={(e) =>
+                setContentTempData({
+                  ...contentTempData,
+                  [link[0]]: e.target.value || "",
+                })
+              }
+            />
+          </div>
+        ))}
       {contentTempData.video && (
         <>
           <p>Видео(файл)</p>

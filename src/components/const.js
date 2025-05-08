@@ -425,13 +425,78 @@ export const blockTemplates = {
   },
   contacts: {
     sample1: {
-      labels: ["Надзаголовок", "Заголовок", "Изображение"],
-      divs: ["title0", "title1", "img1"],
+      labels: ["Заголовок", "ВКонтакте", "Whatsapp", "Telegram"],
+      divs: ["title0"],
       content: {
-        title0: "Надзаголовок",
-        title1: "Заголовок",
-        title2: "Описание",
-        img1: "/content-img-sample1.png",
+        title0: "Контакты",
+        link0: "#",
+        link1: "#",
+        link2: "#",
+      },
+      settings: {
+        fontSize: [40],
+        colors: ["#000000"],
+        backgroundColor: "#ffffff",
+      },
+    },
+    sample2: {
+      labels: ["Заголовок", "Номер", "Почта", "Адрес"],
+      divs: ["title0", "title1", "title2", "title3"],
+      content: {
+        title0: "Контакты",
+        title1: "+7 (909) 000 00 00",
+        title2: "IvanovIvan2000@gmail.com",
+        title3: "г. Екатеринбург, ул. Мира, 19",
+      },
+      settings: {
+        fontSize: [40, 24, 24, 24],
+        colors: ["#000000", "#000000", "#000000", "#4A4A4A"],
+        backgroundColor: "#ffffff",
+      },
+    },
+    sample3: {
+      labels: ["", "ВКонтакте", "Whatsapp", "Telegram"],
+      divs: ["contacts"],
+      content: {
+        link0: "#",
+        link1: "#",
+        link2: "#",
+        isBlack: true,
+      },
+      settings: {
+        colors: ["#000000"],
+        backgroundColor: "#ffffff",
+      },
+    },
+    sample4: {
+      labels: ["", "ВКонтакте", "Telegram", "Почта"],
+      divs: ["contacts"],
+      content: {
+        link0: "#",
+        link1: "#",
+        link2: "#",
+        isBlack: true,
+        withMail: true,
+      },
+      settings: {
+        colors: ["#000000"],
+        backgroundColor: "#ffffff",
+      },
+    },
+    sample5: {
+      labels: ["Заголовок", "Номер", "Почта", "Адрес"],
+      divs: ["title0", "title1", "title2", "title3"],
+      content: {
+        title0: "Контакты",
+        title1: "+7 (909) 000 00 00",
+        title2: "IvanovIvan2000@gmail.com",
+        title3: "г. Екатеринбург, ул. Мира, 19",
+        withMap: true,
+      },
+      settings: {
+        fontSize: [40, 24, 24, 24],
+        colors: ["#000000", "#000000", "#000000", "#4A4A4A"],
+        backgroundColor: "#ffffff",
       },
     },
   },
@@ -633,9 +698,33 @@ export const SampleLib = {
   contacts: [
     {
       name: "sample1",
-      previewImg: "/header_lib/sample1.png",
-      title: "О1",
-      description: "надзаголовок, заголовок, описание, картинка",
+      previewImg: "/contacts_lib/sample1.jpg",
+      title: "Кон1",
+      description: "заголовок, вконтакте, whatsapp, телеграм",
+    },
+    {
+      name: "sample2",
+      previewImg: "/contacts_lib/sample2.jpg",
+      title: "Кон2",
+      description: "заголовок, телефон, почта, адрес",
+    },
+    {
+      name: "sample3",
+      previewImg: "/contacts_lib/sample3.jpg",
+      title: "Кон3",
+      description: "вконтакте, whatsapp, телеграм",
+    },
+    {
+      name: "sample4",
+      previewImg: "/contacts_lib/sample4.jpg",
+      title: "Кон4",
+      description: "вконтакте, телеграм, почта",
+    },
+    {
+      name: "sample5",
+      previewImg: "/contacts_lib/sample5.jpg",
+      title: "Кон5",
+      description: "заголовок, телефон, почта, адрес, карта",
     },
   ],
   video: [
