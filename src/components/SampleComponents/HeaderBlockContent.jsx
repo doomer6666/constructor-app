@@ -1,4 +1,4 @@
-import { handleFileUpload } from "./Utils";
+import { getEmbedSrc, handleFileUpload, handleVideoUpload } from "./Utils";
 import { useState } from "react";
 
 export default function HeaderBlockContent({
@@ -14,6 +14,9 @@ export default function HeaderBlockContent({
   );
   const [imgTexts, setImgTexts] = useState(
     images.map(([, value]) => (value === "none" ? "Загрузить" : "Загружено"))
+  );
+  const [videoText, setVideoText] = useState(
+    contentTempData.video === "none" ? "Загрузить" : "Загружено"
   );
 
   return (
@@ -39,7 +42,7 @@ export default function HeaderBlockContent({
               {(field.includes("title") || field.includes("text")) && (
                 <div>
                   <p>{labels[index]}</p>
-                  {field.includes("text") ? (
+                  {/(?<=text)\d/.test(field) ? (
                     <textarea
                       value={contentTempData[field] || ""}
                       onChange={(e) => {
@@ -139,6 +142,57 @@ export default function HeaderBlockContent({
               }}
             />
           </div>
+        </div>
+      )}
+      {contentTempData.link !== undefined && (
+        <div>
+          <p>Ссылка</p>
+          <input
+            value={contentTempData.link}
+            onChange={(e) =>
+              setContentTempData({
+                ...contentTempData,
+                link: e.target.value || "",
+              })
+            }
+          />
+        </div>
+      )}
+      {contentTempData.video && (
+        <>
+          <p>Видео(файл)</p>
+          <div className="div-img">
+            <label htmlFor={`input-video`} className="input-img">
+              {videoText}
+            </label>
+            <input
+              id="input-video"
+              type="file"
+              onChange={(e) =>
+                handleVideoUpload("video", setContentTempData, setVideoText)(e)
+              }
+            />
+          </div>
+        </>
+      )}
+      {contentTempData.videoLink && (
+        <div>
+          <p>Видео (ссылка)</p>
+          <textarea
+            type="text"
+            value={
+              contentTempData.videoLink === "none"
+                ? ""
+                : contentTempData.videoLink
+            }
+            placeholder="Вставьте сюда ссылку на видео(YouTube, Rutube, VK Видео"
+            onChange={(e) =>
+              setContentTempData({
+                ...contentTempData,
+                videoLink: getEmbedSrc(e.target.value),
+              })
+            }
+          />
         </div>
       )}
     </div>

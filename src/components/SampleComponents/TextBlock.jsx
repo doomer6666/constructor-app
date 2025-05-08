@@ -7,6 +7,8 @@ export default function TextBlock({ contentData, settingData }) {
   const texts = Object.entries(contentData).filter(([label]) =>
     label.includes("text")
   );
+  const titleCount = titles.length;
+
   return (
     <div
       className="page__content"
@@ -18,8 +20,8 @@ export default function TextBlock({ contentData, settingData }) {
           className={label}
           style={{
             "--c": settingData.borderTitleColor,
-            "--dynamic-font": `${settingData.fontSize[0] / 16}rem`,
-            color: settingData.colors[0],
+            "--dynamic-font": `${settingData.fontSize[index] / 16}rem`,
+            color: settingData.colors[index],
           }}
         >
           {text}
@@ -29,8 +31,8 @@ export default function TextBlock({ contentData, settingData }) {
         className="text-container"
         style={{ "--custom-color": settingData.textTimeLine }}
       >
-        {texts.map(([label, text]) => {
-          const index = parseInt(label.match(/\d+/), 10) + 1;
+        {texts.map(([label, text], index) => {
+          const textIndex = titleCount + index;
           return (
             <React.Fragment key={`text-block-${label}-${index}`}>
               {settingData.textTimeLine && (
@@ -46,9 +48,9 @@ export default function TextBlock({ contentData, settingData }) {
                       className="text"
                       style={{
                         "--dynamic-font-p": `${
-                          settingData.fontSize[index] / 16
+                          settingData.fontSize[textIndex] / 16
                         }rem`,
-                        color: settingData.colors[index],
+                        color: settingData.colors[textIndex],
                       }}
                     >
                       {text}
@@ -57,34 +59,36 @@ export default function TextBlock({ contentData, settingData }) {
                   <div className="line"></div>
                 </>
               )}
-              <div
-                key={label + text}
-                className="text-div"
-                style={{ borderColor: settingData.borderTextColor }}
-              >
-                {settingData.textIconColor && (
-                  <img
-                    src="/text_lib/text-icon.svg"
-                    style={{
-                      "--font-data": `${settingData.fontSize[index] / 16}rem`,
-                      color: settingData.colors[index],
-                    }}
-                  />
-                )}
-                {!settingData.textTimeLine && (
+              {!settingData.textTimeLine && (
+                <div
+                  key={label + text}
+                  className="text-div"
+                  style={{ borderColor: settingData.borderTextColor }}
+                >
+                  {settingData.textIconColor && (
+                    <img
+                      src="/text_lib/text-icon.svg"
+                      style={{
+                        "--font-data": `${
+                          settingData.fontSize[textIndex] / 16
+                        }rem`,
+                        color: settingData.colors[textIndex],
+                      }}
+                    />
+                  )}
                   <p
                     className={label}
                     style={{
                       "--dynamic-font-p": `${
-                        settingData.fontSize[index] / 16
+                        settingData.fontSize[textIndex] / 16
                       }rem`,
-                      color: settingData.colors[index],
+                      color: settingData.colors[textIndex],
                     }}
                   >
                     {text}
                   </p>
-                )}
-              </div>
+                </div>
+              )}
             </React.Fragment>
           );
         })}

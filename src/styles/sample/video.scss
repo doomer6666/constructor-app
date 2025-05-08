@@ -1,0 +1,14 @@
+.video {
+    iframe,
+    video {
+        width: 880px;
+        height: 495px;
+        margin-bottom: 1em;
+        background-image: url("/image.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+}

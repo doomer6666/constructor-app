@@ -69,6 +69,7 @@ const BaseBlock = ({ type, data, sample, pageContent }) => {
       )}
       {isSettingVisible && (
         <HeaderBlockSetting
+          blockType={type}
           settingTempData={settingData}
           setSettingTempData={setSettingData}
           handleSettingSave={handleSettingSave}

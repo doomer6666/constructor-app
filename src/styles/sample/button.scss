@@ -1,0 +1,95 @@
+@use "../mixins.scss" as mixins;
+
+.button {
+    .button-div {
+        button {
+            @include mixins.customButton;
+            background-color: var(--btn-bg-color-1);
+            border-color: var(--btn-border-color-1);
+            font-size: var(--dynamic-font);
+            margin-top: 0;
+            margin-bottom: 1.5em;
+            box-shadow: 0 0 8px var(--btn-bg-color-1);
+
+            transition:
+                box-shadow 0.3s ease,
+                transform 0.3s ease;
+
+            &:hover {
+                box-shadow: 0 0 15px var(--btn-bg-color-1);
+                transform: translateY(-2px);
+            }
+        }
+    }
+    &.sample2 {
+        .button-div {
+            button {
+                border-radius: 0;
+            }
+        }
+    }
+    &.sample3 {
+        .button-div {
+            button {
+                border-radius: 0;
+                min-width: 80vw;
+            }
+        }
+    }
+    &.sample4 {
+        .button-div {
+            button {
+                box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.45);
+            }
+        }
+    }
+    &.sample5 {
+        .button-div {
+            button {
+                border-color: transparent;
+                border-radius: 0;
+                background-image: linear-gradient(to right, var(--btn-border-color-1), var(--btn-border-color-1)),
+                    linear-gradient(to bottom, var(--btn-border-color-1), var(--btn-border-color-1)),
+                    linear-gradient(to right, var(--btn-border-color-2), var(--btn-border-color-2)),
+                    linear-gradient(to bottom, var(--btn-border-color-2), var(--btn-border-color-2));
+                background-repeat: no-repeat;
+                background-size:
+                    100% 3px,
+                    3px calc(100% - 0.7em),
+                    100% 3px,
+                    3px calc(100% - 0.7em);
+                background-position:
+                    left top,
+                    right top,
+                    right bottom,
+                    left bottom;
+            }
+        }
+    }
+    &.sample6 {
+        .button-div {
+            button {
+                background: linear-gradient(
+                    90deg,
+                    var(--btn-bg-color-1) 0%,
+                    var(--btn-bg-color-2) 50%,
+                    var(--btn-bg-color-1) 100%
+                );
+            }
+        }
+    }
+    &.sample7 {
+        .button-div {
+            button {
+                background: linear-gradient(to right, var(--btn-bg-color-1), var(--btn-bg-color-2));
+            }
+        }
+    }
+    &.sample8 {
+        .button-div {
+            button {
+                background: radial-gradient(circle, var(--btn-bg-color-1), var(--btn-bg-color-2));
+            }
+        }
+    }
+}
