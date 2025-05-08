@@ -6,7 +6,7 @@ import {
 } from "./Utils";
 import { useState, useCallback, useEffect } from "react";
 
-export default function HeaderBlockSetting({
+export default function BlockSetting({
   blockType,
   settingTempData,
   setSettingTempData,

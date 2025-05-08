@@ -1,6 +1,6 @@
 import { useState } from "react";
-import HeaderBlockContent from "./HeaderBlockContent";
-import HeaderBlockSetting from "./HeaderBlockSetting";
+import BlockContent from "./BlockContent";
+import BlockSetting from "./BlockSetting";
 import Buttons from "./HeaderButtons";
 
 const BaseBlock = ({ type, data, sample, pageContent }) => {
@@ -58,7 +58,7 @@ const BaseBlock = ({ type, data, sample, pageContent }) => {
       <>{pageContent({ contentData, settingData })}</>
 
       {isContentVisible && (
-        <HeaderBlockContent
+        <BlockContent
           contentTempData={contentData}
           setContentTempData={setContentData}
           handleContentSave={handleContentSave}
@@ -68,7 +68,7 @@ const BaseBlock = ({ type, data, sample, pageContent }) => {
         />
       )}
       {isSettingVisible && (
-        <HeaderBlockSetting
+        <BlockSetting
           blockType={type}
           settingTempData={settingData}
           setSettingTempData={setSettingData}

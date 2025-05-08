@@ -1,7 +1,7 @@
 import { getEmbedSrc, handleFileUpload, handleVideoUpload } from "./Utils";
 import { useState } from "react";
 
-export default function HeaderBlockContent({
+export default function BlockContent({
   contentTempData,
   setContentTempData,
   handleContentSave,
