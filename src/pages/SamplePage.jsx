@@ -8,6 +8,7 @@ import GalleryBlock from "../components/SampleComponents/GalleryBlock";
 import ButtonBlock from "../components/SampleComponents/ButtonBlock";
 import ContactsBlock from "../components/SampleComponents/ContactsBlock";
 import VideoBlock from "../components/SampleComponents/VideoBlock";
+import { useSavePageMutation } from "../api/pageApi";
 const SamplePage = () => {
   const [blocks, setBlocks] = useState([]);
   const [isVisibleBlockBar, setIsVisibleBlockBar] = useState(false);
@@ -40,6 +41,19 @@ const SamplePage = () => {
       )
     );
   };
+  const [savePage, { isLoading, error, data }] = useSavePageMutation();
+
+  // Обработчик кнопки "Сохранить страницу"
+  const handleSavePage = async () => {
+    try {
+      // Отправляем массив blocks
+      const response = await savePage(blocks).unwrap();
+      console.log("Страница сохранена успешно:", response);
+      // можно добавить уведомление или редирект
+    } catch (err) {
+      console.error("Ошибка при сохранении страницы:", err);
+    }
+  };
 
   return (
     <section className="redactor-page">
@@ -64,8 +78,12 @@ const SamplePage = () => {
         </button>
       )}
       <div className="page-buttons">
-        <button className="new-block save-page hidden">
-          Сохранить страницу
+        <button
+          className="new-block save-page"
+          onClick={handleSavePage}
+          disabled={isLoading}
+        >
+          {isLoading ? "Сохранение..." : "Сохранить страницу"}
         </button>
         <button
           className="new-block submit-page hidden"

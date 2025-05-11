@@ -25,11 +25,7 @@ const RegisterPage = () => {
       alert("Пароли не совпадают");
       return;
     }
-    if (formData.role === "redactor") {
-      navigate("/redactor");
-    } else if (formData.role === "intern") {
-      navigate("/");
-    }
+    navigate("/redactor");
   };
   return (
     <main>
@@ -81,28 +77,6 @@ const RegisterPage = () => {
             onChange={handleChange}
             required
           />
-          <div className="radio">
-            <label className="first-label">
-              <input
-                type="radio"
-                name="role"
-                value="redactor"
-                onChange={handleChange}
-                required
-              />
-              {"Я редактор"}
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="role"
-                value="intern"
-                onChange={handleChange}
-                required
-              />
-              {"Я стажер"}
-            </label>
-          </div>
           <input
             type="submit"
             value="Зарегистрироваться"

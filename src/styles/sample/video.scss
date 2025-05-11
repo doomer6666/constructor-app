@@ -1,14 +1,20 @@
 .video {
-    iframe,
-    video {
-        width: 880px;
-        height: 495px;
-        margin-bottom: 1em;
-        background-image: url("/image.png");
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
-        overflow: hidden;
-        border-radius: 10px;
+    .page__content {
+        iframe,
+        video,
+        img {
+            width: 880px;
+            height: 495px;
+            margin-bottom: 1em;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .videoLink {
+            background-image: url("/image.png");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
     }
 }
