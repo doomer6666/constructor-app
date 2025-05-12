@@ -5,18 +5,22 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import RedactorPA from "./pages/RedactorPA";
 import SamplePage from "./pages/SamplePage";
+import TemplatePage from "./pages/TemplatePage.jsx";
 import "./styles/sample.scss";
+import "./styles/selection-pages.scss";
 import { Provider } from "react-redux";
 import { store } from "./api/store.js";
+import MainPage from "./pages/MainPage.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/auth" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/redactor" element={<RedactorPA />} />
+        <Route path="/templates" element={<TemplatePage />} />
         <Route path="/sample" element={<SamplePage />} />
-        {/* Добавьте другие маршруты (например, /register) позже */}
       </Routes>
     </BrowserRouter>
   </Provider>

@@ -1,26 +1,26 @@
 export const handleFileUpload =
-  (field, setSettingTempData, setImgText, setIsActualyBackImage = () => {}) =>
-  (e) => {
-    console.log(field);
-    const file = e.target.files[0];
-    if (!file) return;
-    const allowedTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
-    if (!allowedTypes.includes(file.type)) {
-      setImgText("Ошибка");
-      return;
-    }
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const newImageUrl = event.target.result;
-      setSettingTempData((prev) => ({
-        ...prev,
-        [field]: newImageUrl,
-      }));
-      setIsActualyBackImage(true);
+  (field, setSettingTempData, setImgText, setIsActualyBackImage = () => { }) =>
+    (e) => {
+      console.log(field);
+      const file = e.target.files[0];
+      if (!file) return;
+      const allowedTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+      if (!allowedTypes.includes(file.type)) {
+        setImgText("Ошибка");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const newImageUrl = event.target.result;
+        setSettingTempData((prev) => ({
+          ...prev,
+          [field]: newImageUrl,
+        }));
+        setIsActualyBackImage(true);
+      };
+      reader.readAsDataURL(file);
+      setImgText("Загружено");
     };
-    reader.readAsDataURL(file);
-    setImgText("Загружено");
-  };
 
 export const handleFontSizeChange =
   (settingTempData, setSettingTempData) => (e, index) => {
@@ -43,6 +43,7 @@ export const handleFontColorChange =
   };
 
 export const getEmbedSrc = (url) => {
+  console.log(url)
   // Проверяем, что входная ссылка не пустая
   if (typeof url !== "string" || url.trim() === "") {
     console.error("Ошибка: пустая ссылка");
@@ -77,7 +78,7 @@ export const getEmbedSrc = (url) => {
     }
 
     // --- ВКонтакте ---
-    else if (domain.includes("vk.com")) {
+    else if (domain.includes("vk.com") || domain.includes("vkvideo.ru")) {
       // Если ссылка уже в формате video_ext.php
       if (parsedURL.pathname.includes("video_ext.php")) {
         const oid = parsedURL.searchParams.get("oid");
@@ -86,7 +87,7 @@ export const getEmbedSrc = (url) => {
           embedURL = `https://vk.com/video_ext.php?oid=${oid}&id=${id}`;
         }
       } else {
-        // Если ссылка вида vk.com/video{oid}_{id}
+        // Если ссылка вида vk.com/video{oid}_{id} или vkvideo.ru/video{oid}_{id}
         const vkRegex = /video(-?\d+)_([\d]+)/;
         const match = url.match(vkRegex);
         if (match && match[1] && match[2]) {

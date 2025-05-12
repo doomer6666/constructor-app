@@ -3,7 +3,7 @@ import BlockContent from "./BlockContent";
 import BlockSetting from "./BlockSetting";
 import Buttons from "./HeaderButtons";
 
-const BaseBlock = ({ type, data, sample, pageContent }) => {
+const BaseBlock = ({ type, data, sample, pageContent, onUpdate }) => {
   const [isRender, setIsRender] = useState(true);
   const [isSettingVisible, setIsSettingVisible] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
@@ -28,11 +28,13 @@ const BaseBlock = ({ type, data, sample, pageContent }) => {
   const handleContentSave = () => {
     setLastContentData(contentData);
     setIsContentVisible(false);
+    onUpdate({ content: contentData, settings: settingData });
   };
 
   const handleSettingSave = () => {
     setLastSettingData(settingData);
     setIsSettingVisible(false);
+    onUpdate({ content: contentData, settings: settingData });
   };
 
   if (!isRender) {

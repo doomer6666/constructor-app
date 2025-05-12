@@ -14,25 +14,25 @@ const RedactorPA = () => {
         </section>
         <section className="internships">
           <ul className="'internship-list">
-            <li class="internship-el">
-              <a href="#" class="list-item">
+            <li className="internship-el">
+              <a href="#" className="list-item">
                 <img
                   src="../content-img-sample1.png"
                   height="249px"
                   width="296px"
-                  class="white"
+                  className="white"
                 />
                 <h3>Универсальный шаблон</h3>
                 <h4>Для любой стажировки</h4>
               </a>
-              <div class="button-div">
-                <button class="create-internship open-internship">
+              <div className="button-div">
+                <button className="create-internship open-internship">
                   Открыть для всех
                 </button>
-                <button class="create-internship open-internship hidden">
+                <button className="create-internship open-internship hidden">
                   Закрыть публикацию
                 </button>
-                <button class="create-internship open-internship">
+                <button className="create-internship open-internship">
                   Удалить
                 </button>
               </div>

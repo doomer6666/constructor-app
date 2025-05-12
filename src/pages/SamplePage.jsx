@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import BaseBlock from "../components/SampleComponents/BaseBlock";
 import { blockTemplates } from "../components/const";
 import BlockBar from "../components/SampleComponents/BlockBar";
@@ -8,8 +9,12 @@ import GalleryBlock from "../components/SampleComponents/GalleryBlock";
 import ButtonBlock from "../components/SampleComponents/ButtonBlock";
 import ContactsBlock from "../components/SampleComponents/ContactsBlock";
 import VideoBlock from "../components/SampleComponents/VideoBlock";
-import { useSavePageMutation } from "../api/pageApi";
+import { useSavePageMutation, useGetPageQuery } from "../api/pageApi";
 const SamplePage = () => {
+  const { pageId } = useParams();
+  const { data: pageData } = useGetPageQuery(undefined, {
+    skip: pageId === "new",
+  });
   const [blocks, setBlocks] = useState([]);
   const [isVisibleBlockBar, setIsVisibleBlockBar] = useState(false);
   const componentMap = {
@@ -33,6 +38,7 @@ const SamplePage = () => {
   };
 
   const updateBlockData = (id, newData) => {
+    console.log(newData);
     setBlocks(
       blocks.map((block) =>
         block.id === id
@@ -41,12 +47,20 @@ const SamplePage = () => {
       )
     );
   };
-  const [savePage, { isLoading, error, data }] = useSavePageMutation();
+  const [savePage, { isLoading }] = useSavePageMutation();
 
+  useEffect(() => {
+    if (pageId === "new") {
+      setBlocks([]);
+    } else if (pageData) {
+      setBlocks(pageData.blocks || []);
+    }
+  }, [pageId, pageData]);
   // Обработчик кнопки "Сохранить страницу"
   const handleSavePage = async () => {
     try {
       // Отправляем массив blocks
+      console.log(blocks);
       const response = await savePage(blocks).unwrap();
       console.log("Страница сохранена успешно:", response);
       // можно добавить уведомление или редирект
@@ -69,29 +83,24 @@ const SamplePage = () => {
           />
         ))}
       </section>
-      {!isVisibleBlockBar && (
-        <button
-          className="new-block"
-          onClick={() => setIsVisibleBlockBar(true)}
-        >
-          Добавить блоки
-        </button>
-      )}
       <div className="page-buttons">
+        {!isVisibleBlockBar && (
+          <button
+            className="new-block"
+            onClick={() => setIsVisibleBlockBar(true)}
+          >
+            Добавить блоки
+          </button>
+        )}
         <button
-          className="new-block save-page"
+          className="new-block save-page "
           onClick={handleSavePage}
           disabled={isLoading}
         >
           {isLoading ? "Сохранение..." : "Сохранить страницу"}
         </button>
-        <button
-          className="new-block submit-page hidden"
-          // onClick={ }
-        >
-          Выгрузить страницу
-        </button>
       </div>
+
       {isVisibleBlockBar && (
         <BlockBar
           setIsVisibleBlockBar={setIsVisibleBlockBar}

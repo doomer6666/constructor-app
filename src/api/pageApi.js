@@ -12,8 +12,11 @@ export const pageApi = createApi({
         body: { blocks }, // Отправляем объект с блоками в свойстве blocks
       }),
     }),
+    getPage: builder.query({
+      query: () => "loadPage",
+    }),
   }),
 });
 
 // Хук для использования в компонентах
-export const { useSavePageMutation } = pageApi;
+export const { useSavePageMutation, useGetPageQuery } = pageApi;

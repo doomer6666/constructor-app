@@ -14,7 +14,7 @@
 @use "./sample/video.scss";
 @use "./sample/contacts.scss";
 @use "./sample/contacts-samples.scss";
-body {
+.redactor-page {
   font-family: "Manrope";
   color: black;
   margin: 0;
@@ -47,6 +47,8 @@ body {
 }
 
 .page-buttons {
+  justify-content: center;
+  gap: 2em;
   display: flex;
   padding: 0;
 }
@@ -56,11 +58,9 @@ body {
   margin: 0;
   color: white;
   background-color: black;
-  margin-bottom: 1em;
-}
-
-.save-page {
-  margin-left: 50%;
+  margin-top: 3.125em;
+  margin-bottom: 2em;
+  padding: 0.5em 1.2em;
 }
 
 .hidden {

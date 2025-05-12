@@ -15,7 +15,9 @@ export default function ButtonBlock({ contentData, settingData }) {
         <button
           className="new-block"
           style={styleObj}
-          onClick={() => (window.location.href = contentData.link)}
+          onClick={() =>
+            window.open(contentData.link, "_blank", "noopener,noreferrer")
+          }
         >
           {contentData.text}
         </button>
