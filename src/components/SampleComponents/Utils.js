@@ -1,7 +1,6 @@
 export const handleFileUpload =
-  (field, setSettingTempData, setImgText, setIsActualyBackImage = () => { }) =>
+  (field, setSettingTempData, setImgText = () => { }, setIsActualyBackImage = () => { }) =>
     (e) => {
-      console.log(field);
       const file = e.target.files[0];
       if (!file) return;
       const allowedTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];

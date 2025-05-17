@@ -14,6 +14,7 @@
 @use "./sample/video.scss";
 @use "./sample/contacts.scss";
 @use "./sample/contacts-samples.scss";
+@use "./sample//modal.scss";
 .redactor-page {
   font-family: "Manrope";
   color: black;
@@ -23,6 +24,7 @@
   justify-content: center;
   align-items: center;
   overflow-x: hidden;
+  margin-bottom: 15em;
 }
 
 .page {
@@ -35,7 +37,16 @@
     font-size: 5px !important;
   }
 }
-
+h1,
+h2,
+h3,
+p {
+  max-width: 100%;
+  text-wrap: wrap;
+}
+.page__content {
+  width: 100vw;
+}
 .new-block {
   @include mixins.customButton;
   @media (max-width: 585px) {
@@ -70,6 +81,9 @@
 section section {
   border-bottom: 2px solid #c9c9c9;
 }
+.block {
+  margin-top: 2em !important;
+}
 
 :root {
   --max-font-h1: 8rem;
@@ -83,16 +97,16 @@ section section {
 
 @media (max-width: 768px) {
   :root {
-    --max-font-h1: 7rem;
-    --max-font-h2: 4rem;
-    --max-font-p: 3.5rem;
+    --max-font-h1: 5rem;
+    --max-font-h2: 3rem;
+    --max-font-p: 2.5rem;
   }
 }
 
 @media (max-width: 480px) {
   :root {
-    --max-font-h1: 4rem;
+    --max-font-h1: 3.5rem;
     --max-font-h2: 2rem;
-    --max-font-p: 1.5rem;
+    --max-font-p: 1rem;
   }
 }

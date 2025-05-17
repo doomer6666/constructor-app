@@ -1,5 +1,9 @@
 .video {
     .page__content {
+        margin: 0 auto;
+        .buttons {
+            margin: 0;
+        }
         iframe,
         video,
         img {

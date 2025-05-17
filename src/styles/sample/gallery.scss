@@ -1,5 +1,9 @@
 .gallery {
     .page__content {
+        margin: 0 auto;
+        .buttons {
+            margin: 0;
+        }
         .gallery-div {
             width: 80%;
             margin: 0 auto;

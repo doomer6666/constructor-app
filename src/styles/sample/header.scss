@@ -15,12 +15,15 @@
   text-align: center;
   width: fit-content;
   height: fit-content;
+  margin: 0 auto;
+  max-width: 70%;
+  text-wrap: wrap;
   @include blocks.block();
 }
 
 h1 {
   width: 100%;
-  @include mixins.responsive-font(var(--max-font-h1), var(--dynamic-font, 5.625rem));
+  @include mixins.responsive-font(var(--max-font-h1), var(--dynamic-font));
   margin: 0;
   color: #ffffff;
   padding: 0.12em 0.333em 0.144em 0.389em;
@@ -29,12 +32,14 @@ h1 {
 
 h2 {
   width: 100%;
-  @include mixins.responsive-font(var(--max-font-h2), var(--dynamic-font, 2.5rem));
+  @include mixins.responsive-font(var(--max-font-h2), var(--dynamic-font));
   margin: 0;
   color: #ffffff;
   margin-bottom: 4.35em;
-
+  @media (max-width: 780px) {
+    margin-bottom: 2.5em;
+  }
   @media (max-width: 480px) {
-    margin-bottom: 3.35em;
+    margin-bottom: 1.5em;
   }
 }

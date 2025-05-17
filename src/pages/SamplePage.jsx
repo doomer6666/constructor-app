@@ -10,7 +10,9 @@ import ButtonBlock from "../components/SampleComponents/ButtonBlock";
 import ContactsBlock from "../components/SampleComponents/ContactsBlock";
 import VideoBlock from "../components/SampleComponents/VideoBlock";
 import { useSavePageMutation, useGetPageQuery } from "../api/pageApi";
+import Modal from "../components/SampleComponents/Modal";
 const SamplePage = () => {
+  const [isopenModal, setIsModalOpen] = useState(false);
   const { pageId } = useParams();
   const { data: pageData } = useGetPageQuery(undefined, {
     skip: pageId === "new",
@@ -49,13 +51,13 @@ const SamplePage = () => {
   };
   const [savePage, { isLoading }] = useSavePageMutation();
 
-  useEffect(() => {
-    if (pageId === "new") {
-      setBlocks([]);
-    } else if (pageData) {
-      setBlocks(pageData.blocks || []);
-    }
-  }, [pageId, pageData]);
+  // useEffect(() => {
+  //   if (pageId === "new") {
+  //     setBlocks([]);
+  //   } else if (pageData) {
+  //     setBlocks(pageData.blocks || []);
+  //   }
+  // }, [pageId, pageData]);
   // Обработчик кнопки "Сохранить страницу"
   const handleSavePage = async () => {
     try {
@@ -68,7 +70,11 @@ const SamplePage = () => {
       console.error("Ошибка при сохранении страницы:", err);
     }
   };
-
+  const [modalData, setModalData] = useState({ img: "none", text: "" });
+  function onClose() {
+    setIsModalOpen(false);
+    setModalData({ img: "none", text: "" });
+  }
   return (
     <section className="redactor-page">
       <section className="page" key={"page1"}>
@@ -94,10 +100,9 @@ const SamplePage = () => {
         )}
         <button
           className="new-block save-page "
-          onClick={handleSavePage}
-          disabled={isLoading}
+          onClick={() => setIsModalOpen(true)}
         >
-          {isLoading ? "Сохранение..." : "Сохранить страницу"}
+          Сохранить страницу
         </button>
       </div>
 
@@ -107,6 +112,13 @@ const SamplePage = () => {
           handleAddBlock={handleAddBlock}
         />
       )}
+      <Modal
+        isOpen={isopenModal}
+        onClose={onClose}
+        onSave={handleSavePage}
+        modalData={modalData}
+        setModalData={setModalData}
+      ></Modal>
     </section>
   );
 };

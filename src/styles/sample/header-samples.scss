@@ -26,9 +26,11 @@
             margin-bottom: 1.25rem; /* 20px */
             margin-left: auto;
             margin-right: 1.25rem; /* 20px */
+            text-align: right;
           }
 
           &:last-child {
+            text-align: left;
             margin-right: auto;
             margin-left: 2.5rem; /* 40px */
           }
@@ -36,8 +38,8 @@
       }
 
       .gallery {
-        width: 43.75rem; /* 700px */
-        height: 40.625rem; /* 650px */
+        max-width: 43.75rem; /* 700px */
+        max-height: 40.625rem; /* 650px */
 
         img {
           border-radius: 3.125rem; /* 50px */
@@ -57,6 +59,41 @@
       border-style: solid;
       background-color: #d9d9d9;
       background-color: rgba(217, 217, 217, 0.2);
+    }
+    @media (max-width: 768px) {
+      .titles {
+        max-width: 90%;
+        h1 {
+          width: fit-content;
+        }
+        h2 {
+          width: fit-content;
+          &:first-child {
+            margin-bottom: 1rem !important;
+            margin-left: 30% !important;
+            margin-right: 1rem !important;
+          }
+        }
+      }
+    }
+    @media (max-width: 495px) {
+      .titles {
+        max-width: 80%;
+        h1 {
+          width: fit-content;
+        }
+        h2 {
+          width: fit-content;
+          &:first-child {
+            margin-bottom: 0.5rem !important;
+            margin-left: 20% !important;
+            margin-right: 0.5rem !important;
+          }
+          &:last-child {
+            margin-right: 30% !important;
+          }
+        }
+      }
     }
   }
 
@@ -86,43 +123,114 @@
 
   &.sample4 {
     overflow: hidden;
+
     .page__content {
       margin: 0;
       display: flex;
-      gap: 10rem; /* 80px */
-      padding-bottom: 1.3125rem; /* 21px 50px */
+      gap: clamp(2rem, 5vw, 6rem); // Адаптивный отступ между элементами
       align-items: center;
       justify-content: center;
+      flex-wrap: wrap; // Перенос элементов на маленьких экранах
+
       .titles {
-        margin-left: 5rem;
-        width: 500px;
+        margin-left: clamp(1rem, 3vw, 3rem);
+        max-width: clamp(250px, 40vw, 500px); // Адаптивная ширина
+        flex-shrink: 0; // Предотвращаем сжатие текста
+        text-align: left;
         h1 {
-          padding: 0;
-          margin-right: auto;
+          font-size: max(1.5rem, var(--dynamic-font)); // Адаптивный размер шрифта
         }
+
         h2 {
-          width: auto;
-          margin-right: auto;
+          font-size: max(1.5rem, var(--dynamic-font));
         }
       }
+
       .gallery {
-        position: sticky;
-        width: 70%;
-        height: 120%;
+        position: relative; // Убрали sticky для лучшей адаптивности
+        width: clamp(200px, 50vw, 600px); // Адаптивная ширина
+        height: auto; // Позволяем высоте подстраиваться
         display: flex;
         flex-direction: column;
+        align-items: center;
+
         img {
-          width: 500px;
-          height: 500px;
-          border-radius: 3.125rem; /* 50px */
+          width: clamp(150px, 35vw, 400px); // Адаптивный размер изображений
+          height: clamp(150px, 35vw, 400px);
+          border-radius: clamp(1rem, 2vw, 2rem);
           object-fit: cover;
+
           &:first-child {
-            margin-bottom: -100px;
+            margin-bottom: clamp(-50px, -10vw, -80px); // Адаптивный отступ
             transform: rotate(8.74deg);
           }
+
           &:last-child {
-            margin-left: 15rem;
+            margin-left: clamp(2rem, 10vw, 10rem);
             transform: rotate(-8.74deg);
+          }
+        }
+      }
+    }
+
+    // Медиа-запрос для планшетов (768px и меньше)
+    @media (max-width: 868px) {
+      .page__content {
+        flex-direction: row !important;
+        flex-wrap: nowrap;
+        gap: 2rem;
+        padding: 1rem;
+
+        .titles {
+          max-width: 50%; // Полная ширина
+
+          h1,
+          h2 {
+            font-size: max(1rem, var(--dynamic-font) / 2);
+          }
+        }
+
+        .gallery {
+          width: 50%;
+          max-width: 400px; // Ограничение ширины
+
+          img {
+            width: 80%;
+            height: auto; // Сохраняем пропорции
+            margin-left: 0;
+
+            &:first-child {
+              margin-bottom: -10%;
+            }
+
+            &:last-child {
+              margin-left: 5rem;
+            }
+          }
+        }
+      }
+    }
+
+    // Медиа-запрос для мобильных (480px и меньше)
+    @media (max-width: 480px) {
+      .page__content {
+        gap: 1rem;
+        padding: 0.5rem;
+
+        .titles {
+          h1,
+          h2 {
+            font-size: max(1rem, var(--dynamic-font) / 3);
+          }
+        }
+
+        .gallery {
+          max-width: 60%;
+
+          img {
+            width: 100%;
+            height: auto;
+            border-radius: 1rem;
           }
         }
       }
