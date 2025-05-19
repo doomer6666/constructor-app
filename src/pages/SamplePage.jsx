@@ -11,7 +11,29 @@ import ContactsBlock from "../components/SampleComponents/ContactsBlock";
 import VideoBlock from "../components/SampleComponents/VideoBlock";
 import { useSavePageMutation, useGetPageQuery } from "../api/pageApi";
 import Modal from "../components/SampleComponents/Modal";
+import PreviewPageBlock from "../components/SampleComponents/PreviewPageBar";
+import PreviewFrame from "../components/SampleComponents/PreviewPage";
+
+const deviceSize = {
+  pc: {
+    width: "100%",
+    height: "100vh",
+  },
+  tablet: {
+    width: "768px",
+    height: "1024px",
+  },
+  phone: {
+    width: "480px",
+    height: "800px",
+  },
+};
+
 const SamplePage = () => {
+  const [currentDevice, setCurrentDevice] = useState("pc");
+  const [isPreview, setIsPreview] = useState(false);
+
+  const [isBlocked, setIsBlocked] = useState(false);
   const [isopenModal, setIsModalOpen] = useState(false);
   const { pageId } = useParams();
   const { data: pageData } = useGetPageQuery(undefined, {
@@ -75,51 +97,71 @@ const SamplePage = () => {
     setIsModalOpen(false);
     setModalData({ img: "none", text: "" });
   }
+  const [isVisibleOtherBar, setIsVisibleOtherBar] = useState(false);
   return (
-    <section className="redactor-page">
-      <section className="page" key={"page1"}>
-        {blocks.map((block) => (
-          <BaseBlock
-            key={block.id}
-            type={block.type}
-            data={block.data}
-            onUpdate={(newData) => updateBlockData(block.id, newData)}
-            sample={block.sample}
-            pageContent={componentMap[block.type]}
-          />
-        ))}
-      </section>
-      <div className="page-buttons">
-        {!isVisibleBlockBar && (
-          <button
-            className="new-block"
-            onClick={() => setIsVisibleBlockBar(true)}
-          >
-            Добавить блоки
-          </button>
-        )}
-        <button
-          className="new-block save-page "
-          onClick={() => setIsModalOpen(true)}
-        >
-          Сохранить страницу
-        </button>
-      </div>
-
-      {isVisibleBlockBar && (
-        <BlockBar
-          setIsVisibleBlockBar={setIsVisibleBlockBar}
-          handleAddBlock={handleAddBlock}
+    <>
+      {!(isVisibleBlockBar || isVisibleOtherBar) && (
+        <PreviewPageBlock
+          currentDevice={currentDevice}
+          setCurrentDevice={setCurrentDevice}
+          isPreview={isPreview}
+          setIsPreview={setIsPreview}
         />
       )}
-      <Modal
-        isOpen={isopenModal}
-        onClose={onClose}
-        onSave={handleSavePage}
-        modalData={modalData}
-        setModalData={setModalData}
-      ></Modal>
-    </section>
+      {isPreview ? (
+        <PreviewFrame
+          blocks={blocks}
+          componentMap={componentMap}
+          deviceSize={deviceSize[currentDevice]}
+        />
+      ) : (
+        <section className="redactor-page">
+          <section className="page" key={"page1"}>
+            {blocks.map((block) => (
+              <BaseBlock
+                key={block.id}
+                type={block.type}
+                data={block.data}
+                onUpdate={(newData) => updateBlockData(block.id, newData)}
+                sample={block.sample}
+                pageContent={componentMap[block.type]}
+                setIsVisibleBar={setIsVisibleOtherBar}
+              />
+            ))}
+          </section>
+          {!(isVisibleOtherBar || isVisibleBlockBar) && (
+            <div className="page-buttons">
+              <button
+                className="new-block"
+                onClick={() => setIsVisibleBlockBar(true)}
+              >
+                Добавить блоки
+              </button>
+
+              <button
+                className="new-block save-page "
+                onClick={() => setIsModalOpen(true)}
+              >
+                Сохранить страницу
+              </button>
+            </div>
+          )}
+          {isVisibleBlockBar && (
+            <BlockBar
+              setIsVisibleBlockBar={setIsVisibleBlockBar}
+              handleAddBlock={handleAddBlock}
+            />
+          )}
+          <Modal
+            isOpen={isopenModal}
+            onClose={onClose}
+            onSave={handleSavePage}
+            modalData={modalData}
+            setModalData={setModalData}
+          ></Modal>
+        </section>
+      )}
+    </>
   );
 };
 

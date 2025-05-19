@@ -14,13 +14,23 @@
 @use "./sample/video.scss";
 @use "./sample/contacts.scss";
 @use "./sample/contacts-samples.scss";
-@use "./sample//modal.scss";
+@use "./sample/modal.scss";
+@use "./sample/preview.scss";
+
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  text-align: center;
+}
+
 .redactor-page {
   font-family: "Manrope";
   color: black;
   margin: 0;
   padding: 0;
-  display: block;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow-x: hidden;
@@ -28,7 +38,7 @@
 }
 
 .page {
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -45,7 +55,7 @@ p {
   text-wrap: wrap;
 }
 .page__content {
-  width: 100vw;
+  width: 100%;
 }
 .new-block {
   @include mixins.customButton;
@@ -78,11 +88,11 @@ p {
   display: none !important;
 }
 
-section section {
+section.block {
   border-bottom: 2px solid #c9c9c9;
-}
-.block {
-  margin-top: 2em !important;
+  &:first-of-type {
+    margin-top: 3em !important;
+  }
 }
 
 :root {

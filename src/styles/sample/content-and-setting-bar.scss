@@ -76,6 +76,8 @@
 }
 
 @mixin bar {
+    display: flex;
+    flex-direction: column;
     text-align: left;
     position: fixed;
     top: 0;
@@ -84,9 +86,14 @@
     background-color: rgba(231, 231, 231, 1);
     z-index: 10;
     width: 40%;
-    padding-bottom: 6.25em;
     box-sizing: border-box;
     @include barComponents;
+    .bar-content {
+        flex: 1;
+        overflow-y: auto;
+        padding-top: 1em;
+        height: 100vh;
+    }
 }
 
 .content-bar {
@@ -103,9 +110,6 @@
         min-height: 9em !important;
         white-space: pre-wrap;
         word-wrap: break-word;
-    }
-    & {
-        overflow-x: scroll;
     }
 }
 
@@ -155,7 +159,6 @@
         color: rgba(255, 255, 255, 1);
         font-size: 1.5rem;
         background-color: black;
-        margin-bottom: 1em;
         padding-top: 1.5em;
         padding-bottom: 1.5em;
         width: 50%;

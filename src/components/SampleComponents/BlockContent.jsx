@@ -32,7 +32,7 @@ export default function BlockContent({
           Сохранить и закрыть
         </button>
       </div>
-      <div>
+      <div className="bar-content">
         {divs.map((field, index) => {
           let imgCounter = -1;
           const isImageField = field.includes("img");

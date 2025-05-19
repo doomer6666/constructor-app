@@ -1,12 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BlockContent from "./BlockContent";
 import BlockSetting from "./BlockSetting";
 import Buttons from "./HeaderButtons";
 
-const BaseBlock = ({ type, data, sample, pageContent, onUpdate }) => {
+const BaseBlock = ({
+  type,
+  data,
+  sample,
+  pageContent,
+  onUpdate,
+  setIsVisibleBar,
+}) => {
   const [isRender, setIsRender] = useState(true);
   const [isSettingVisible, setIsSettingVisible] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
+  useEffect(() => {
+    if (isContentVisible || isSettingVisible) {
+      setIsVisibleBar(true);
+    } else {
+      setIsVisibleBar(false);
+    }
+  }, [isContentVisible, isSettingVisible, setIsVisibleBar]);
   const [contentData, setContentData] = useState({ ...data.content });
   const [settingData, setSettingData] = useState({ ...data.settings });
   const [lastContentData, setLastContentData] = useState(contentData);
@@ -40,6 +54,7 @@ const BaseBlock = ({ type, data, sample, pageContent, onUpdate }) => {
   if (!isRender) {
     return null;
   }
+
   const bgImage = isBackImage ? `url(${settingData.backgroundImage})` : "none";
   const bgColor = !isBackImage ? settingData.backgroundColor : "transparent";
 
@@ -55,6 +70,7 @@ const BaseBlock = ({ type, data, sample, pageContent, onUpdate }) => {
         setIsSettingVisible={setIsSettingVisible}
         setIsContentVisible={setIsContentVisible}
         setIsRender={setIsRender}
+        disabled={isContentVisible || isSettingVisible}
       />
 
       <>{pageContent({ contentData, settingData })}</>

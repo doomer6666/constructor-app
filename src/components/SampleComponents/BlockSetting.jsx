@@ -383,7 +383,7 @@ export default function BlockSetting({
           Сохранить и закрыть
         </button>
       </div>
-      <div>
+      <div className="bar-content">
         {blockType === "header" && renderHeaderSettings()}
         {blockType === "text" && renderTextSettings()}
         {blockType === "gallery" && renderGallerySettings()}

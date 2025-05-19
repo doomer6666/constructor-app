@@ -1,4 +1,4 @@
-export default function ButtonBlock({ contentData, settingData }) {
+export default function ButtonBlock({ contentData, settingData, disabled }) {
   const styleObj = {
     "--dynamic-font": `${settingData.fontSize / 16}rem`,
     color: settingData.textColor,
@@ -18,6 +18,7 @@ export default function ButtonBlock({ contentData, settingData }) {
           onClick={() =>
             window.open(contentData.link, "_blank", "noopener,noreferrer")
           }
+          disabled={disabled}
         >
           {contentData.text}
         </button>
