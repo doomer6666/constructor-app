@@ -24,20 +24,20 @@
 // .content-bar {
 //     scrollbar-width: 0;
 // }
-// .page,
-// .bar-content {
-//     height: 100% !important;
-//     /* Для Chrome/Edge/Safari */
-//     &::-webkit-scrollbar {
-//         width: 6px !important;
-//     }
-//     &::-webkit-scrollbar-track {
-//         background: transparent !important;
-//     }
-//     &::-webkit-scrollbar-thumb {
-//         background: #d9d9d9 !important;
-//         border-radius: 10px !important;
-//     }
-//     /* Для Firefox */
-//     scrollbar-width: auto !important;
-// }
+.bar-content,
+.lib {
+    height: 100% !important;
+    /* Для Chrome/Edge/Safari */
+    &::-webkit-scrollbar {
+        width: 6px !important;
+    }
+    &::-webkit-scrollbar-track {
+        background: transparent !important;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #d9d9d9 !important;
+        border-radius: 10px !important;
+    }
+    /* Для Firefox */
+    scrollbar-width: auto !important;
+}

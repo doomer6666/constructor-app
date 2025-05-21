@@ -75,7 +75,12 @@ const BaseBlock = ({
 
       <>{pageContent({ contentData, settingData })}</>
 
-      {isContentVisible && (
+      {/* Блок контента */}
+      <div
+        className={`content-bar content-header-bar ${
+          isContentVisible ? "active" : ""
+        }`}
+      >
         <BlockContent
           contentTempData={contentData}
           setContentTempData={setContentData}
@@ -84,8 +89,13 @@ const BaseBlock = ({
           labels={data.labels}
           divs={data.divs}
         />
-      )}
-      {isSettingVisible && (
+      </div>
+      {/* Блок настроек */}
+      <div
+        className={`setting-bar setting-header-bar ${
+          isSettingVisible ? "active" : ""
+        }`}
+      >
         <BlockSetting
           blockType={type}
           settingTempData={settingData}
@@ -96,7 +106,7 @@ const BaseBlock = ({
           labels={data.labels}
           divs={data.divs}
         />
-      )}
+      </div>
     </section>
   );
 };

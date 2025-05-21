@@ -374,7 +374,7 @@ export default function BlockSetting({
   };
 
   return (
-    <div className="setting-bar setting-header-bar">
+    <>
       <div className="buttons-div">
         <button className="save" onClick={handleSettingClose}>
           Закрыть
@@ -391,6 +391,6 @@ export default function BlockSetting({
         {blockType === "contacts" && renderContactsSetting()}
         {blockType === "video" && renderVideoSettings()}
       </div>
-    </div>
+    </>
   );
 }

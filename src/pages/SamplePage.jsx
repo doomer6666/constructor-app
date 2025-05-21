@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
 import BaseBlock from "../components/SampleComponents/BaseBlock";
 import { blockTemplates } from "../components/const";
 import BlockBar from "../components/SampleComponents/BlockBar";
@@ -9,7 +8,6 @@ import GalleryBlock from "../components/SampleComponents/GalleryBlock";
 import ButtonBlock from "../components/SampleComponents/ButtonBlock";
 import ContactsBlock from "../components/SampleComponents/ContactsBlock";
 import VideoBlock from "../components/SampleComponents/VideoBlock";
-import { useSavePageMutation, useGetPageQuery } from "../api/pageApi";
 import Modal from "../components/SampleComponents/Modal";
 import PreviewPageBlock from "../components/SampleComponents/PreviewPageBar";
 import PreviewFrame from "../components/SampleComponents/PreviewPage";
@@ -33,12 +31,8 @@ const SamplePage = () => {
   const [currentDevice, setCurrentDevice] = useState("pc");
   const [isPreview, setIsPreview] = useState(false);
 
-  const [isBlocked, setIsBlocked] = useState(false);
   const [isopenModal, setIsModalOpen] = useState(false);
-  const { pageId } = useParams();
-  const { data: pageData } = useGetPageQuery(undefined, {
-    skip: pageId === "new",
-  });
+
   const [blocks, setBlocks] = useState([]);
   const [isVisibleBlockBar, setIsVisibleBlockBar] = useState(false);
   const componentMap = {
@@ -71,22 +65,16 @@ const SamplePage = () => {
       )
     );
   };
-  const [savePage, { isLoading }] = useSavePageMutation();
 
-  // useEffect(() => {
-  //   if (pageId === "new") {
-  //     setBlocks([]);
-  //   } else if (pageData) {
-  //     setBlocks(pageData.blocks || []);
-  //   }
-  // }, [pageId, pageData]);
-  // Обработчик кнопки "Сохранить страницу"
   const handleSavePage = async () => {
+    const access = localStorage.getItem("access");
+    if (!access) {
+      console.error("aaaaaa");
+      return;
+    }
     try {
       // Отправляем массив blocks
       console.log(blocks);
-      const response = await savePage(blocks).unwrap();
-      console.log("Страница сохранена успешно:", response);
       // можно добавить уведомление или редирект
     } catch (err) {
       console.error("Ошибка при сохранении страницы:", err);
@@ -146,12 +134,11 @@ const SamplePage = () => {
               </button>
             </div>
           )}
-          {isVisibleBlockBar && (
-            <BlockBar
-              setIsVisibleBlockBar={setIsVisibleBlockBar}
-              handleAddBlock={handleAddBlock}
-            />
-          )}
+          <BlockBar
+            specialClass={`block-bar ${isVisibleBlockBar ? "active" : ""}`}
+            setIsVisibleBlockBar={setIsVisibleBlockBar}
+            handleAddBlock={handleAddBlock}
+          />
           <Modal
             isOpen={isopenModal}
             onClose={onClose}

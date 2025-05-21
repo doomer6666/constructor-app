@@ -1,22 +1,12 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import axios from "axios";
+import { BASE_URL } from './authApi.js'
 
-export const pageApi = createApi({
-  reducerPath: "pageApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5050" }), // Укажите адрес вашего сервера
-  endpoints: (builder) => ({
-    // Мутация для сохранения страницы
-    savePage: builder.mutation({
-      query: (blocks) => ({
-        url: "/savePage", // URL на сервере для сохранения страницы
-        method: "POST",
-        body: { blocks }, // Отправляем объект с блоками в свойстве blocks
-      }),
-    }),
-    getPage: builder.query({
-      query: () => "loadPage",
-    }),
-  }),
-});
-
-// Хук для использования в компонентах
-export const { useSavePageMutation, useGetPageQuery } = pageApi;
+export const savePage = async (credentials) => {
+  try {
+    const response = axios.post(`${BASE_URL}/register/`, credentials)
+    return (await response).data;
+  } catch (err) {
+    console.error('Ошибка регистрации:', err);
+    throw err;
+  }
+}

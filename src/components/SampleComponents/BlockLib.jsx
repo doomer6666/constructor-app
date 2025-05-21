@@ -1,24 +1,37 @@
 import { SampleLib } from "../const";
 
-export default function BlockLib({ type, handleAddBlock }) {
-  const typeLib = SampleLib[type] || null;
+export default function BlockLib({
+  type,
+  handleAddBlock,
+  isVisible,
+  setIsVisible,
+}) {
+  const typeLib = SampleLib[type] || SampleLib["header"];
+
+  if (!typeLib) return null;
+
   return (
-    typeLib !== null && (
-      <section className="lib">
-        <ul>
-          {typeLib.map((sample) => (
-            <li
-              onClick={() => handleAddBlock(type, sample.name)}
-              key={sample.title}
-            >
-              <img src={sample.previewImg} alt="Шаблон 1" />
-              <p>
-                <strong>{sample.title}</strong>:{sample.description}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </section>
-    )
+    <section className={`lib ${isVisible ? "active" : ""}`}>
+      <ul>
+        {typeLib.map((sample) => (
+          <li
+            key={sample.title}
+            onClick={() => {
+              handleAddBlock(type, sample.name);
+              setIsVisible(false);
+            }}
+          >
+            <img
+              src={sample.previewImg}
+              alt={`Шаблон ${sample.title}`}
+              style={{ maxWidth: "100%" }}
+            />
+            <p>
+              <strong>{sample.title}</strong>: {sample.description}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }

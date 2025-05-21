@@ -1,32 +1,31 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useLoginMutation } from "../api/authApi";
-import { useDispatch } from "react-redux";
-import { setCredentials } from "../slices/AuthSlice";
 import "../styles/login-register.scss";
+import { login } from "../api/authApi";
 
 const LoginPage = () => {
-  const [login, setLogin] = useState("");
+  const [error, setError] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loginMutation, { isLoading, error }] = useLoginMutation();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await loginMutation({ login, password }).unwrap();
-      console.log("Успешный вход:", result);
-      dispatch(setCredentials(result));
-      navigate("/register");
+      const data = await login({ username: username, password: password });
+      console.log(data);
+      localStorage.setItem("access", data.access);
+      localStorage.setItem("refresh", data.refresh);
+      navigate("/sample");
     } catch (err) {
       console.error("Ошибка входа:", err);
+      setError("Неверные логин/пароль");
     }
   };
 
   return (
     <div className="login-page">
-      {error && <p className="error">Ошибка: {error.message}</p>}
+      {error && <p className="error">Ошибка: {error}</p>}
 
       {/* <div className="sectInfo">
         <div className="companyName">
@@ -43,8 +42,8 @@ const LoginPage = () => {
         <input
           type="text"
           placeholder="Логин"
-          value={login}
-          onChange={(e) => setLogin(e.target.value)}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           required
           className="field"
         />
@@ -60,7 +59,7 @@ const LoginPage = () => {
           type="submit"
           value="Войти"
           className="field submit"
-          disabled={isLoading}
+          // disabled={isLoading}
         />
         <Link to="/register" className="button">
           Зарегистрироваться

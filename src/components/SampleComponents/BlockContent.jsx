@@ -23,7 +23,7 @@ export default function BlockContent({
   );
 
   return (
-    <div className="content-bar header-bar">
+    <>
       <div className="buttons-div">
         <button className="save" onClick={handleContentClose}>
           Закрыть
@@ -213,6 +213,6 @@ export default function BlockContent({
           />
         </div>
       )}
-    </div>
+    </>
   );
 }

@@ -1,9 +1,13 @@
 import { useState } from "react";
 import BlockLib from "./BlockLib";
 
-export default function BlockBar({ setIsVisibleBlockBar, handleAddBlock }) {
+export default function BlockBar({
+  setIsVisibleBlockBar,
+  handleAddBlock,
+  specialClass,
+}) {
   const [activeType, setActiveType] = useState("");
-  const [libIsVisible, setLibIsVisible] = useState(true);
+  const [libIsVisible, setLibIsVisible] = useState(false);
   const blocks = [
     ["header", "Обложка"],
     ["text", "Текстовый блок"],
@@ -12,13 +16,32 @@ export default function BlockBar({ setIsVisibleBlockBar, handleAddBlock }) {
     ["contacts", "Контакты"],
     ["video", "Видео"],
   ];
+
+  const handleTypeClick = (blockType) => {
+    if (activeType === blockType) {
+      // Если тот же тип уже активен, переключаем видимость
+      setLibIsVisible(!libIsVisible);
+    } else {
+      // Новый тип: устанавливаем тип и показываем библиотеку
+      setActiveType(blockType);
+      setLibIsVisible(true);
+    }
+  };
+
   return (
     <>
-      <section className="block-bar">
+      <section className={specialClass}>
         <div className="title-bar">
           <h4>Библиотека блоков</h4>
-          <button className="exit" onClick={() => setIsVisibleBlockBar(false)}>
-            <img src="/cross.svg" height="48px" width="51px" />
+          <button
+            className="exit"
+            onClick={() => {
+              setIsVisibleBlockBar(false);
+              setLibIsVisible(false);
+              setActiveType("");
+            }}
+          >
+            <img src="/cross.svg" height="48px" width="51px" alt="Закрыть" />
           </button>
         </div>
         <ul className="block-list">
@@ -26,12 +49,9 @@ export default function BlockBar({ setIsVisibleBlockBar, handleAddBlock }) {
             <li className="block-item" key={index}>
               <button
                 className={`title-button template-button ${
-                  activeType === block[0] ? "active" : ""
+                  activeType === block[0] && libIsVisible ? "active" : ""
                 }`}
-                onClick={() => {
-                  setActiveType(block[0]);
-                  setLibIsVisible(!!libIsVisible);
-                }}
+                onClick={() => handleTypeClick(block[0])}
               >
                 {block[1]}
               </button>
@@ -39,9 +59,12 @@ export default function BlockBar({ setIsVisibleBlockBar, handleAddBlock }) {
           ))}
         </ul>
       </section>
-      {libIsVisible && (
-        <BlockLib type={activeType} handleAddBlock={handleAddBlock} />
-      )}
+      <BlockLib
+        isVisible={libIsVisible}
+        setIsVisible={setLibIsVisible}
+        type={activeType}
+        handleAddBlock={handleAddBlock}
+      />
     </>
   );
 }

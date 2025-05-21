@@ -1,15 +1,12 @@
 import { Link } from "react-router-dom";
-import { useGetPageQuery } from "../api/pageApi";
 
 const MainPage = () => {
-  const { data, isLoading, error } = useGetPageQuery();
+  // if (isLoading) return <div>Загрузка...</div>;
+  // if (error) return <div>Ошибка: {error.message}</div>;
 
-  if (isLoading) return <div>Загрузка...</div>;
-  if (error) return <div>Ошибка: {error.message}</div>;
-
-  const title =
-    data?.blocks?.find((block) => block.type === "header")?.data.content
-      .title1 || "Без заголовка";
+  const title = "Без заголовка";
+  // data?.blocks?.find((block) => block.type === "header")?.data.content
+  //   .title1 || "Без заголовка";
 
   return (
     <div className="main-page">
