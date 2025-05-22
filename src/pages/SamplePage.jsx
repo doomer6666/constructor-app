@@ -11,6 +11,7 @@ import VideoBlock from "../components/SampleComponents/VideoBlock";
 import Modal from "../components/SampleComponents/Modal";
 import PreviewPageBlock from "../components/SampleComponents/PreviewPageBar";
 import PreviewFrame from "../components/SampleComponents/PreviewPage";
+import { savePage } from "../api/pageApi";
 
 const deviceSize = {
   pc: {
@@ -33,6 +34,11 @@ const SamplePage = () => {
 
   const [isopenModal, setIsModalOpen] = useState(false);
 
+  const [modalData, setModalData] = useState({
+    img: "none",
+    file: "",
+    text: "",
+  });
   const [blocks, setBlocks] = useState([]);
   const [isVisibleBlockBar, setIsVisibleBlockBar] = useState(false);
   const componentMap = {
@@ -66,21 +72,18 @@ const SamplePage = () => {
     );
   };
 
-  const handleSavePage = async () => {
-    const access = localStorage.getItem("access");
-    if (!access) {
-      console.error("aaaaaa");
-      return;
-    }
+  const handleSavePage = (withTemp) => {
     try {
-      // Отправляем массив blocks
-      console.log(blocks);
-      // можно добавить уведомление или редирект
+      savePage({
+        name: modalData.text,
+        image: modalData.file,
+        sample_data: blocks.toString(),
+        state: withTemp ? "temp" : "close",
+      });
     } catch (err) {
       console.error("Ошибка при сохранении страницы:", err);
     }
   };
-  const [modalData, setModalData] = useState({ img: "none", text: "" });
   function onClose() {
     setIsModalOpen(false);
     setModalData({ img: "none", text: "" });

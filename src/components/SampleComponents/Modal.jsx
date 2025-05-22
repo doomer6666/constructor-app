@@ -27,7 +27,10 @@ const Modal = ({ isOpen, onClose, onSave, modalData, setModalData }) => {
           <input
             id="input-img-modal"
             type="file"
-            onChange={(e) => handleFileUpload("img", setModalData)(e)}
+            onChange={(e) => {
+              handleFileUpload("img", setModalData)(e);
+              setModalData({ ...modalData, file: e.target.files[0] });
+            }}
           />
         </div>
         <input
