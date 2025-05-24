@@ -43,7 +43,7 @@ api.interceptors.response.use(
 );
 
 export const savePage = async (data) => {
-  await api.post(`/sample`, data, {
+  await api.post(`/api/sample`, data, {
   })
     .then(response => {
       console.log(response.data);
