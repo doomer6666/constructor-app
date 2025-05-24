@@ -22,6 +22,10 @@
         li {
             width: fit-content;
             border: 2px solid black;
+            img {
+                max-width: 100%;
+                height: 70%;
+            }
         }
     }
     .redactor-main {
@@ -52,6 +56,7 @@
                 margin: 0;
                 padding: 0;
                 background-color: white;
+                color: black;
             }
         }
 

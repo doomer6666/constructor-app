@@ -732,12 +732,6 @@ export const SampleLib = {
       name: "sample1",
       previewImg: "/video_lib/sample1.jpg",
       title: "B1",
-      description: "видео-файл",
-    },
-    {
-      name: "sample2",
-      previewImg: "/video_lib/sample2.jpg",
-      title: "B2",
       description: "видео-ссылка на сторонюю платформу",
     },
   ],
