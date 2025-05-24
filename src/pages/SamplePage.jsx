@@ -74,15 +74,16 @@ const SamplePage = () => {
 
   const handleSavePage = (withTemp) => {
     try {
-      savePage({
-        name: modalData.text,
-        image: modalData.file,
-        sample_data: blocks.toString(),
-        state: withTemp ? "temp" : "close",
-      });
-    } catch (err) {
-      console.error("Ошибка при сохранении страницы:", err);
-    }
+    const formData = new FormData();
+    formData.set('name', modalData.text);
+    formData.set('image', modalData.file);
+    formData.set('sample_data', JSON.stringify(blocks));  // если это объект
+    formData.set('state', withTemp ? "temp" : "close");
+
+    savePage(formData);  // передаём FormData
+  } catch (err) {
+    console.error("Ошибка при сохранении страницы:", err);
+  }
   };
   function onClose() {
     setIsModalOpen(false);
