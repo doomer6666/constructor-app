@@ -9,15 +9,17 @@ export default function BlockContent({
   divs,
   labels,
 }) {
-  const images = Object.entries(contentTempData).filter(([label]) =>
-    label.includes("img")
-  );
-  const links = Object.entries(contentTempData).filter(([label]) =>
-    label.includes("link")
-  );
-  const [imgTexts, setImgTexts] = useState(
-    images.map(([, value]) => (value === "none" ? "Загрузить" : "Загружено"))
-  );
+  // Инициализируем состояние для текстов загрузки с использованием имён полей
+  const initialImgTexts = divs.reduce((acc, field) => {
+    if (field.includes("img")) {
+      acc[field] =
+        contentTempData[field] === "none" ? "Загрузить" : "Загружено";
+    }
+    return acc;
+  }, {});
+
+  const [imgTexts, setImgTexts] = useState(initialImgTexts);
+
   const [videoText, setVideoText] = useState(
     contentTempData.video === "none" ? "Загрузить" : "Загружено"
   );
@@ -34,12 +36,8 @@ export default function BlockContent({
       </div>
       <div className="bar-content">
         {divs.map((field, index) => {
-          let imgCounter = -1;
           const isImageField = field.includes("img");
 
-          if (isImageField) {
-            imgCounter = images.findIndex(([key]) => key === field);
-          }
           return (
             <div key={`${field}-${index}`}>
               {(field.includes("title") || field.includes("text")) && (
@@ -78,33 +76,29 @@ export default function BlockContent({
                 <>
                   <p>{labels[index]}</p>
                   <div className="div-img">
-                    <label
-                      htmlFor={`input-img-${imgCounter}`}
-                      className="input-img"
-                    >
-                      {imgTexts[imgCounter]}
+                    <label htmlFor={`input-${field}`} className="input-img">
+                      {imgTexts[field]}
                     </label>
                     <input
-                      id={`input-img-${imgCounter}`}
+                      id={`input-${field}`}
                       type="file"
                       onChange={(e) =>
                         handleFileUpload(field, setContentTempData, (newText) =>
-                          setImgTexts((prev) => {
-                            const newState = [...prev];
-                            newState[imgCounter] = newText;
-                            return newState;
-                          })
+                          setImgTexts((prev) => ({
+                            ...prev,
+                            [field]: newText,
+                          }))
                         )(e)
                       }
                     />
                     <button
                       className="remove-img"
                       onClick={() => {
-                        setImgTexts((prev) => {
-                          const newState = [...prev];
-                          newState[index] = "Загрузить";
-                          return newState;
-                        });
+                        // Обновляем состояние для данного поля
+                        setImgTexts((prev) => ({
+                          ...prev,
+                          [field]: "Загрузить",
+                        }));
                         setContentTempData({
                           ...contentTempData,
                           [field]: "none",
@@ -119,100 +113,114 @@ export default function BlockContent({
             </div>
           );
         })}
-      </div>
-      {contentTempData.isInfinite && (
-        <div className="infinite-add">
-          <p>Загрузить еще</p>
-          <div className="div-img">
-            <label htmlFor="input-img-new" className="input-img">
-              Загрузить
-            </label>
-            <input
-              id="input-img-new"
-              type="file"
-              onChange={(e) => {
-                // Вычисляем текущие ключи изображений
-                const imageKeys = Object.keys(contentTempData).filter((key) =>
-                  key.includes("img")
-                );
-                // Новый ключ: "img" + (количество существующих изображений + 1)
-                const nextField = `img${imageKeys.length + 1}`;
-                // Вызываем handleFileUpload для нового ключа.
-                // В колбеке обновляем imgTexts, добавляя новый элемент.
-                handleFileUpload(nextField, setContentTempData, (newText) => {
-                  setImgTexts((prev) => [...prev, newText]);
-                })(e);
-              }}
-            />
+
+        {contentTempData.isInfinite && (
+          <div className="infinite-add">
+            <p>Загрузить еще</p>
+            <div className="div-img">
+              <label htmlFor="input-img-new" className="input-img">
+                Загрузить
+              </label>
+              <input
+                id="input-img-new"
+                type="file"
+                onChange={(e) => {
+                  const imageKeys = Object.keys(contentTempData).filter((key) =>
+                    key.includes("img")
+                  );
+                  const nextField = `img${imageKeys.length + 1}`;
+                  handleFileUpload(nextField, setContentTempData, (newText) => {
+                    setImgTexts((prev) => ({
+                      ...prev,
+                      [nextField]: newText,
+                    }));
+                  })(e);
+                }}
+              />
+            </div>
           </div>
-        </div>
-      )}
-      {links.length === 1 && (
-        <div>
-          <p>Ссылка</p>
-          <input
-            value={contentTempData.link}
-            onChange={(e) =>
-              setContentTempData({
-                ...contentTempData,
-                link: e.target.value || "",
-              })
-            }
-          />
-        </div>
-      )}
-      {links.length > 1 &&
-        links.map((link, index) => (
-          <div key={link + index}>
-            <p>Ссылка на {labels[index + 1]}</p>
-            <input
-              value={link[1] === "#" ? "" : link[1]}
+        )}
+
+        {(() => {
+          const links = Object.entries(contentTempData).filter(([label]) =>
+            label.includes("link")
+          );
+          if (links.length === 1) {
+            return (
+              <div>
+                <p>Ссылка</p>
+                <input
+                  value={contentTempData.link}
+                  onChange={(e) =>
+                    setContentTempData({
+                      ...contentTempData,
+                      link: e.target.value,
+                    })
+                  }
+                />
+              </div>
+            );
+          } else if (links.length > 1) {
+            return links.map((link, index) => (
+              <div key={link[0] + index}>
+                <p>Ссылка на {labels[index + 1]}</p>
+                <input
+                  value={link[1] === "#" ? "" : link[1]}
+                  onChange={(e) =>
+                    setContentTempData({
+                      ...contentTempData,
+                      [link[0]]: e.target.value || "",
+                    })
+                  }
+                />
+              </div>
+            ));
+          }
+          return null;
+        })()}
+
+        {contentTempData.video && (
+          <>
+            <p>Видео(файл)</p>
+            <div className="div-img">
+              <label htmlFor={`input-video`} className="input-img">
+                {videoText}
+              </label>
+              <input
+                id="input-video"
+                type="file"
+                onChange={(e) =>
+                  handleVideoUpload(
+                    "video",
+                    setContentTempData,
+                    setVideoText
+                  )(e)
+                }
+              />
+            </div>
+          </>
+        )}
+        {contentTempData.videoLink && (
+          <div>
+            <p>Видео (ссылка)</p>
+            <textarea
+              type="text"
+              value={
+                contentTempData.videoLink === "none"
+                  ? ""
+                  : contentTempData.videoLink
+              }
+              placeholder="Вставьте сюда ссылку на видео (YouTube, Rutube, VK Видео)"
               onChange={(e) =>
                 setContentTempData({
                   ...contentTempData,
-                  [link[0]]: e.target.value || "",
+                  videoLink: getEmbedSrc(e.target.value),
                 })
               }
             />
           </div>
-        ))}
-      {contentTempData.video && (
-        <>
-          <p>Видео(файл)</p>
-          <div className="div-img">
-            <label htmlFor={`input-video`} className="input-img">
-              {videoText}
-            </label>
-            <input
-              id="input-video"
-              type="file"
-              onChange={(e) =>
-                handleVideoUpload("video", setContentTempData, setVideoText)(e)
-              }
-            />
-          </div>
-        </>
-      )}
-      {contentTempData.videoLink && (
-        <div>
-          <p>Видео (ссылка)</p>
-          <textarea
-            type="text"
-            value={
-              contentTempData.videoLink === "none"
-                ? ""
-                : contentTempData.videoLink
-            }
-            placeholder="Вставьте сюда ссылку на видео(YouTube, Rutube, VK Видео"
-            onChange={(e) =>
-              setContentTempData({
-                ...contentTempData,
-                videoLink: getEmbedSrc(e.target.value),
-              })
-            }
-          />
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 }

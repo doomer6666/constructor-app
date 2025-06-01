@@ -2,16 +2,14 @@
 import { Modal as AntdModal, Checkbox, ConfigProvider } from "antd";
 import { useState } from "react";
 import { handleFileUpload } from "./Utils";
+import { Link } from "react-router-dom";
 
 const Modal = ({ isOpen, onClose, onSave, modalData, setModalData }) => {
   const [withTemplates, setWithTemplates] = useState(false);
   return (
     <AntdModal
       open={isOpen}
-      onCancel={() => {
-        onClose();
-        setWithTemplates(false);
-      }}
+      onCancel={onClose}
       footer={null}
       width={600}
       className="modal"
@@ -45,16 +43,18 @@ const Modal = ({ isOpen, onClose, onSave, modalData, setModalData }) => {
           }
           className={`input-title-modal`}
         />
-        <button
-          className="new-block save-page"
-          onClick={() => onSave(withTemplates)}
-        >
-          Сохранить страницу
-        </button>
+        <Link to={"/redactor"}>
+          <button
+            className="new-block save-page"
+            onClick={() => onSave(withTemplates)}
+          >
+            Сохранить страницу
+          </button>
+        </Link>
         <ConfigProvider
           theme={{
             token: {
-              colorPrimary: "#fa8c16", // Оранжевый цвет
+              colorPrimary: "#fa8c16",
             },
           }}
         >

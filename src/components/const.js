@@ -277,13 +277,9 @@ export const blockTemplates = {
         "Изображение5",
         "Изображение6",
       ],
-      divs: ["img1", "img2", "img3", "img4", "img5"],
+      divs: ["img1"],
       content: {
         img1: "none",
-        img2: "none",
-        img3: "none",
-        img4: "none",
-        img5: "none",
         isInfinite: true,
       },
       settings: {
@@ -515,7 +511,7 @@ export const blockTemplates = {
       labels: ["Видео"],
       divs: ["video"],
       content: {
-        videoLink: "none",
+        videoLink: "http\\none",
       },
       settings: {
         backgroundColor: "#ffffff",
@@ -728,11 +724,32 @@ export const SampleLib = {
     },
   ],
   video: [
+    // {
+    //   name: "sample1",
+    //   previewImg: "/video_lib/sample1.jpg",
+    //   title: "B1",
+    //   description: "видео-файл",
+    // },
     {
-      name: "sample1",
-      previewImg: "/video_lib/sample1.jpg",
+      name: "sample2",
+      previewImg: "/video_lib/sample2.jpg",
       title: "B1",
       description: "видео-ссылка на сторонюю платформу",
     },
   ],
+};
+
+export const deviceSize = {
+  pc: {
+    width: "100%",
+    height: "100vh",
+  },
+  tablet: {
+    width: "768px",
+    height: "1024px",
+  },
+  phone: {
+    width: "480px",
+    height: "800px",
+  },
 };

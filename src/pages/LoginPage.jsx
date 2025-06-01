@@ -16,7 +16,7 @@ const LoginPage = () => {
       console.log(data);
       localStorage.setItem("access", data.access);
       localStorage.setItem("refresh", data.refresh);
-      navigate("/sample");
+      navigate("/redactor");
     } catch (err) {
       console.error("Ошибка входа:", err);
       setError("Неверные логин/пароль");

@@ -8,9 +8,9 @@ const api = axios.create({
 
 autoRefresh(api);
 
-export const getOnlyPage = async (ip) => {
+export const getOnlyPage = async (id) => {
     try {
-        const response = await api.get(`${BASE_URL}/api/sample/${ip}`)
+        const response = await api.get(`${BASE_URL}/api/sample/${id}`)
         return response.data;
     } catch (err) {
         console.error('Ошибка получения страницы:', err);

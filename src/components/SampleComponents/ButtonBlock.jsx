@@ -1,4 +1,5 @@
 export default function ButtonBlock({ contentData, settingData, disabled }) {
+  console.log(contentData.link);
   const styleObj = {
     "--dynamic-font": `${settingData.fontSize / 16}rem`,
     color: settingData.textColor,

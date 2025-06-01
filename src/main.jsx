@@ -18,8 +18,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/redactor" element={<RedactorPA />} />
       <Route path="/templates" element={<TemplatePage />} />
-      <Route path="/sample" element={<SamplePage />} />
-      <Route path="/read" element={<ReadOnlyBlock />} />
+      <Route path="/sample/:id?" element={<SamplePage />} />
+      <Route path="/read/:id?" element={<ReadOnlyBlock />} />
     </Routes>
   </BrowserRouter>
 );

@@ -4,7 +4,7 @@
     margin: 0;
     padding-bottom: $em;
     margin-left: 0.5em;
-    color: rgba(99, 99, 99, 1);
+    color: rgba(47, 47, 47);
     font-size: $font;
 }
 
@@ -135,7 +135,7 @@
             p {
                 font-size: 1.25rem;
                 margin-left: 1em;
-                width: 7em;
+                width: 7em !important;
             }
         }
     }

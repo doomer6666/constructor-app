@@ -10,11 +10,12 @@
 
 .buttons {
   @include block();
+  width: 100vw;
   font-size: 1rem !important;
   justify-content: left;
   z-index: 3;
   color: black;
-  margin: 3.125em 10.25em 3em 10.25em;
+  margin: 3.125em 0 3em 0;
   flex-direction: row;
   gap: 2.6875em;
 

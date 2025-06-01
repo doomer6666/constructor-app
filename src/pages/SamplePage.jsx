@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import BaseBlock from "../components/SampleComponents/BaseBlock";
-import { blockTemplates } from "../components/const";
+import { blockTemplates, deviceSize } from "../components/const";
 import BlockBar from "../components/SampleComponents/BlockBar";
 import HeaderBlock from "../components/SampleComponents/HeaderBlock";
 import TextBlock from "../components/SampleComponents/TextBlock";
@@ -11,36 +12,27 @@ import VideoBlock from "../components/SampleComponents/VideoBlock";
 import Modal from "../components/SampleComponents/Modal";
 import PreviewPageBlock from "../components/SampleComponents/PreviewPageBar";
 import PreviewFrame from "../components/SampleComponents/PreviewPage";
-import { savePage } from "../api/pageApi";
-
-const deviceSize = {
-  pc: {
-    width: "100%",
-    height: "100vh",
-  },
-  tablet: {
-    width: "768px",
-    height: "1024px",
-  },
-  phone: {
-    width: "480px",
-    height: "800px",
-  },
-};
+import { savePage } from "../api/postPageApi";
+import { getOnlyPage } from "../api/getOnlyPageApi";
+import { BASE_URL } from "../api/authApi";
 
 const SamplePage = () => {
   const [currentDevice, setCurrentDevice] = useState("pc");
   const [isPreview, setIsPreview] = useState(false);
 
   const [isopenModal, setIsModalOpen] = useState(false);
-
   const [modalData, setModalData] = useState({
     img: "none",
     file: "",
     text: "",
+    state: "close",
   });
-  const [blocks, setBlocks] = useState([]);
+
   const [isVisibleBlockBar, setIsVisibleBlockBar] = useState(false);
+  const [isVisibleOtherBar, setIsVisibleOtherBar] = useState(false);
+
+  const [blocks, setBlocks] = useState([]);
+
   const componentMap = {
     header: HeaderBlock,
     text: TextBlock,
@@ -49,6 +41,7 @@ const SamplePage = () => {
     contacts: ContactsBlock,
     video: VideoBlock,
   };
+
   const handleAddBlock = (type, sample) => {
     const newBlock = {
       id: Date.now(),
@@ -62,7 +55,6 @@ const SamplePage = () => {
   };
 
   const updateBlockData = (id, newData) => {
-    console.log(newData);
     setBlocks(
       blocks.map((block) =>
         block.id === id
@@ -74,22 +66,57 @@ const SamplePage = () => {
 
   const handleSavePage = (withTemp) => {
     try {
-    const formData = new FormData();
-    formData.set('name', modalData.text);
-    formData.set('image', modalData.file);
-    formData.set('sample_data', JSON.stringify(blocks));  // если это объект
-    formData.set('state', withTemp ? "temp" : "close");
-
-    savePage(formData);  // передаём FormData
-  } catch (err) {
-    console.error("Ошибка при сохранении страницы:", err);
-  }
+      const formData = new FormData();
+      formData.set("name", modalData.text);
+      if (modalData.file) {
+        formData.set("image", modalData.file);
+      }
+      formData.set("sample_data", JSON.stringify(blocks));
+      formData.set("state", withTemp ? "temp" : modalData.state);
+      if (id) {
+        formData.set("id", id);
+      }
+      savePage(formData, id);
+    } catch (err) {
+      console.error("Ошибка при сохранении страницы:", err);
+    }
   };
+
   function onClose() {
     setIsModalOpen(false);
-    setModalData({ img: "none", text: "" });
   }
-  const [isVisibleOtherBar, setIsVisibleOtherBar] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const { id } = useParams();
+  useEffect(() => {
+    if (id) {
+      setIsLoading(true);
+      const fetchData = async () => {
+        try {
+          const response = await getOnlyPage(id);
+          const parsedData = await JSON.parse(response.sample_data);
+          setBlocks(parsedData);
+          setModalData({
+            text: response.name,
+            //временно
+            img: BASE_URL + response.image,
+            state: response.state,
+          });
+          console.log(modalData);
+        } catch (err) {
+          setError(err);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
+      fetchData();
+    }
+  }, [id]);
+
+  if (isLoading) return <div>Загрузка...</div>;
+  if (error) return <div>Ошибка: {error.message}</div>;
   return (
     <>
       {!(isVisibleBlockBar || isVisibleOtherBar) && (

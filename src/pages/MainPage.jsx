@@ -1,36 +1,38 @@
 import { Link } from "react-router-dom";
-import { getPages } from "../api/getPagesApi";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../api/authApi";
+import { getPublicPages } from "../api/getPublicPages";
 
 const MainPage = () => {
   const [pages, setPages] = useState(null);
-  const [isLoading, setIsLoading] = useState(true); // Состояние загрузки
-  const [error, setError] = useState(null); // Состояние ошибки
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await getPages(); // Ждем результата
+        const result = await getPublicPages();
         setPages(result);
       } catch (err) {
-        setError(err); // Сохраняем ошибку
+        setError(err);
       } finally {
-        setIsLoading(false); // Завершаем загрузку в любом случае
+        setIsLoading(false);
       }
     };
 
-    fetchData(); // Запускаем асинхронную функцию
-  }, []); // Пустой массив зависимостей [[1]]
+    fetchData();
+  }, []);
 
-  if (isLoading) return <div>Загрузка...</div>; // Показываем лоадер
-  if (error) return <div>Ошибка: {error.message}</div>; // Показываем ошибку
+  if (isLoading) return <div>Загрузка...</div>;
+  if (error) return <div>Ошибка: {error.message}</div>;
 
   return (
     <div className="main-page">
       <header className="redactor-head">
-        <button className="exit">Вход</button>
-        <p className="lk">Личный кабинет</p>
+        <Link to={"/auth"}>
+          <button className="exit">Вход</button>
+        </Link>
+        {/* <p className="lk">Личный кабинет</p> */}
       </header>
       <main className="redactor-main">
         <section className="hero">

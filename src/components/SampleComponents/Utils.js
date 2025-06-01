@@ -1,25 +1,37 @@
+import { BASE_URL } from "../../api/authApi";
+import { postImage } from "../../api/postImage";
+
 export const handleFileUpload =
   (field, setSettingTempData, setImgText = () => { }, setIsActualyBackImage = () => { }) =>
-    (e) => {
+    async (e) => {
       const file = e.target.files[0];
-      console.log(file)
       if (!file) return;
-      const allowedTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+      const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
       if (!allowedTypes.includes(file.type)) {
         setImgText("Ошибка");
         return;
       }
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const newImageUrl = event.target.result;
+      const formData = new FormData();
+      formData.set('image', file);
+      // const reader = new FileReader();
+      // reader.onload = (event) => {
+      try {
+        let newImageUrl = await postImage(formData);
+        console.log(newImageUrl)
+        //временно
+        newImageUrl = BASE_URL + newImageUrl.image;
         setSettingTempData((prev) => ({
           ...prev,
           [field]: newImageUrl,
         }));
         setIsActualyBackImage(true);
-      };
-      reader.readAsDataURL(file);
-      setImgText("Загружено");
+        // };
+        // reader.readAsDataURL(file);
+        setImgText("Загружено");
+      }
+      catch (err) {
+        console.log(err)
+      }
     };
 
 export const handleFontSizeChange =
