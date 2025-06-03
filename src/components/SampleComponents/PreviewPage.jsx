@@ -59,8 +59,8 @@ const PreviewFrame = ({ blocks, componentMap, deviceSize }) => {
 
     // Генерация HTML с использованием ReadOnlyBlock
     const htmlContent = renderToString(
-      <section className="redactor-page">
-        <section className="page">
+      <section className="read-only-page">
+        <section className="page-content">
           {blocks.map((block) => (
             <ReadOnlyBlock
               key={block.id}

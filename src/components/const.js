@@ -2,7 +2,7 @@ export const blockTemplates = {
   header: {
     sample1: {
       labels: ["Надзаголовок", "Заголовок", "Изображение"],
-      divs: ["title0", "title1", "img1"],
+      divs: ["title0", "title1", "title2", "img1"],
       content: {
         title0: "Надзаголовок",
         title1: "Заголовок",

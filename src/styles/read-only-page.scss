@@ -2,7 +2,17 @@
     overflow-x: hidden;
     .block {
         border-bottom: none;
-        // margin-top: 2em;
         padding-top: 2em;
+    }
+    .header {
+        &.sample2 {
+            padding-top: 3em;
+        }
+        &.sample3 {
+            padding-top: 4em;
+        }
+        &.sample4 {
+            padding-top: 0;
+        }
     }
 }
