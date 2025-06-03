@@ -10,8 +10,8 @@ const BaseBlock = ({
   pageContent,
   onUpdate,
   setIsVisibleBar,
+  onDelete,
 }) => {
-  const [isRender, setIsRender] = useState(true);
   const [isSettingVisible, setIsSettingVisible] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
 
@@ -27,7 +27,6 @@ const BaseBlock = ({
     return `block-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
   });
 
-  // Префиксируем имена полей изображений уникальным идентификатором блока
   const [contentData, setContentData] = useState(() => {
     const prefixedContent = {};
     for (const [key, value] of Object.entries(data.content)) {
@@ -61,7 +60,6 @@ const BaseBlock = ({
   const handleContentSave = () => {
     setLastContentData(contentData);
     setIsContentVisible(false);
-    // При сохранении убираем префикс blockId из имен полей
     const unprefixedContent = {};
     for (const [key, value] of Object.entries(contentData)) {
       if (key.includes("img")) {
@@ -80,10 +78,6 @@ const BaseBlock = ({
     onUpdate({ content: contentData, settings: settingData });
   };
 
-  if (!isRender) {
-    return null;
-  }
-
   const bgImage = isBackImage ? `url(${settingData.backgroundImage})` : "none";
   const bgColor = !isBackImage ? settingData.backgroundColor : "transparent";
 
@@ -98,7 +92,7 @@ const BaseBlock = ({
       <Buttons
         setIsSettingVisible={setIsSettingVisible}
         setIsContentVisible={setIsContentVisible}
-        setIsRender={setIsRender}
+        onDelete={onDelete}
         disabled={isContentVisible || isSettingVisible}
       />
 

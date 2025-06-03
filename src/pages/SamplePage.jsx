@@ -123,6 +123,10 @@ const SamplePage = () => {
     }
   }, [id]);
 
+  const handleDeleteBlock = (id) => {
+    setBlocks(blocks.filter((block) => block.id !== id));
+  };
+
   if (isLoading) return <div>Загрузка...</div>;
   if (error) return <div>Ошибка: {error.message}</div>;
   return (
@@ -153,6 +157,7 @@ const SamplePage = () => {
                 sample={block.sample}
                 pageContent={componentMap[block.type]}
                 setIsVisibleBar={setIsVisibleOtherBar}
+                onDelete={() => handleDeleteBlock(block.id)}
               />
             ))}
           </section>

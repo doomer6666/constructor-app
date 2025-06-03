@@ -1,7 +1,7 @@
 export default function Buttons({
   setIsSettingVisible,
   setIsContentVisible,
-  setIsRender,
+  onDelete,
 }) {
   return (
     <div className="buttons">
@@ -19,7 +19,7 @@ export default function Buttons({
       >
         Контент
       </button>
-      <button className="trash" onClick={() => setIsRender(false)}>
+      <button className="trash" onClick={onDelete}>
         <img src="/trash.svg" height="25px" width="23px" />
       </button>
     </div>
