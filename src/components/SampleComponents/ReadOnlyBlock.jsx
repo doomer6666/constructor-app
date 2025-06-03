@@ -15,7 +15,7 @@ const ReadOnlyBlock = ({ type, data, sample, pageContent }) => {
         backgroundColor: bgColor,
       }}
     >
-      <>{pageContent({ contentData, settingData })}</>
+      <>{pageContent({ contentData, settingData, isReadOnly: true })}</>
     </section>
   );
 };

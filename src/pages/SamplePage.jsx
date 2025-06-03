@@ -26,6 +26,8 @@ const SamplePage = () => {
     file: "",
     text: "",
     state: "close",
+    temp: false,
+    tempName: "",
   });
 
   const [isVisibleBlockBar, setIsVisibleBlockBar] = useState(false);
@@ -64,15 +66,21 @@ const SamplePage = () => {
     );
   };
 
-  const handleSavePage = (withTemp) => {
+  const handleSavePage = () => {
     try {
       const formData = new FormData();
       formData.set("name", modalData.text);
       if (modalData.file) {
         formData.set("image", modalData.file);
       }
+      if (modalData.temp && modalData.state !== "temp") {
+        formData.set("temp", modalData.temp.toString());
+        formData.set("temp_name", modalData.tempName);
+        formData.set("state", modalData.state);
+      } else {
+        formData.set("state", "close");
+      }
       formData.set("sample_data", JSON.stringify(blocks));
-      formData.set("state", withTemp ? "temp" : modalData.state);
       if (id) {
         formData.set("id", id);
       }

@@ -43,7 +43,7 @@ const MainPage = () => {
           <ul className="internship-list">
             {pages.map((page) => (
               <li className="internship-el">
-                <Link to="/read" className="list-item">
+                <Link to={`/read/${page.id}`} className="list-item">
                   <img src={BASE_URL + "\\" + page.image} />
                   <h3>{page.name}</h3>
                 </Link>

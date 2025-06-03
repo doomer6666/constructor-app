@@ -1,11 +1,9 @@
 // import { Checkbox } from "antd";
 import { Modal as AntdModal, Checkbox, ConfigProvider } from "antd";
-import { useState } from "react";
 import { handleFileUpload } from "./Utils";
 import { Link } from "react-router-dom";
 
 const Modal = ({ isOpen, onClose, onSave, modalData, setModalData }) => {
-  const [withTemplates, setWithTemplates] = useState(false);
   return (
     <AntdModal
       open={isOpen}
@@ -34,7 +32,7 @@ const Modal = ({ isOpen, onClose, onSave, modalData, setModalData }) => {
         <input
           type="text"
           value={modalData.text || ""}
-          placeholder="Добавьте текст к странице"
+          placeholder="Добавьте название страницы"
           onChange={(e) =>
             setModalData({
               ...modalData,
@@ -44,10 +42,7 @@ const Modal = ({ isOpen, onClose, onSave, modalData, setModalData }) => {
           className={`input-title-modal`}
         />
         <Link to={"/redactor"}>
-          <button
-            className="new-block save-page"
-            onClick={() => onSave(withTemplates)}
-          >
+          <button className="new-block save-page" onClick={onSave}>
             Сохранить страницу
           </button>
         </Link>
@@ -59,12 +54,28 @@ const Modal = ({ isOpen, onClose, onSave, modalData, setModalData }) => {
           }}
         >
           <Checkbox
-            checked={withTemplates}
-            onChange={(e) => setWithTemplates(e.target.checked)}
+            checked={modalData.temp}
+            onChange={(e) =>
+              setModalData({ ...modalData, temp: e.target.checked })
+            }
             style={{ marginTop: 10 }}
           >
             Сохранить в шаблоны
           </Checkbox>
+          {modalData.temp && (
+            <input
+              type="text"
+              value={modalData.tempName || ""}
+              placeholder="Добавьте название шаблона"
+              onChange={(e) =>
+                setModalData({
+                  ...modalData,
+                  ["tempName"]: e.target.value,
+                })
+              }
+              className={`input-title-modal`}
+            />
+          )}
         </ConfigProvider>
       </div>
     </AntdModal>

@@ -1,12 +1,9 @@
 @use "../mixins.scss" as mixins;
 
 .preview-section {
-    position: fixed;
     height: 3.875em;
-    top: 0;
-    left: 0;
     width: 100%;
-    background-color: rgba(203, 203, 203, 0.6); // Полупрозрачный серый фон
+    background-color: rgba(203, 203, 203, 0.6);
     z-index: 1000;
     display: flex;
     align-items: center;

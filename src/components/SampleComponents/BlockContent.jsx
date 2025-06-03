@@ -8,12 +8,13 @@ export default function BlockContent({
   handleContentClose,
   divs,
   labels,
+  blockId,
 }) {
-  // Инициализируем состояние для текстов загрузки с использованием имён полей
   const initialImgTexts = divs.reduce((acc, field) => {
     if (field.includes("img")) {
-      acc[field] =
-        contentTempData[field] === "none" ? "Загрузить" : "Загружено";
+      const prefixedField = `${blockId}-${field}`;
+      acc[prefixedField] =
+        contentTempData[prefixedField] === "none" ? "Загрузить" : "Загружено";
     }
     return acc;
   }, {});
@@ -37,9 +38,10 @@ export default function BlockContent({
       <div className="bar-content">
         {divs.map((field, index) => {
           const isImageField = field.includes("img");
+          const prefixedField = isImageField ? `${blockId}-${field}` : field;
 
           return (
-            <div key={`${field}-${index}`}>
+            <div key={`${prefixedField}-${index}`}>
               {(field.includes("title") || field.includes("text")) && (
                 <div>
                   <p>{labels[index]}</p>
@@ -76,32 +78,37 @@ export default function BlockContent({
                 <>
                   <p>{labels[index]}</p>
                   <div className="div-img">
-                    <label htmlFor={`input-${field}`} className="input-img">
-                      {imgTexts[field]}
+                    <label
+                      htmlFor={`input-${prefixedField}`}
+                      className="input-img"
+                    >
+                      {imgTexts[prefixedField]}
                     </label>
                     <input
-                      id={`input-${field}`}
+                      id={`input-${prefixedField}`}
                       type="file"
                       onChange={(e) =>
-                        handleFileUpload(field, setContentTempData, (newText) =>
-                          setImgTexts((prev) => ({
-                            ...prev,
-                            [field]: newText,
-                          }))
+                        handleFileUpload(
+                          prefixedField,
+                          setContentTempData,
+                          (newText) =>
+                            setImgTexts((prev) => ({
+                              ...prev,
+                              [prefixedField]: newText,
+                            }))
                         )(e)
                       }
                     />
                     <button
                       className="remove-img"
                       onClick={() => {
-                        // Обновляем состояние для данного поля
                         setImgTexts((prev) => ({
                           ...prev,
-                          [field]: "Загрузить",
+                          [prefixedField]: "Загрузить",
                         }));
                         setContentTempData({
                           ...contentTempData,
-                          [field]: "none",
+                          [prefixedField]: "none",
                         });
                       }}
                     >
@@ -126,9 +133,9 @@ export default function BlockContent({
                 type="file"
                 onChange={(e) => {
                   const imageKeys = Object.keys(contentTempData).filter((key) =>
-                    key.includes("img")
+                    key.startsWith(`${blockId}-img`)
                   );
-                  const nextField = `img${imageKeys.length + 1}`;
+                  const nextField = `${blockId}-img${imageKeys.length + 1}`;
                   handleFileUpload(nextField, setContentTempData, (newText) => {
                     setImgTexts((prev) => ({
                       ...prev,

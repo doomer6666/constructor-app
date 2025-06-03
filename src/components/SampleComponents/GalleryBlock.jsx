@@ -1,9 +1,10 @@
 import { Carousel } from "antd";
 
-export default function GalleryBlock({ contentData }) {
+export default function GalleryBlock({ contentData, blockId, isReadOnly }) {
   const images = Object.entries(contentData).filter(([label]) =>
-    label.includes("img")
+    isReadOnly ? label.includes("img") : label.startsWith(`${blockId}-img`)
   );
+
   return (
     <div className="page__content">
       <div className="gallery-div">
@@ -11,13 +12,15 @@ export default function GalleryBlock({ contentData }) {
           <>
             <div className="path-1">
               <div className="big-img">
-                <img src={images[0][1]} alt="Big" />
+                <img src={images[0]?.[1]} alt="Big" />
               </div>
               <div className="x-gallery">
                 {images.map(([label, url], idx) =>
                   idx === 1 || idx === 2 ? (
                     <div key={label + idx}>
-                      {url && <img className={label} src={url} alt={label} />}
+                      {url && url !== "none" && (
+                        <img className={label} src={url} alt={label} />
+                      )}
                     </div>
                   ) : null
                 )}
@@ -27,7 +30,9 @@ export default function GalleryBlock({ contentData }) {
               {images.map(([label, url], idx) =>
                 idx > 2 ? (
                   <div key={label + idx}>
-                    {url && <img className={label} src={url} alt={label} />}
+                    {url && url !== "none" && (
+                      <img className={label} src={url} alt={label} />
+                    )}
                   </div>
                 ) : null
               )}
@@ -37,14 +42,18 @@ export default function GalleryBlock({ contentData }) {
           <Carousel className="carousel" arrows infinite={true}>
             {images.map(([label, url], idx) => (
               <div key={label + idx}>
-                {url && <img className={label} src={url} alt={label} />}
+                {url && url !== "none" && (
+                  <img className={label} src={url} alt={label} />
+                )}
               </div>
             ))}
           </Carousel>
         ) : (
           images.map(([label, url], idx) => (
             <div key={label + idx}>
-              {url && <img className={label} src={url} alt={label} />}
+              {url && url !== "none" && (
+                <img className={label} src={url} alt={label} />
+              )}
             </div>
           ))
         )}

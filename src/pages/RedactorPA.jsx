@@ -54,7 +54,7 @@ const RedactorPA = () => {
           <ul className="internship-list">
             {pages.map((page) => {
               const isPageOpen = page.state === "open";
-              if (page.state === "delete") {
+              if (page.state === "delete" || page.state === "temp") {
                 return;
               }
               return (

@@ -8,8 +8,9 @@ import SamplePage from "./pages/SamplePage";
 import TemplatePage from "./pages/TemplatePage.jsx";
 import "./styles/sample.scss";
 import "./styles/selection-pages.scss";
+import "./styles/read-only-page.scss";
 import MainPage from "./pages/MainPage.jsx";
-import ReadOnlyBlock from "./components/SampleComponents/ReadOnlyBlock.jsx";
+import ReadOnlyPage from "./pages/ReadPage.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Routes>
@@ -19,7 +20,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Route path="/redactor" element={<RedactorPA />} />
       <Route path="/templates" element={<TemplatePage />} />
       <Route path="/sample/:id?" element={<SamplePage />} />
-      <Route path="/read/:id?" element={<ReadOnlyBlock />} />
+      <Route path="/read/:id?" element={<ReadOnlyPage />} />
     </Routes>
   </BrowserRouter>
 );

@@ -14,6 +14,7 @@ const BaseBlock = ({
   const [isRender, setIsRender] = useState(true);
   const [isSettingVisible, setIsSettingVisible] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
+
   useEffect(() => {
     if (isContentVisible || isSettingVisible) {
       setIsVisibleBar(true);
@@ -21,13 +22,31 @@ const BaseBlock = ({
       setIsVisibleBar(false);
     }
   }, [isContentVisible, isSettingVisible, setIsVisibleBar]);
-  const [contentData, setContentData] = useState({ ...data.content });
+
+  const [blockId] = useState(() => {
+    return `block-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  });
+
+  // Префиксируем имена полей изображений уникальным идентификатором блока
+  const [contentData, setContentData] = useState(() => {
+    const prefixedContent = {};
+    for (const [key, value] of Object.entries(data.content)) {
+      if (key.includes("img")) {
+        prefixedContent[`${blockId}-${key}`] = value;
+      } else {
+        prefixedContent[key] = value;
+      }
+    }
+    return prefixedContent;
+  });
+
   const [settingData, setSettingData] = useState({ ...data.settings });
   const [lastContentData, setLastContentData] = useState(contentData);
   const [lastSettingData, setLastSettingData] = useState(settingData);
   const [isBackImage, setIsBackImage] = useState(
     settingData.backgroundImage !== undefined
   );
+
   const handleContentClose = () => {
     setContentData(lastContentData);
     setIsContentVisible(false);
@@ -42,7 +61,17 @@ const BaseBlock = ({
   const handleContentSave = () => {
     setLastContentData(contentData);
     setIsContentVisible(false);
-    onUpdate({ content: contentData, settings: settingData });
+    // При сохранении убираем префикс blockId из имен полей
+    const unprefixedContent = {};
+    for (const [key, value] of Object.entries(contentData)) {
+      if (key.includes("img")) {
+        const originalKey = key.replace(`${blockId}-`, "");
+        unprefixedContent[originalKey] = value;
+      } else {
+        unprefixedContent[key] = value;
+      }
+    }
+    onUpdate({ content: unprefixedContent, settings: settingData });
   };
 
   const handleSettingSave = () => {
@@ -73,15 +102,15 @@ const BaseBlock = ({
         disabled={isContentVisible || isSettingVisible}
       />
 
-      <>{pageContent({ contentData, settingData })}</>
+      <>{pageContent({ contentData, settingData, blockId })}</>
 
-      {/* Блок контента */}
       <div
         className={`content-bar content-header-bar ${
           isContentVisible ? "active" : ""
         }`}
       >
         <BlockContent
+          blockId={blockId}
           contentTempData={contentData}
           setContentTempData={setContentData}
           handleContentSave={handleContentSave}
@@ -90,7 +119,6 @@ const BaseBlock = ({
           divs={data.divs}
         />
       </div>
-      {/* Блок настроек */}
       <div
         className={`setting-bar setting-header-bar ${
           isSettingVisible ? "active" : ""

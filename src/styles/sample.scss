@@ -92,9 +92,9 @@ section.block {
   position: relative;
   overflow: visible;
   border-bottom: 2px solid #c9c9c9;
-  &:first-of-type {
-    margin-top: 3em !important;
-  }
+  // &:first-of-type {
+  //   margin-top: 3em !important;
+  // }
   width: 100% !important;
 }
 
