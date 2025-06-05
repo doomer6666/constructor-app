@@ -1,3 +1,10 @@
+div#root:has(iframe[title="Preview"]) {
+    background-color: rgba(203, 203, 203, 0.6);
+    padding-bottom: 3.5em;
+}
+iframe[title="Preview"] {
+    padding: 0;
+}
 .read-only-page {
     overflow-x: hidden;
     .block {
@@ -64,5 +71,9 @@
                 margin-bottom: 4em;
             }
         }
+    }
+    .gallery {
+        padding-top: 2em !important;
+        padding-bottom: 2em;
     }
 }
