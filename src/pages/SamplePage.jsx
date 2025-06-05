@@ -79,6 +79,7 @@ const SamplePage = () => {
         formData.set("state", modalData.state);
       } else {
         formData.set("state", "close");
+        formData.set("temp", "false");
       }
       formData.set("sample_data", JSON.stringify(blocks));
       if (id) {

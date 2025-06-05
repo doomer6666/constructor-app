@@ -7,7 +7,13 @@
         iframe,
         video,
         img {
-            width: 75%;
+            width: 40%;
+            @media (max-width: 1200px) {
+                width: 60%;
+            }
+            @media (max-width: 780px) {
+                width: 70%;
+            }
             height: auto;
             aspect-ratio: 16/9;
             margin-bottom: 1em;
