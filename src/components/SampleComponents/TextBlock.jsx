@@ -24,7 +24,7 @@ export default function TextBlock({ contentData, settingData }) {
             color: settingData.colors[index],
           }}
         >
-          {text}
+          <span class="border">{text}</span>
         </h2>
       ))}
       <div
@@ -42,7 +42,7 @@ export default function TextBlock({ contentData, settingData }) {
                       className="circle"
                       style={{ backgroundColor: settingData.textTimeLine }}
                     >
-                      {index}
+                      {index + 1}
                     </div>
                     <p
                       className="text"

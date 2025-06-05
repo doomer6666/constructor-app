@@ -104,6 +104,7 @@ const BaseBlock = ({
         }`}
       >
         <BlockContent
+          blockType={type}
           blockId={blockId}
           contentTempData={contentData}
           setContentTempData={setContentData}

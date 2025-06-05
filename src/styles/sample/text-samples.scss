@@ -6,11 +6,35 @@
             margin-bottom: 1em !important;
         }
         .text-container {
+            justify-content: center;
             display: flex !important;
             gap: 2em !important;
             .text-div {
                 padding: 0.8em !important;
                 min-height: 300px !important;
+            }
+        }
+    }
+    &.sample3 {
+        .text-container {
+            justify-content: center;
+            .text-div {
+                width: 50%;
+                word-break: break-word;
+            }
+        }
+    }
+    &.sample6 {
+        .text-container {
+            @media (max-width: 780px) {
+                display: block !important;
+            }
+        }
+    }
+    &.sample7 {
+        div {
+            p {
+                margin-bottom: 0.4em;
             }
         }
     }
@@ -32,6 +56,9 @@
             align-items: center;
             gap: 2em;
             padding: 0.8em !important;
+            margin-left: 42%;
+            width: 45%;
+            justify-content: left;
             img {
                 display: flex;
                 justify-content: start;
@@ -42,6 +69,12 @@
                 margin: 0;
                 padding: 0;
             }
+            @media (max-width: 780px) {
+                margin-left: 32%;
+            }
+            @media (max-width: 495px) {
+                margin-left: 22%;
+            }
         }
     }
 
@@ -49,33 +82,36 @@
         .text-container {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             position: relative;
             margin: 50px;
-            margin-left: 15vw;
+            width: 82%;
+            margin: 0 auto;
             margin-right: 0;
+            align-items: flex-start;
+            @media (max-width: 780px) {
+                width: 85%;
+            }
+            @media (max-width: 495px) {
+                width: 90vw;
+            }
         }
 
-        /* Соединительная линия (отступы настроены для корректного позиционирования) */
         .text-container::before {
             content: "";
             position: absolute;
-            top: 20%;
+            top: 1.5em;
             left: 2%;
             right: 23%;
-            border-top: 2px solid; /* Оттенок оранжевого */
+            border-top: 2px solid;
             border-top-color: var(--custom-color);
             transform: translateY(-50%);
             z-index: 1;
         }
 
-        /* Элемент таймлайна */
         .block {
             position: relative;
-            justify-content: start;
-            text-align: center;
-            z-index: 2; /* чтобы круги были поверх линии */
-            /* Стили для круга с числом */
+            z-index: 2;
+            min-width: 0;
             .circle {
                 width: 40px;
                 height: 40px;
@@ -89,35 +125,49 @@
                 font-size: 18px;
             }
 
-            /* Стили для подписи под кругом */
             p {
                 margin-left: -0.5em;
+                display: block;
+                width: 10em !important;
+                @media (max-width: 780px) {
+                    width: 5.5em !important;
+                }
+                @media (max-width: 495px) {
+                    width: 5em !important;
+                }
             }
+        }
+    }
+    &.sample9,
+    &.sample10 {
+        p {
+            max-width: 300% !important;
         }
     }
     &.sample10 {
         position: relative;
-
+        .page__content {
+            display: flex;
+            flex-direction: column;
+        }
         .text-container {
+            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
             width: 100%;
             margin: 0 auto;
-            padding: 0 20px;
             box-sizing: border-box;
-
+            min-height: 30em;
             &::before {
-                margin-top: 8em;
-                margin-bottom: 3em;
                 content: "";
                 position: absolute;
-                left: 50%; // линия по центру контейнера
-                top: 0;
-                bottom: 0;
-                width: 2px; // толщина линии
-                background-color: var(--custom-color);
+                left: 50%;
                 transform: translateX(-50%);
+                background-color: var(--custom-color);
+                width: 2px;
+                top: 15%;
+                height: calc(100% - (15% + 25px) - 3em);
                 z-index: 1;
             }
         }
@@ -131,7 +181,7 @@
             margin: 50px auto;
             box-sizing: border-box;
             z-index: 2;
-
+            min-width: 0;
             .circle {
                 width: 40px;
                 height: 40px;
@@ -159,15 +209,44 @@
 
             &.odd {
                 p {
-                    left: 0;
+                    display: block;
                     text-align: right;
+                    width: 80% !important;
+                    left: -37%;
+                    transform: none;
+                    margin-top: -0.5em;
+                    @media (max-width: 780px) {
+                        width: 100% !important;
+                        left: -10em;
+                    }
+
+                    @media (max-width: 495px) {
+                        bottom: 5px;
+                        left: -8em;
+                        overflow: visible;
+                    }
                 }
             }
 
             &.even {
                 p {
-                    right: 0;
+                    display: block;
                     text-align: left;
+                    width: 80% !important;
+                    right: -37%;
+                    transform: none;
+                    margin-top: -0.5em;
+
+                    @media (max-width: 780px) {
+                        width: 100% !important;
+                        right: -10em;
+                    }
+
+                    @media (max-width: 495px) {
+                        bottom: 5px;
+                        right: -8em;
+                        overflow: visible;
+                    }
                 }
             }
         }

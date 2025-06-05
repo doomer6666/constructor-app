@@ -18,7 +18,6 @@
         width: 90vw;
         @include mixins.border-style(1.25em, transparent, 2px, solid);
         padding: 15px 30px 0px 30px;
-        min-height: 400px;
         box-sizing: border-box;
         margin-bottom: 30px;
         position: relative;
@@ -27,17 +26,63 @@
             width: 50%;
             @include mixins.responsive-font(var(--max-font-h2), var(--dynamic-font, 4.5rem));
             text-align: center;
-            margin: 0;
-            color: #ffffff;
-            line-height: calc(1.2em + 2 * var(--h));
-            padding-bottom: calc(2 * var(--h));
-            background: bottom/calc(2 * var(--w)) calc(2 * var(--h)) space no-repeat;
-            --_g: calc(var(--w) / 2) top 50%, var(--c) 90%, #0000 105%;
-            background-image: radial-gradient(var(--h) at left var(--_g)), radial-gradient(var(--h) at right var(--_g)),
-                linear-gradient(90deg, #0000 calc(var(--w) / 2), var(--c) 0 calc(3 * var(--w) / 2), #0000 0);
-            -webkit-box-decoration-break: clone;
-            box-decoration-break: clone;
+            position: relative;
+            padding-bottom: 20px;
+            margin: 0 auto;
+            @media (max-width: 780px) {
+                font-size: min(3rem, var(--dynamic-font) / 1.25);
+            }
+            @media (max-width: 495px) {
+                font-size: min(2.5rem, var(--dynamic-font) / 1.5);
+            }
         }
+
+        h2 span {
+            position: relative;
+            display: block;
+            text-align: center;
+        }
+
+        h2 span::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -0.5em;
+            transform: translateX(-50%);
+            width: 115%;
+            height: 8px;
+            border-radius: 10px;
+            background-color: var(--c);
+            z-index: 1;
+        }
+
+        h2::before,
+        h2::after {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--c);
+            border-radius: 50%;
+            bottom: -1px;
+            @media (max-width: 780px) {
+                bottom: 3px;
+            }
+            @media (max-width: 495px) {
+                bottom: 6px;
+            }
+        }
+
+        /* Левый кружок */
+        h2::before {
+            left: 110%;
+        }
+
+        /* Правый кружок */
+        h2::after {
+            right: 110%;
+        }
+
         div {
             width: 100%;
             @include mixins.border-style(1.25em, transparent, 2px, solid);
@@ -48,6 +93,12 @@
                 margin: 0;
                 white-space: pre-line;
                 margin-bottom: 30px;
+                @media (max-width: 780px) {
+                    font-size: min(2rem, var(--dynamic-font-p) / 1.25);
+                }
+                @media (max-width: 495px) {
+                    font-size: min(1.5rem, var(--dynamic-font-p) / 1.5);
+                }
             }
         }
     }

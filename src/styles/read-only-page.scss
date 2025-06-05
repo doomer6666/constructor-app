@@ -14,5 +14,55 @@
         &.sample4 {
             padding-top: 0;
         }
+        h2::before,
+        h2::after {
+            bottom: 20px !important;
+            @media (max-width: 780px) {
+                bottom: 2px;
+            }
+            @media (max-width: 495px) {
+                bottom: 5px;
+            }
+        }
+    }
+    .text {
+        overflow-y: hidden;
+        overflow-x: hidden;
+        &.sample9,
+        &.sample10 {
+            h2 {
+                padding: 0;
+            }
+            .text-container {
+                margin-top: 0;
+                @media (max-width: 780px) {
+                    padding-left: 0;
+                    padding-right: 0;
+                }
+                @media (max-width: 495px) {
+                    margin-top: -1em;
+                }
+            }
+        }
+        &.sample9 {
+            // height: 20em !important;
+            .text-container::before {
+                top: 3.5em;
+            }
+        }
+        &.sample10 {
+            .text-container {
+                margin-bottom: 2em;
+                &::before {
+                    content: "";
+                    top: -16%;
+                    height: calc(100% - (15% + 2em) - 1em);
+                }
+            }
+            .text-container::before {
+                margin-top: 9em;
+                margin-bottom: 4em;
+            }
+        }
     }
 }
