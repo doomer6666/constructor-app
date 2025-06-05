@@ -1,9 +1,11 @@
 @use "../mixins.scss" as mixins;
 
 .button {
+    border-radius: 0;
     margin: 0 auto;
     .buttons {
         margin: 0;
+        margin-bottom: 1em;
     }
     .button-div {
         button {

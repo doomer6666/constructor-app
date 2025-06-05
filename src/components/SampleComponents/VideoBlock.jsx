@@ -2,11 +2,7 @@ export default function VideoBlock({ contentData }) {
   console.log(contentData.video);
   return (
     <div className="page__content">
-      {contentData.video && contentData.video !== "none" ? (
-        <video key={contentData.video} controls>
-          <source src={contentData.video} type="video/mp4" />
-        </video>
-      ) : contentData.video === "none" ? (
+      {contentData.video === "none" ? (
         <img src="/video-placeholder.png" alt="Video placeholder" />
       ) : null}
       {contentData.videoLink && (

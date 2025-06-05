@@ -7,8 +7,9 @@
         iframe,
         video,
         img {
-            width: 880px;
-            height: 495px;
+            width: 75%;
+            height: auto;
+            aspect-ratio: 16/9;
             margin-bottom: 1em;
             overflow: hidden;
             border-radius: 10px;
