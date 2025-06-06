@@ -493,6 +493,7 @@ export const blockTemplates = {
         fontSize: [40, 24, 24, 24],
         colors: ["#000000", "#000000", "#000000", "#4A4A4A"],
         backgroundColor: "#ffffff",
+        underlayColor: "#efefef"
       },
     },
   },

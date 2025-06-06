@@ -181,6 +181,21 @@ export default function BlockSetting({
             />
           </div>
         )}
+        {settingTempData.underlayColor && (
+          <div className="little-div">
+            <p>Подложка контактов</p>
+            <ColorPicker
+              className="colorPicker"
+              value={settingTempData.underlayColor}
+              onChange={(color) => {
+                setSettingTempData({
+                  ...settingTempData,
+                  underlayColor: color.toHexString(),
+                });
+              }}
+            />
+          </div>
+        )}
       </div>
     </>
   );
@@ -271,7 +286,12 @@ export default function BlockSetting({
 
   const renderGallerySettings = () => <>{renderBackgroundColor()}</>;
   const renderVideoSettings = () => <>{renderBackgroundColor()}</>;
-  const renderContactsSetting = () => <>{renderTextSettings()}</>;
+  const renderContactsSetting = () => (
+    <>
+      {renderTextSettings()}{" "}
+      {settingTempData.underlayColor && renderDecorColors()}
+    </>
+  );
   const renderButtonSettings = () => {
     return (
       <>

@@ -1,23 +1,45 @@
 .contacts {
     .page__content {
         margin: 0 auto;
+        padding-bottom: 5em;
         .buttons {
             margin: 0;
         }
-        margin-bottom: 5em;
         h2 {
             margin-bottom: 1.5em;
             font-size: var(--dynamic-font-p);
+            @media (max-width: 780px) {
+                font-size: max(2rem, var(--dynamic-font-p) / 1.5);
+            }
+        }
+        p {
+            @media (max-width: 780px) {
+                font-size: min(2rem, var(--dynamic-font-p) / 1.5) !important;
+            }
         }
         .icon-div {
             margin: 0 auto;
             display: flex;
             justify-content: center;
             gap: 5em;
+            @media (max-width: 780px) {
+                gap: 3em;
+            }
+            @media (max-width: 495px) {
+                gap: 2em;
+            }
             img {
                 width: 100px;
                 height: 100px;
                 cursor: pointer;
+                @media (max-width: 780px) {
+                    width: 80px;
+                    height: 80px;
+                }
+                @media (max-width: 495px) {
+                    width: 64px;
+                    height: 64px;
+                }
             }
         }
     }

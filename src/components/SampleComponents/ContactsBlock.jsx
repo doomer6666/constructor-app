@@ -35,7 +35,14 @@ export default function ContactsBlock({ contentData, settingData }) {
         </div>
       )}
       {contentData.title1 && (
-        <div className="text-map-div">
+        <div
+          className="text-map-div"
+          style={
+            contentData.withMap && {
+              backgroundColor: settingData.underlayColor,
+            }
+          }
+        >
           <div className="text-div">
             {info.map(([label, text], index) => (
               <p
