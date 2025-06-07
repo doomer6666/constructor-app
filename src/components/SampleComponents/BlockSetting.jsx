@@ -3,6 +3,7 @@ import {
   handleFontColorChange,
   handleFontSizeChange,
   handleFileUpload,
+  useClickEsc,
 } from "./Utils";
 import { useState, useCallback, useEffect } from "react";
 
@@ -53,6 +54,8 @@ export default function BlockSetting({
     }
   }, [settingTempData]);
 
+  useClickEsc(handleSettingClose);
+
   const [imgText, setImgText] = useState(
     setIsActualyBackImage ? "Загружено" : "Загрузить"
   );
@@ -64,7 +67,6 @@ export default function BlockSetting({
     [settingTempData, setSettingTempData]
   );
 
-  // Общие функции для рендеринга настроек
   const renderFontSizeSettings = () => (
     <>
       <p>Размер шрифта</p>

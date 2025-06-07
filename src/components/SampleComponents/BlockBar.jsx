@@ -1,5 +1,6 @@
 import { useState } from "react";
 import BlockLib from "./BlockLib";
+import { useClickEsc } from "./Utils";
 
 export default function BlockBar({
   setIsVisibleBlockBar,
@@ -16,13 +17,14 @@ export default function BlockBar({
     ["contacts", "Контакты"],
     ["video", "Видео"],
   ];
-
+  useClickEsc(() => {
+    setIsVisibleBlockBar(false);
+    setLibIsVisible(false);
+  });
   const handleTypeClick = (blockType) => {
     if (activeType === blockType) {
-      // Если тот же тип уже активен, переключаем видимость
       setLibIsVisible(!libIsVisible);
     } else {
-      // Новый тип: устанавливаем тип и показываем библиотеку
       setActiveType(blockType);
       setLibIsVisible(true);
     }

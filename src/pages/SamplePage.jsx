@@ -20,6 +20,7 @@ const SamplePage = () => {
   const [currentDevice, setCurrentDevice] = useState("pc");
   const [isPreview, setIsPreview] = useState(false);
 
+  const [isAnyMenuOpen, setIsAnyMenuOpen] = useState(false);
   const [isopenModal, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState({
     img: "none",
@@ -155,6 +156,8 @@ const SamplePage = () => {
                 type={block.type}
                 data={block.data}
                 onUpdate={(newData) => updateBlockData(block.id, newData)}
+                isAnyMenuOpen={isAnyMenuOpen}
+                setIsAnyMenuOpen={setIsAnyMenuOpen}
                 sample={block.sample}
                 pageContent={componentMap[block.type]}
                 setIsVisibleBar={setIsVisibleOtherBar}

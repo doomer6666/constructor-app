@@ -24,7 +24,7 @@ export default function TextBlock({ contentData, settingData }) {
             color: settingData.colors[index],
           }}
         >
-          <span class="border">{text}</span>
+          <span className="border">{text}</span>
         </h2>
       ))}
       <div

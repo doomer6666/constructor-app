@@ -1,4 +1,9 @@
-import { getEmbedSrc, handleFileUpload, handleVideoUpload } from "./Utils";
+import {
+  getEmbedSrc,
+  handleFileUpload,
+  handleVideoUpload,
+  useClickEsc,
+} from "./Utils";
 import { useState } from "react";
 
 export default function BlockContent({
@@ -11,6 +16,7 @@ export default function BlockContent({
   labels,
   blockId,
 }) {
+  useClickEsc(handleContentClose);
   const initialImgTexts = divs.reduce((acc, field) => {
     if (field.includes("img")) {
       const prefixedField = `${blockId}-${field}`;

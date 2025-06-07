@@ -1,30 +1,39 @@
 @use "../mixins.scss" as mixins;
 
 .preview-section {
+    position: relative; // родитель должен иметь относительное позиционирование
     height: 3.875em;
     width: 100%;
     background-color: rgba(203, 203, 203, 0.6);
     z-index: 1000;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; // для остальных элементов, если они нужны
 
     p {
+        position: absolute; // абсолютное позиционирование
+        left: 50%; // отступ от левого края =50%
+        transform: translateX(-50%); // смещение назад на половину ширины элемента — центрирование
         padding: 0;
         margin: 0;
-        padding-left: 18%;
         font-size: 2rem;
-        flex: 1;
         display: flex;
         justify-content: center;
     }
+
     .preview {
         @include mixins.customButton($backgroundColor: #ffffff, $margin-bottom: 0);
         margin-top: 0;
         padding: 6px 19px;
+        margin-left: auto;
         margin-right: 1em;
+        @media (max-width: 1199px) {
+            display: none;
+        }
     }
+
     div {
+        margin-left: auto;
         margin-right: 2em;
         display: flex;
         gap: 0.5em;
@@ -41,6 +50,7 @@
             margin-top: 1%;
         }
     }
+
     .exit {
         height: 100%;
         align-self: center;
@@ -48,6 +58,7 @@
     }
 
     animation: slideIn 0.3s ease-out;
+
     @keyframes slideIn {
         from {
             transform: translateY(-100%);

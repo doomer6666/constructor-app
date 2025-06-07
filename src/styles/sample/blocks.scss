@@ -20,7 +20,11 @@
   gap: 2.6875em;
 
   button:first-child {
-    margin-left: 2vw;
+    margin-left: 3vw;
+  }
+  button:last-child {
+    margin-left: auto;
+    margin-right: 3vw;
   }
   button:hover {
     background-color: #ffb74d;
@@ -28,6 +32,10 @@
 
   button:active {
     background-color: #cc6600;
+  }
+  button:disabled {
+    background-color: #eeeeee;
+    cursor: not-allowed;
   }
 }
 
@@ -42,9 +50,13 @@
   border-radius: 0.5rem;
   border-color: none;
   font-size: 20px;
-  padding: 5px 11px;
 }
-
+.setting {
+  padding: 5px 10px 0 10px;
+}
+.content {
+  padding: 8px 12px 2px 13px;
+}
 .trash {
   padding: 8px 11px 2px 11px;
 }

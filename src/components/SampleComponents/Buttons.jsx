@@ -1,4 +1,5 @@
 export default function Buttons({
+  isAnyMenuOpen,
   setIsSettingVisible,
   setIsContentVisible,
   onDelete,
@@ -10,16 +11,18 @@ export default function Buttons({
         onClick={() => {
           return setIsSettingVisible(true);
         }}
+        disabled={isAnyMenuOpen}
       >
-        Настройки
+        <img src="/setting.svg" height="30px" width="30px" />
       </button>
       <button
         className="header-content content"
         onClick={() => setIsContentVisible(true)}
+        disabled={isAnyMenuOpen}
       >
-        Контент
+        <img src="/content.svg" height="25px" width="25px" />
       </button>
-      <button className="trash" onClick={onDelete}>
+      <button className="trash" onClick={onDelete} disabled={isAnyMenuOpen}>
         <img src="/trash.svg" height="25px" width="23px" />
       </button>
     </div>

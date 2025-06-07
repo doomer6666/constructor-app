@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import BlockContent from "./BlockContent";
 import BlockSetting from "./BlockSetting";
-import Buttons from "./HeaderButtons";
+import Buttons from "./Buttons";
 
 const BaseBlock = ({
   type,
@@ -11,6 +11,8 @@ const BaseBlock = ({
   onUpdate,
   setIsVisibleBar,
   onDelete,
+  isAnyMenuOpen,
+  setIsAnyMenuOpen,
 }) => {
   const [isSettingVisible, setIsSettingVisible] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
@@ -18,10 +20,12 @@ const BaseBlock = ({
   useEffect(() => {
     if (isContentVisible || isSettingVisible) {
       setIsVisibleBar(true);
+      setIsAnyMenuOpen(true);
     } else {
       setIsVisibleBar(false);
+      setIsAnyMenuOpen(false);
     }
-  }, [isContentVisible, isSettingVisible, setIsVisibleBar]);
+  }, [isContentVisible, isSettingVisible, setIsAnyMenuOpen, setIsVisibleBar]);
 
   const [blockId] = useState(() => {
     return `block-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -93,7 +97,7 @@ const BaseBlock = ({
         setIsSettingVisible={setIsSettingVisible}
         setIsContentVisible={setIsContentVisible}
         onDelete={onDelete}
-        disabled={isContentVisible || isSettingVisible}
+        isAnyMenuOpen={isAnyMenuOpen}
       />
 
       <>{pageContent({ contentData, settingData, blockId })}</>

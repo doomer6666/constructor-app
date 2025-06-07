@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BASE_URL } from "../../api/authApi";
 import { postImage } from "../../api/postImage";
 
@@ -154,3 +155,18 @@ export const handleVideoUpload =
     reader.readAsDataURL(file);
     setVideoText("Загружено");
   };
+
+export function useClickEsc(callback) {
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape" || event.key === "Esc") {
+        callback();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [callback]);
+}
