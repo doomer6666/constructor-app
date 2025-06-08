@@ -61,7 +61,7 @@ const LoginPage = () => {
           className="field submit"
           // disabled={isLoading}
         />
-        <Link to="/register" className="button">
+        <Link to="/register" className="button-reg">
           Зарегистрироваться
         </Link>
       </form>

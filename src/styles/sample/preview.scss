@@ -1,19 +1,19 @@
 @use "../mixins.scss" as mixins;
 
 .preview-section {
-    position: relative; // родитель должен иметь относительное позиционирование
+    position: relative;
     height: 3.875em;
     width: 100%;
     background-color: rgba(203, 203, 203, 0.6);
     z-index: 1000;
     display: flex;
     align-items: center;
-    justify-content: space-between; // для остальных элементов, если они нужны
+    justify-content: space-between;
 
     p {
-        position: absolute; // абсолютное позиционирование
-        left: 50%; // отступ от левого края =50%
-        transform: translateX(-50%); // смещение назад на половину ширины элемента — центрирование
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
         padding: 0;
         margin: 0;
         font-size: 2rem;

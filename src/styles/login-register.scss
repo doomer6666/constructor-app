@@ -3,15 +3,31 @@ body {
     color: black;
     margin: 0;
 }
-
 .login-page,
 .sec-form {
+    position: relative;
     width: 100vw;
     height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: radial-gradient(circle at 20% 30%, #ffeede 25%, transparent 26%),
+            radial-gradient(circle at 80% 20%, #ffeede 25%, transparent 26%),
+            radial-gradient(circle at 50% 80%, #ffeede 25%, transparent 26%);
+        filter: blur(60px);
+        z-index: -1;
+        background-repeat: no-repeat;
+    }
 }
+
 form {
     h1 {
         color: black;
@@ -67,7 +83,7 @@ form {
     padding: 5px 20px;
 }
 
-.button {
+.button-reg {
     margin-bottom: 0;
     background-color: #d8d8d8;
     color: inherit;
