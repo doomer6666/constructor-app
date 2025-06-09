@@ -68,6 +68,16 @@ const TemplatePA = () => {
         </section>
         <section className="internships">
           <ul className="internship-list">
+            <li className="internship-el">
+              <Link to="/sample/" className="list-item">
+                <img src="/white.png" />
+                <h3>Пустая страница</h3>
+                <p>
+                  Для тех, кто хочет
+                  <br /> начать с нуля
+                </p>
+              </Link>
+            </li>
             {pages.map((page) => {
               if (page.state !== "temp") {
                 return;
@@ -89,11 +99,6 @@ const TemplatePA = () => {
             })}
           </ul>
         </section>
-        <div className="container">
-          <Link to="/sample/" className="create-internship">
-            Создать стажировку
-          </Link>
-        </div>
       </main>
     </div>
   );
