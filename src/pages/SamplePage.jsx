@@ -69,24 +69,29 @@ const SamplePage = () => {
 
   const handleSavePage = () => {
     try {
+      console.log(modalData.state);
       const formData = new FormData();
       formData.set("name", modalData.text);
       if (modalData.file) {
         formData.set("image", modalData.file);
       }
-      if (modalData.temp && modalData.state !== "temp") {
+      if (modalData.temp) {
         formData.set("temp", modalData.temp.toString());
         formData.set("temp_name", modalData.tempName);
-        formData.set("state", modalData.state);
       } else {
-        formData.set("state", "close");
         formData.set("temp", "false");
       }
+      formData.set("state", modalData.state);
       formData.set("sample_data", JSON.stringify(blocks));
       if (id) {
         formData.set("id", id);
       }
-      savePage(formData, id);
+      console.log(formData.state);
+      if (formData.state === "temp") {
+        savePage(formData);
+      } else {
+        savePage(formData, id);
+      }
     } catch (err) {
       console.error("Ошибка при сохранении страницы:", err);
     }
@@ -109,11 +114,9 @@ const SamplePage = () => {
           setBlocks(parsedData);
           setModalData({
             text: response.name,
-            //временно
             img: BASE_URL + response.image,
             state: response.state,
           });
-          console.log(modalData);
         } catch (err) {
           setError(err);
         } finally {
