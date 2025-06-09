@@ -8,6 +8,7 @@ const RegisterPage = () => {
     first_name: "",
     second_name: "",
     username: "",
+    email: "",
     password: "",
     repeatPassword: "",
     role: "",
@@ -46,11 +47,9 @@ const RegisterPage = () => {
         setError(validationError);
         return;
       }
-      const data = await logup(formData);
-      localStorage.setItem("access", data.access);
-      localStorage.setItem("refresh", data.refresh);
-      console.log("Успешная регистрация:", data);
-      navigate("/redactor");
+      await logup(formData);
+      localStorage.setItem("email", formData.email);
+      navigate("/email-verify");
     } catch (err) {
       console.error("Ошибка регистрации:", err);
       setError("Ошибка регистрации, смените логин");
@@ -61,8 +60,8 @@ const RegisterPage = () => {
     <main>
       {error && <p className="error">{error}</p>}
       <section className="sec-form">
+        <h1 className="reg-h1">Регистрация</h1>
         <form method="post" onSubmit={handleSubmit}>
-          <h1 className="reg-h1">Регистрация</h1>
           <input
             type="text"
             placeholder="Имя"
@@ -91,6 +90,15 @@ const RegisterPage = () => {
             required
           />
           <input
+            type="text"
+            placeholder="Почта"
+            className="field"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <input
             type="password"
             placeholder="Пароль"
             className="field"
@@ -108,11 +116,7 @@ const RegisterPage = () => {
             onChange={handleChange}
             required
           />
-          <input
-            type="submit"
-            value="Зарегистрироваться"
-            className="field submit"
-          />
+          <input type="submit" value="Далее" className="field submit" />
         </form>
       </section>
     </main>

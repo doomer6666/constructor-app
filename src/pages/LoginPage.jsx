@@ -27,18 +27,20 @@ const LoginPage = () => {
     <div className="login-page">
       {error && <p className="error">Ошибка: {error}</p>}
 
-      {/* <div className="sectInfo">
-        <div className="companyName">
-          <p>Uralintern</p>
+      <div className="sec-info">
+        <div className="company-name">
+          <p>Точка сбора</p>
         </div>
         <div className="info">
-          <p>Сайт с шаблонами для создания плана стажировок</p>
+          <p>
+            Сайт для
+            <br /> создания страниц
+          </p>
           <img src="/decor-index.png" alt="Декор" width="365" height="218" />
         </div>
-      </div> */}
+      </div>
 
       <form onSubmit={handleSubmit}>
-        <p>Вход</p>
         <input
           type="text"
           placeholder="Логин"

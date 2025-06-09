@@ -62,11 +62,13 @@ const MainPage = () => {
             </button>
           </div>
         ) : (
-          <Link to={"/auth"}>
-            <button className="exit">
-              <img src="/log-in.svg" />
-            </button>
-          </Link>
+          <div className="redactor-head-div">
+            <Link to={"/auth"}>
+              <button className="exit">
+                <img src="/log-in.svg" />
+              </button>
+            </Link>
+          </div>
         )}
       </header>
       <main className="redactor-main">
