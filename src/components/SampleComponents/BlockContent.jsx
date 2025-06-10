@@ -31,7 +31,7 @@ export default function BlockContent({
     contentTempData.video === "none" ? "Загрузить" : "Загружено"
   );
 
-  const renderTextFields = (maxTextareaLength = 200, maxInputLength = 200) => {
+  const renderTextFields = (maxTextareaLength = 200, maxInputLength = 100) => {
     return divs.map((field, index) => {
       if (field.includes("title") || field.includes("text")) {
         return (
@@ -235,7 +235,7 @@ export default function BlockContent({
   const renderHeaderContent = () => {
     return (
       <>
-        {renderTextFields()}
+        {renderTextFields(200, 50)}
         {renderImageFields()}
         {renderInfiniteImages()}
         {renderLinks()}
@@ -248,7 +248,7 @@ export default function BlockContent({
   const renderTextContent = () => {
     return (
       <>
-        {renderTextFields()}
+        {renderTextFields(300, 100)}
         {renderImageFields()}
         {renderLinks()}
       </>
@@ -276,7 +276,7 @@ export default function BlockContent({
   const renderContactsContent = () => {
     return (
       <>
-        {renderTextFields()}
+        {renderTextFields(200, 50)}
         {renderLinks()}
       </>
     );

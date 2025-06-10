@@ -79,7 +79,7 @@ const MainPage = () => {
         <section className="internships">
           <ul className="internship-list">
             {pages.map((page) => (
-              <li className="internship-el">
+              <li className="internship-el readonly">
                 <Link to={`/read/${page.id}`} className="list-item">
                   <img src={BASE_URL + "\\" + page.image} />
                   <h3>{page.name}</h3>
