@@ -79,19 +79,21 @@ const SamplePage = () => {
       if (modalData.temp) {
         formData.set("temp", modalData.temp.toString());
         formData.set("temp_name", modalData.tempName);
+        formData.set("state", "close");
       } else {
         formData.set("temp", "false");
+        formData.set("state", modalData.state);
       }
-      formData.set("state", modalData.state);
+
       formData.set("sample_data", JSON.stringify(blocks));
       if (id) {
         formData.set("id", id);
       }
       console.log(formData.state);
       if (formData.state === "temp") {
-        savePage(formData);
-      } else {
         savePage(formData, id);
+      } else {
+        savePage(formData);
       }
     } catch (err) {
       console.error("Ошибка при сохранении страницы:", err);
