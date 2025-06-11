@@ -15,6 +15,7 @@ import PreviewFrame from "../components/SampleComponents/PreviewPage";
 import { savePage } from "../api/postPageApi";
 import { getOnlyPage } from "../api/getOnlyPageApi";
 import { BASE_URL } from "../api/authApi";
+import UpButton from "../components/UpButton";
 
 const SamplePage = () => {
   const [currentDevice, setCurrentDevice] = useState("pc");
@@ -197,6 +198,7 @@ const SamplePage = () => {
             modalData={modalData}
             setModalData={setModalData}
           ></Modal>
+          <UpButton isMenuVisible={isAnyMenuOpen} />
         </section>
       )}
     </>

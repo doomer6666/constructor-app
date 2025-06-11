@@ -4,6 +4,7 @@ import { getPages } from "../api/getPagesApi";
 import { BASE_URL } from "../api/authApi";
 import { patchPageState } from "../api/patchPageStateApi";
 import { logOut } from "../api/logOut";
+import UpButton from "../components/UpButton";
 
 const TemplatePA = () => {
   const [pages, setPages] = useState([]);
@@ -68,7 +69,7 @@ const TemplatePA = () => {
         </section>
         <section className="internships">
           <ul className="internship-list">
-            <li className="internship-el">
+            <li className="internship-el readonly">
               <Link to="/sample/" className="list-item">
                 <img src="/white.png" />
                 <h3>Пустая страница</h3>
@@ -83,7 +84,7 @@ const TemplatePA = () => {
                 return;
               }
               return (
-                <li className="internship-el" key={page.id}>
+                <li className="internship-el readonly" key={page.id}>
                   <button
                     className="trash"
                     onClick={() => onStateClick(page.id, "delete")}
@@ -99,6 +100,7 @@ const TemplatePA = () => {
             })}
           </ul>
         </section>
+        <UpButton />
       </main>
     </div>
   );

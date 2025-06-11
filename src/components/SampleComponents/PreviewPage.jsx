@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import { renderToString } from "react-dom/server";
 import ReadOnlyBlock from "./ReadOnlyBlock";
-import sampleCSS from "../../styles/sample.scss?raw"; // Импорт скомпилированного CSS (нужно настроить сборщик)
+import sampleCSS from "../../styles/sample.scss?raw";
 
 const PreviewFrame = ({ blocks, componentMap, deviceSize }) => {
   const iframeRef = useRef();
@@ -12,11 +12,11 @@ const PreviewFrame = ({ blocks, componentMap, deviceSize }) => {
     const iframe = iframeRef.current;
     const iframeDoc = iframe.contentDocument;
 
-    // Очистка содержимого
     iframeDoc.body.innerHTML = "";
     iframeDoc.head.innerHTML = "";
 
-    // Добавление meta-тега viewport
+    iframeDoc.documentElement.classList.add("iframe-html");
+
     const viewportMeta = iframeDoc.createElement("meta");
     viewportMeta.name = "viewport";
     viewportMeta.content = "width=device-width, initial-scale=1.0";
@@ -34,12 +34,10 @@ const PreviewFrame = ({ blocks, componentMap, deviceSize }) => {
       "https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&display=swap";
     iframeDoc.head.appendChild(fontLink2);
 
-    // Инъекция стилей из sample.scss
     const styleElement = iframeDoc.createElement("style");
-    styleElement.textContent = sampleCSS; // Вставляем скомпилированный CSS
+    styleElement.textContent = sampleCSS;
     iframeDoc.head.appendChild(styleElement);
 
-    // Копирование локальных стилей (дополнительно)
     const styleSheets = Array.from(document.styleSheets);
     styleSheets.forEach((sheet) => {
       try {
@@ -57,7 +55,6 @@ const PreviewFrame = ({ blocks, componentMap, deviceSize }) => {
       }
     });
 
-    // Генерация HTML с использованием ReadOnlyBlock
     const htmlContent = renderToString(
       <section className="read-only-page">
         <section className="page-content">
@@ -79,7 +76,6 @@ const PreviewFrame = ({ blocks, componentMap, deviceSize }) => {
       </section>
     );
 
-    // Вставка HTML в ифрейм
     const div = document.createElement("div");
     div.innerHTML = htmlContent;
     while (div.firstChild) {

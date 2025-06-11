@@ -9,6 +9,7 @@ import GalleryBlock from "../components/SampleComponents/GalleryBlock";
 import ButtonBlock from "../components/SampleComponents/ButtonBlock";
 import ContactsBlock from "../components/SampleComponents/ContactsBlock";
 import VideoBlock from "../components/SampleComponents/VideoBlock";
+import UpButton from "../components/UpButton";
 
 const ReadOnlyPage = () => {
   const [blocks, setBlocks] = useState([]);
@@ -63,6 +64,7 @@ const ReadOnlyPage = () => {
           );
         })}
       </section>
+      <UpButton />
     </section>
   );
 };

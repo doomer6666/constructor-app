@@ -4,6 +4,7 @@ import { getPages } from "../api/getPagesApi";
 import { BASE_URL } from "../api/authApi";
 import { patchPageState } from "../api/patchPageStateApi";
 import { logOut } from "../api/logOut";
+import UpButton from "../components/UpButton";
 
 const RedactorPA = () => {
   const [pages, setPages] = useState([]);
@@ -112,6 +113,7 @@ const RedactorPA = () => {
             Создать стажировку
           </Link>
         </div>
+        <UpButton />
       </main>
     </div>
   );

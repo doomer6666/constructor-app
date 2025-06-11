@@ -17,6 +17,21 @@
 @use "./sample/modal.scss";
 @use "./sample/preview.scss";
 
+.iframe-html {
+  &::-webkit-scrollbar {
+    width: 6px !important;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent !important;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #939393 !important;
+    border-radius: 10px !important;
+  }
+  /* Для Firefox */
+  scrollbar-width: auto !important;
+}
+
 body {
   margin: 0 !important;
   padding: 0 !important;

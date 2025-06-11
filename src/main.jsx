@@ -9,6 +9,7 @@ import TemplatePage from "./pages/TemplatePage.jsx";
 import "./styles/sample.scss";
 import "./styles/selection-pages.scss";
 import "./styles/read-only-page.scss";
+import "./styles/up-button.scss";
 import MainPage from "./pages/MainPage.jsx";
 import ReadOnlyPage from "./pages/ReadPage.jsx";
 import EmailVerifyPage from "./pages/EmailVerifyPage.jsx";

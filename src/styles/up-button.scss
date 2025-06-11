@@ -1,0 +1,17 @@
+.up-button {
+    position: fixed;
+    bottom: 5%;
+    right: 3%;
+    padding: 10px 9px 5px 9px;
+    border: none;
+    border-radius: 5px;
+    background: #d9d9d9;
+    cursor: pointer;
+    z-index: 100;
+    &:hover {
+        background-color: #c6c6c6;
+    }
+    &:active {
+        border: 0.5px solid black;
+    }
+}

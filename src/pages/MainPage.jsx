@@ -4,6 +4,7 @@ import { BASE_URL } from "../api/authApi";
 import { getPublicPages } from "../api/getPublicPages";
 import { refreshToken } from "../api/refreshApi";
 import { logOut } from "../api/logOut";
+import UpButton from "../components/UpButton";
 
 const MainPage = () => {
   const [pages, setPages] = useState(null);
@@ -88,6 +89,7 @@ const MainPage = () => {
             ))}
           </ul>
         </section>
+        <UpButton />
       </main>
     </div>
   );
