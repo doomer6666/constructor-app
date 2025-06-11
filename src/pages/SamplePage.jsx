@@ -70,26 +70,31 @@ const SamplePage = () => {
 
   const handleSavePage = () => {
     try {
-      console.log(modalData.state);
       const formData = new FormData();
       formData.set("name", modalData.text);
       if (modalData.file) {
         formData.set("image", modalData.file);
       }
+
       if (modalData.temp) {
         formData.set("temp", modalData.temp.toString());
         formData.set("temp_name", modalData.tempName);
-        formData.set("state", "close");
       } else {
         formData.set("temp", "false");
+      }
+
+      if (modalData.state === "temp") {
+        formData.set("state", "close");
+      } else {
         formData.set("state", modalData.state);
       }
 
       formData.set("sample_data", JSON.stringify(blocks));
+
       if (id) {
         formData.set("id", id);
       }
-      console.log(formData.state);
+
       if (formData.state === "temp") {
         savePage(formData, id);
       } else {
