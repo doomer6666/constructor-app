@@ -85,12 +85,14 @@ const TemplatePA = () => {
               }
               return (
                 <li className="internship-el readonly" key={page.id}>
-                  <button
-                    className="trash"
-                    onClick={() => onStateClick(page.id, "delete")}
-                  >
-                    <img src="/trash.svg" height="25px" width="23px" />
-                  </button>
+                  {page.deletable && (
+                    <button
+                      className="trash"
+                      onClick={() => onStateClick(page.id, "delete")}
+                    >
+                      <img src="/trash.svg" height="25px" width="23px" />
+                    </button>
+                  )}
                   <Link to={`/sample/${page.id}`} className="list-item">
                     <img src={`${BASE_URL}\\${page.image}`} alt={page.name} />
                     <h3>{page.name}</h3>
