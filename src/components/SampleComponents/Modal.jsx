@@ -1,9 +1,14 @@
 // import { Checkbox } from "antd";
 import { Modal as AntdModal, Checkbox, ConfigProvider } from "antd";
 import { handleFileUpload } from "./Utils";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Modal = ({ isOpen, onClose, onSave, modalData, setModalData }) => {
+  const navigate = useNavigate();
+  const handleSave = async () => {
+    await onSave();
+    navigate("/redactor");
+  };
   return (
     <AntdModal
       open={isOpen}
@@ -41,11 +46,9 @@ const Modal = ({ isOpen, onClose, onSave, modalData, setModalData }) => {
           }
           className={`input-title-modal`}
         />
-        <Link to={"/redactor"}>
-          <button className="new-block save-page" onClick={onSave}>
-            Сохранить страницу
-          </button>
-        </Link>
+        <button className="new-block save-page" onClick={handleSave}>
+          Сохранить страницу
+        </button>
         <ConfigProvider
           theme={{
             token: {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { getPages } from "../api/getPagesApi";
 import { BASE_URL } from "../api/authApi";
 import { patchPageState } from "../api/patchPageStateApi";
@@ -10,20 +10,31 @@ const RedactorPA = () => {
   const [pages, setPages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const refreshPages = async () => {
+    setIsLoading(true);
+    try {
+      const result = await getPages();
+      setPages(result);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchPages = async () => {
-      try {
-        const result = await getPages();
-        setPages(result);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchPages();
+    refreshPages();
   }, []);
+
+  useEffect(() => {
+    if (location.state && location.state.newPage) {
+      setPages((prevPages) => [...prevPages, location.state.newPage]);
+      navigate(location.pathname, { replace: true });
+    }
+  }, [location, navigate]);
 
   const onStateClick = async (pageId, newState) => {
     setPages((prevPages) =>
@@ -33,8 +44,9 @@ const RedactorPA = () => {
     );
     try {
       await patchPageState({ id: pageId, state: newState });
+      await refreshPages();
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
