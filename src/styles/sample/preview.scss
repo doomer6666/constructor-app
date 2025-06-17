@@ -9,7 +9,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
+    animation: slideIn 0.3s ease-out;
+    @media (max-width: 800px) {
+        height: 2.8em;
+    }
+    @media (max-width: 500px) {
+        height: 2em;
+    }
     p {
         position: absolute;
         left: 50%;
@@ -19,6 +25,12 @@
         font-size: 2rem;
         display: flex;
         justify-content: center;
+        @media (max-width: 800px) {
+            font-size: 1.6rem;
+        }
+        @media (max-width: 500px) {
+            font-size: 1.4rem;
+        }
     }
 
     .preview {
@@ -56,8 +68,6 @@
         align-self: center;
         margin-right: 1em;
     }
-
-    animation: slideIn 0.3s ease-out;
 
     @keyframes slideIn {
         from {

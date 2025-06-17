@@ -57,12 +57,7 @@ const LoginPage = () => {
           required
           className="field"
         />
-        <input
-          type="submit"
-          value="Войти"
-          className="field submit"
-          // disabled={isLoading}
-        />
+        <input type="submit" value="Войти" className="field submit" />
         <Link to="/register" className="button-reg">
           Зарегистрироваться
         </Link>

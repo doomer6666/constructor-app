@@ -1,4 +1,3 @@
-// import { Checkbox } from "antd";
 import { Modal as AntdModal, Checkbox, ConfigProvider } from "antd";
 import { handleFileUpload } from "./Utils";
 import { useNavigate } from "react-router-dom";

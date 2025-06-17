@@ -28,7 +28,6 @@
     background: #939393 !important;
     border-radius: 10px !important;
   }
-  /* Для Firefox */
   scrollbar-width: auto !important;
 }
 
@@ -76,9 +75,13 @@ p {
   @include mixins.customButton;
   @media (max-width: 585px) {
     font-size: 1.25rem;
+    padding: 0.3em 1.5em;
+    max-width: 45% !important;
   }
   @media (max-width: 480px) {
     font-size: 1rem;
+    padding: 0.2em 1em !important;
+    max-width: 45% !important;
   }
 }
 
@@ -98,7 +101,40 @@ p {
   margin-bottom: 2em;
   padding: 0.5em 1.2em;
 }
-
+.ant-modal-content {
+  .new-block {
+    max-width: 80% !important;
+    margin: 0 auto !important;
+  }
+  @media (max-width: 500px) {
+    width: 80%;
+    height: auto;
+    .ant-modal-body {
+      .gallery-div {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+  @media (max-width: 420px) {
+    width: 90%;
+    height: auto;
+    font-size: 1rem !important;
+    padding-left: 1.5em !important;
+    .ant-modal-body {
+      width: 110%;
+      margin: 0 auto;
+      .gallery-div {
+        width: 100%;
+        height: auto;
+      }
+      .input-img {
+        padding: 0.2em 1em;
+        font-size: 1rem !important;
+      }
+    }
+  }
+}
 .hidden {
   display: none !important;
 }

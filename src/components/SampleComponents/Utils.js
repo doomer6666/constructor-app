@@ -14,20 +14,15 @@ export const handleFileUpload =
       }
       const formData = new FormData();
       formData.set('image', file);
-      // const reader = new FileReader();
-      // reader.onload = (event) => {
       try {
         let newImageUrl = await postImage(formData);
         console.log(newImageUrl)
-        //временно
         newImageUrl = BASE_URL + newImageUrl.image;
         setSettingTempData((prev) => ({
           ...prev,
           [field]: newImageUrl,
         }));
         setIsActualyBackImage(true);
-        // };
-        // reader.readAsDataURL(file);
         setImgText("Загружено");
       }
       catch (err) {
@@ -57,7 +52,6 @@ export const handleFontColorChange =
 
 export const getEmbedSrc = (url) => {
   console.log(url)
-  // Проверяем, что входная ссылка не пустая
   if (typeof url !== "string" || url.trim() === "") {
     console.error("Ошибка: пустая ссылка");
     return "none";
@@ -69,20 +63,16 @@ export const getEmbedSrc = (url) => {
     const parsedURL = new URL(url);
     const domain = parsedURL.hostname;
 
-    // --- YouTube ---
     if (domain.includes("youtube.com") || domain.includes("youtu.be")) {
       let videoId = "";
       if (domain.includes("youtube.com")) {
-        // Если ссылка уже в формате embed (например, /embed/VIDEO_ID)
         if (parsedURL.pathname.startsWith("/embed/")) {
           const parts = parsedURL.pathname.split("/");
           if (parts[2]) videoId = parts[2];
         } else {
-          // Из обычной ссылки вида youtube.com/watch?v=VIDEO_ID
           videoId = parsedURL.searchParams.get("v");
         }
       } else if (domain.includes("youtu.be")) {
-        // Из ссылок вида youtu.be/VIDEO_ID
         videoId = parsedURL.pathname.substring(1);
       }
       if (videoId && videoId.trim() !== "") {
@@ -90,9 +80,7 @@ export const getEmbedSrc = (url) => {
       }
     }
 
-    // --- ВКонтакте ---
     else if (domain.includes("vk.com") || domain.includes("vkvideo.ru")) {
-      // Если ссылка уже в формате video_ext.php
       if (parsedURL.pathname.includes("video_ext.php")) {
         const oid = parsedURL.searchParams.get("oid");
         const id = parsedURL.searchParams.get("id");
@@ -100,7 +88,6 @@ export const getEmbedSrc = (url) => {
           embedURL = `https://vk.com/video_ext.php?oid=${oid}&id=${id}`;
         }
       } else {
-        // Если ссылка вида vk.com/video{oid}_{id} или vkvideo.ru/video{oid}_{id}
         const vkRegex = /video(-?\d+)_([\d]+)/;
         const match = url.match(vkRegex);
         if (match && match[1] && match[2]) {
@@ -109,9 +96,7 @@ export const getEmbedSrc = (url) => {
       }
     }
 
-    // --- RuTube ---
     else if (domain.includes("rutube.ru")) {
-      // Обрабатываем форматы: /video/ID, /tracks/ID или /play/embed/ID
       const rtRegex = /rutube\.ru\/(?:video|tracks|play\/embed)\/([\w-]+)/;
       const match = url.match(rtRegex);
       if (match && match[1]) {
@@ -122,7 +107,6 @@ export const getEmbedSrc = (url) => {
     console.error("Ошибка при обработке URL:", e);
   }
 
-  // Если embedURL так и остался пустым, возвращаем сообщение об ошибке
   if (!embedURL || embedURL.trim() === "") {
     return "none";
   }
@@ -136,7 +120,6 @@ export const handleVideoUpload =
     const file = e.target.files[0];
     if (!file) return;
 
-    // Допустимые видеоформаты
     const allowedTypes = ["video/mp4", "video/webm", "video/ogg"];
     if (!allowedTypes.includes(file.type)) {
       setVideoText("Ошибка: неподдерживаемый формат");
@@ -156,17 +139,26 @@ export const handleVideoUpload =
     setVideoText("Загружено");
   };
 
-export function useClickEsc(callback) {
+export function useOuterClick(ref, callback) {
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape" || event.key === "Esc") {
         callback();
       }
     };
+
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        callback();
+      }
+    };
+
     document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [callback]);
+  }, [ref, callback]);
 }

@@ -3,9 +3,10 @@ import {
   handleFontColorChange,
   handleFontSizeChange,
   handleFileUpload,
-  useClickEsc,
+  useOuterClick,
 } from "./Utils";
 import { useState, useCallback, useEffect } from "react";
+import { useRef } from "react";
 
 export default function BlockSetting({
   blockType,
@@ -53,8 +54,8 @@ export default function BlockSetting({
       }
     }
   }, [settingTempData]);
-
-  useClickEsc(handleSettingClose);
+  const ref = useRef(null);
+  useOuterClick(ref, handleSettingClose);
 
   const [imgText, setImgText] = useState(
     setIsActualyBackImage ? "Загружено" : "Загрузить"
@@ -254,7 +255,6 @@ export default function BlockSetting({
     </>
   );
 
-  // Функции для каждого типа блока
   const renderHeaderSettings = () => (
     <>
       {divs.some((d) => d.includes("title") || d.includes("text")) &&
@@ -396,7 +396,7 @@ export default function BlockSetting({
   };
 
   return (
-    <>
+    <div ref={ref} style={{ display: "contents" }}>
       <div className="buttons-div">
         <button className="save" onClick={handleSettingClose}>
           Закрыть
@@ -413,6 +413,6 @@ export default function BlockSetting({
         {blockType === "contacts" && renderContactsSetting()}
         {blockType === "video" && renderVideoSettings()}
       </div>
-    </>
+    </div>
   );
 }

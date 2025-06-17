@@ -12,15 +12,15 @@
     width: 40%;
   }
 
-  @media (max-width: 768px) {
-    width: 45%;
+  @media (max-width: 800px) {
+    width: 50%;
   }
 
   @media (max-width: 480px) {
     width: 60%;
   }
   &.active {
-    transform: translateX(0); // Конечное положение
+    transform: translateX(0);
   }
 }
 
@@ -33,13 +33,33 @@
   border-bottom: 0.125em solid #dbdbdb;
   margin-bottom: 1.25em;
   font-weight: normal;
-  //доработать положение в разных экранах
+  @media (max-width: 800px) {
+    padding: 0.2em 0.5em 0 0.35em;
+  }
+
+  @media (max-width: 500px) {
+    padding: 0.1em 0.3em 0 0.2em;
+  }
   h4 {
     margin: 0;
     padding: 0;
     margin-top: 9px;
     display: block;
     width: 70%;
+    text-align: start;
+    @media (max-width: 1024px) {
+      font-size: 1.3rem;
+      width: 75%;
+    }
+
+    @media (max-width: 800px) {
+      font-size: 1.2rem;
+      width: 80%;
+    }
+
+    @media (max-width: 480px) {
+      width: 1rem;
+    }
   }
 }
 
@@ -50,6 +70,20 @@
   color: inherit;
   background-color: inherit;
   cursor: pointer;
+  @media (max-width: 800px) {
+    margin-top: 0.2em;
+    img {
+      width: 80%;
+      height: auto;
+    }
+  }
+  @media (max-width: 500px) {
+    margin-top: 0.4em;
+    img {
+      width: 70%;
+      height: auto;
+    }
+  }
 }
 
 .block-list {
@@ -76,19 +110,20 @@
     font-weight: 600;
     cursor: pointer;
     text-align: left;
-    // transition:
-    //   background-color 0.3s,
-    //   color 0.3s;
     &.active {
       border-right: 0.5em solid #ffb97d;
     }
+    @media (max-width: 800px) {
+      &.active {
+        border-left: 0.25em solid #ffb97d;
+        border-right: none;
+      }
+      font-size: 1.1rem;
+    }
+    @media (max-width: 500px) {
+      font-size: 1rem;
+      margin-right: 50%;
+      width: 50%;
+    }
   }
-  // &:hover {
-  //   color: #000;
-  // }
-
-  // &:active {
-  //   background-color: #ffd700;
-  //   color: #fff;
-  // }
 }

@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import BlockLib from "./BlockLib";
-import { useClickEsc } from "./Utils";
+import { useOuterClick } from "./Utils";
 
 export default function BlockBar({
   setIsVisibleBlockBar,
   handleAddBlock,
   specialClass,
+  setIsAnyMenuOpen,
 }) {
   const [activeType, setActiveType] = useState("");
   const [libIsVisible, setLibIsVisible] = useState(false);
+  const ref = useRef(null);
   const blocks = [
     ["header", "Обложка"],
     ["text", "Текстовый блок"],
@@ -17,9 +19,10 @@ export default function BlockBar({
     ["contacts", "Контакты"],
     ["video", "Видео"],
   ];
-  useClickEsc(() => {
+  useOuterClick(ref, () => {
     setIsVisibleBlockBar(false);
     setLibIsVisible(false);
+    setIsAnyMenuOpen(false);
   });
   const handleTypeClick = (blockType) => {
     if (activeType === blockType) {
@@ -31,7 +34,7 @@ export default function BlockBar({
   };
 
   return (
-    <>
+    <div ref={ref} style={{ display: "contents" }}>
       <section className={specialClass}>
         <div className="title-bar">
           <h4>Библиотека блоков</h4>
@@ -40,6 +43,7 @@ export default function BlockBar({
             onClick={() => {
               setIsVisibleBlockBar(false);
               setLibIsVisible(false);
+              setIsAnyMenuOpen(false);
               setActiveType("");
             }}
           >
@@ -67,6 +71,6 @@ export default function BlockBar({
         type={activeType}
         handleAddBlock={handleAddBlock}
       />
-    </>
+    </div>
   );
 }

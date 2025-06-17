@@ -2,9 +2,9 @@ import {
   getEmbedSrc,
   handleFileUpload,
   handleVideoUpload,
-  useClickEsc,
+  useOuterClick,
 } from "./Utils";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function BlockContent({
   blockType,
@@ -16,7 +16,8 @@ export default function BlockContent({
   labels,
   blockId,
 }) {
-  useClickEsc(handleContentClose);
+  const ref = useRef(null);
+  useOuterClick(ref, handleContentClose);
   const initialImgTexts = divs.reduce((acc, field) => {
     if (field.includes("img")) {
       const prefixedField = `${blockId}-${field}`;
@@ -292,7 +293,7 @@ export default function BlockContent({
   };
 
   return (
-    <>
+    <div ref={ref} style={{ display: "contents" }}>
       <div className="buttons-div">
         <button className="save" onClick={handleContentClose}>
           Закрыть
@@ -310,6 +311,6 @@ export default function BlockContent({
         {blockType === "contacts" && renderContactsContent()}
         {blockType === "button" && renderButtonContent()}
       </div>
-    </>
+    </div>
   );
 }

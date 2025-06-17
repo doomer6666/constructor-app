@@ -51,7 +51,7 @@ const TemplatePA = () => {
         </p>
         <p className="lk">Личный кабинет</p>
         <div className="redactor-head-div">
-          <Link to="/">
+          <Link to="/" className=" template-transit">
             <button className="transit">Все страницы</button>
           </Link>
           <Link to="/redactor">
@@ -64,7 +64,7 @@ const TemplatePA = () => {
       </header>
       <main className="redactor-main">
         <section className="hero">
-          <h1 className="inter-h1">Шаблоны страниц</h1>
+          <h1 className="inter-h1 template-inter-h1">Шаблоны страниц</h1>
           <h2>Выберите новый шаблон и адаптируйте его под ваши цели</h2>
         </section>
         <section className="internships">

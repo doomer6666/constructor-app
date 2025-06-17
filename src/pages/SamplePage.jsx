@@ -107,6 +107,7 @@ const SamplePage = () => {
 
   function onClose() {
     setIsModalOpen(false);
+    setIsAnyMenuOpen(false);
   }
 
   const [isLoading, setIsLoading] = useState(false);
@@ -180,14 +181,20 @@ const SamplePage = () => {
             <div className="page-buttons">
               <button
                 className="new-block"
-                onClick={() => setIsVisibleBlockBar(true)}
+                onClick={() => {
+                  setIsVisibleBlockBar(true);
+                  setIsAnyMenuOpen(true);
+                }}
               >
                 Добавить блоки
               </button>
 
               <button
                 className="new-block save-page "
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => {
+                  setIsModalOpen(true);
+                  setIsAnyMenuOpen(true);
+                }}
               >
                 Сохранить страницу
               </button>
@@ -196,6 +203,7 @@ const SamplePage = () => {
           <BlockBar
             specialClass={`block-bar ${isVisibleBlockBar ? "active" : ""}`}
             setIsVisibleBlockBar={setIsVisibleBlockBar}
+            setIsAnyMenuOpen={setIsAnyMenuOpen}
             handleAddBlock={handleAddBlock}
           />
           <Modal

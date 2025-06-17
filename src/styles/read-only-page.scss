@@ -1,6 +1,6 @@
 div#root:has(iframe[title="Preview"]) {
     background-color: rgba(203, 203, 203, 0.6);
-    padding-bottom: 3.5em;
+    min-height: 100vh;
 }
 iframe[title="Preview"] {
     padding: 0;
