@@ -1,7 +1,8 @@
 const ReadOnlyBlock = ({ type, data, sample, pageContent }) => {
   const settingData = data?.settings || {};
   const contentData = data?.content || {};
-  const isBackImage = settingData.backgroundImage !== undefined;
+  const isBackImage =
+    settingData.backgroundImage && settingData.backgroundImage !== "none";
   const bgImage = isBackImage ? `url(${settingData.backgroundImage})` : "none";
   const bgColor = !isBackImage
     ? settingData.backgroundColor || "#ffffff"

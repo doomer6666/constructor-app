@@ -46,7 +46,7 @@ const BaseBlock = ({
   const [settingData, setSettingData] = useState({ ...data.settings });
   const [lastContentData, setLastContentData] = useState(contentData);
   const [lastSettingData, setLastSettingData] = useState(settingData);
-  const [isBackImage, setIsBackImage] = useState(
+  const [_, setIsBackImage] = useState(
     settingData.backgroundImage !== undefined
   );
 
@@ -82,8 +82,14 @@ const BaseBlock = ({
     onUpdate({ content: contentData, settings: settingData });
   };
 
-  const bgImage = isBackImage ? `url(${settingData.backgroundImage})` : "none";
-  const bgColor = !isBackImage ? settingData.backgroundColor : "transparent";
+  const hasBackgroundImage =
+    settingData.backgroundImage && settingData.backgroundImage !== "none";
+  const bgImage = hasBackgroundImage
+    ? `url(${settingData.backgroundImage})`
+    : "none";
+  const bgColor = !hasBackgroundImage
+    ? settingData.backgroundColor
+    : "transparent";
 
   return (
     <section

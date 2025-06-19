@@ -109,10 +109,13 @@ p {
   @media (max-width: 500px) {
     width: 80%;
     height: auto;
+    label {
+      padding-bottom: 0;
+    }
     .ant-modal-body {
       .gallery-div {
         width: 100%;
-        height: auto;
+        height: 47vw;
       }
     }
   }
@@ -125,12 +128,15 @@ p {
       width: 110%;
       margin: 0 auto;
       .gallery-div {
-        width: 100%;
-        height: auto;
+        height: 55vw;
       }
       .input-img {
         padding: 0.2em 1em;
         font-size: 1rem !important;
+      }
+      input,
+      label {
+        font-size: 1rem;
       }
     }
   }
@@ -143,9 +149,6 @@ section.block {
   position: relative;
   overflow: visible;
   border-bottom: 2px solid #c9c9c9;
-  // &:first-of-type {
-  //   margin-top: 3em !important;
-  // }
   width: 100vw !important;
 }
 

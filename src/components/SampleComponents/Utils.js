@@ -148,6 +148,10 @@ export function useOuterClick(ref, callback) {
     };
 
     const handleClickOutside = (event) => {
+      if (event.target.closest('.ant-popover')) {
+        return;
+      }
+
       if (ref.current && !ref.current.contains(event.target)) {
         callback();
       }

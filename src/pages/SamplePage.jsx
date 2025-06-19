@@ -68,7 +68,7 @@ const SamplePage = () => {
     );
   };
 
-  const handleSavePage = () => {
+  const handleSavePage = async () => {
     try {
       const formData = new FormData();
       formData.set("name", modalData.text);
@@ -96,9 +96,9 @@ const SamplePage = () => {
       }
 
       if (formData.state === "temp") {
-        savePage(formData, id);
+        await savePage(formData, id);
       } else {
-        savePage(formData);
+        await savePage(formData);
       }
     } catch (err) {
       console.error("Ошибка при сохранении страницы:", err);

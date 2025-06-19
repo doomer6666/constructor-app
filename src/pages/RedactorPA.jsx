@@ -37,16 +37,20 @@ const RedactorPA = () => {
   }, [location, navigate]);
 
   const onStateClick = async (pageId, newState) => {
-    setPages((prevPages) =>
-      prevPages.map((page) =>
-        page.id === pageId ? { ...page, state: newState } : page
-      )
+    setPages((prev) =>
+      prev.map((p) => (p.id === pageId ? { ...p, state: newState } : p))
     );
     try {
       await patchPageState({ id: pageId, state: newState });
-      await refreshPages();
     } catch (err) {
       console.error(err);
+      setPages((prev) =>
+        prev.map((p) =>
+          p.id === pageId
+            ? { ...p, state: p.state === newState ? "close" : p.state }
+            : p
+        )
+      );
     }
   };
 

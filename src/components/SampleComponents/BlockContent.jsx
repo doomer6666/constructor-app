@@ -238,10 +238,6 @@ export default function BlockContent({
       <>
         {renderTextFields(200, 50)}
         {renderImageFields()}
-        {renderInfiniteImages()}
-        {renderLinks()}
-        {renderVideoFile()}
-        {renderVideoLink()}
       </>
     );
   };

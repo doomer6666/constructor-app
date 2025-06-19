@@ -55,6 +55,9 @@
                         }
                     }
                     @media (max-width: 495px) {
+                        p {
+                            font-size: min(0.85rem, var(--dynamic-font-p) / 1.5) !important;
+                        }
                         margin-left: 0;
                         :last-child {
                             margin-top: 2em;
@@ -67,7 +70,7 @@
                 }
                 @media (max-width: 495px) {
                     padding: 0.5em 1em;
-                    max-width: 85%;
+                    max-width: 92%;
                 }
             }
         }
