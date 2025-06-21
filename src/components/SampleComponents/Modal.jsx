@@ -27,23 +27,7 @@ const Modal = ({ isOpen, onClose, onSave, modalData, setModalData }) => {
     navigate("/redactor");
   };
   const handleCancel = () => {
-    if (
-      modalData.file ||
-      modalData.text ||
-      modalData.temp ||
-      modalData.tempName
-    ) {
-      AntdModal.confirm({
-        title: "Подтвердите закрытие",
-        content:
-          "Несохранённые данные будут потеряны. Вы уверены, что хотите закрыть окно?",
-        okText: "Да",
-        cancelText: "Нет",
-        onOk: onClose,
-      });
-    } else {
-      onClose();
-    }
+    onClose();
   };
 
   return (
